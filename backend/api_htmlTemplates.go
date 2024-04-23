@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"os"
@@ -17,7 +19,7 @@ func OutputMainPage(dat SummaryEntry) {
 
 	t1 := template.New("Main Page")
 
-	read, err := os.ReadFile("mainTemplate.html")
+	read, err := os.ReadFile("frontend_data/mainTemplate.html")
 	if err != nil {
 		log.Printf("Error with reading file: " + err.Error())
 		return
@@ -36,13 +38,13 @@ func OutputMainPage(dat SummaryEntry) {
 		return
 	}
 
-	entries, err := SelectAllRows() // SelectNRows(5, 0)
+	entries, err := LoadLocalCache() //SelectAllRows() // SelectNRows(5, 0)
 	if err != nil {
-		log.Printf("Error with getting files: " + err.Error())
+		// log.Printf("Error with getting files: " + err.Error())
 		return
 
 	}
-	log.Print(entries)
+	// log.Print(entries)
 
 	toDisplay := htmlDat{
 		Title:   "Website",
@@ -51,4 +53,46 @@ func OutputMainPage(dat SummaryEntry) {
 
 	temp.Execute(file, toDisplay)
 
+}
+
+func LoadLocalCache() ([]SummaryEntry, error) {
+
+	file, err := os.ReadFile("frontend_data/data.json")
+	if err != nil {
+		fmt.Println("Local file read error " + err.Error())
+		return nil, err
+	}
+	var retVal []SummaryEntry
+
+	err = json.Unmarshal(file, &retVal)
+	if err != nil {
+		fmt.Println("Local file unmarshal error " + err.Error())
+		return nil, err
+	}
+
+	return retVal, nil
+}
+
+func CreateLocalCache() {
+	file, err := os.Create("frontend_data/data.json")
+	if err != nil {
+		fmt.Println("Local file create error " + err.Error())
+		return
+	}
+
+	writeEntries, err := SelectAllRows() // SelectNRows(5, 0)
+	if err != nil {
+		log.Printf("Error with getting files: " + err.Error())
+		return
+	}
+	dat, err := json.Marshal(writeEntries)
+	if err != nil {
+		log.Printf("Error with marshal: " + err.Error())
+		return
+	}
+	file.Write(dat)
+	if err != nil {
+		log.Printf("Error with write file: " + err.Error())
+		return
+	}
 }

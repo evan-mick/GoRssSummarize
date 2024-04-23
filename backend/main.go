@@ -62,6 +62,7 @@ func main() {
 			OutputMainPage(dat)
 		} else if input == "cycle" || input == "c" {
 			FullRSSCycle()
+			CreateLocalCache()
 		} else if input == "DELETEitALlBIGBOi" {
 			DirectSQLCMD("DELETE FROM entries")
 		}
