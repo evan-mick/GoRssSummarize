@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+    <script type='text/javascript' src="./main.js"></script>
+    <head>
+        <title>Website</title>
+    </head>
+
+    <style>
+
+ 
+        :root {
+            --mainback: #333333;
+            --secondback: #ffffff;
+            --textmain:  #252525;
+            --texttitle: #0078be;
+            --outlinecol: #f4690d;
+            --outlinesize: 0.15rem; 
+        }
+
+         
+        #main-list {
+            background-color: var(--mainback);
+            padding: 3rem;
+            margin: 1rem;
+            display: flex;
+             
+            justify-content: center;
+            
+            flex-wrap: wrap;
+            gap: 2rem 3rem;
+        }
+
+        #comic {
+            max-width: 25rem;
+            padding: 3rem;
+        }
+
+        #upper {
+            background-color: var(--mainback);
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        body {
+             
+             
+             
+             
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: var(--textmain);
+            background-color: var(--mainback);
+        }
+
+        .articleTitle {
+            font-weight: bolder;
+            color: var(--texttitle);
+        }
+
+
+        .published {
+            color: var(--texttitle); 
+            padding-top: 1rem;
+        }
+
+        .entry {
+            border-radius: .25rem;
+            border: var(--outlinesize) solid var(--outlinecol);
+            background-color: var(--secondback);
+
+            align-items: center;
+            display: flex;
+            justify-content: space-evenly;
+
+             
+            padding: 2rem;
+            min-width: 10rem;
+            max-width: 40rem;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            transition: transform 0.2s;
+            color: var(--textmain);
+            text-align: left;
+            font-size: large;
+             
+             
+        }
+
+        .upper-in {
+            border-radius: .25rem;
+            border: var(--outlinesize) solid var(--outlinecol);
+            background-color: var(--secondback);
+            padding: 1rem;
+            color: var(--textmain);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            
+
+        }
+
+
+        :hover.entry {
+            
+            transform: scale(1.02);
+        }
+
+        .centered {
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .entryPhoto {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: contain;
+            padding-top: 1rem;
+        }
+
+        #title {
+            color: var(--texttitle);
+             
+            font-size: 5rem;
+        }
+
+        .summary {
+            color: var(--textmain);
+            padding-top: 1rem;
+        }
+
+        #header {
+            background-color: var(--secondback);
+            padding-top: 1rem;
+            min-width: 100%;
+            box-sizing:border-box;
+            padding-right: 4rem;
+            padding-left: 4rem;
+            padding-bottom: 2rem;
+            border: var(--outlinesize) solid var(--outlinecol);
+        }
+
+        * {
+            padding: 0;
+            margin: 0; 
+        }
+    </style>
+    <body>
+        <div id="header">
+            <h1 id="title">the HeadLiner 🙆‍♂️📈🔥</h1>
+            <h2>Line your head with summaries of the news. Its like skimming the headlines, but better!</h2>
+            <p>Disclaimer: AI can be so silly sometimes! Please don't ever use summaries as official references, as sometimes it can just make stuff up, bless 🙏.</p>
+        </div>
+        <div id="upper">
+            <div class="upper-in">
+                <p>But first, a Boomer comic! Now don't YOU feel informed? 🤭</p>
+                <img id="comic" decoding="async" src="https://filesrv.cagle.com/283181/750/283181.png">
+                <p>What delicious nuanced political commentary! Now lets get into the news.</p>
+            </div>
+        </div>
+        <section id="main-list">
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">Israel &#39;spoofs&#39; GPS to deter attacks, but it also throws off planes, ships and apps</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/19/lebanon_airport_screens_hack_24007650637932_slide-923bf329a6da68ac7449faba680a3be9f8952faa-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 10:02:47 &#43;0000 UTC">2024-04-22 10:02:47 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1245847903/israel-gps-spoofing">Link from NPR</a>
+                    </div>
+                    <p class="summary">The U.S.-operated GPS has been falsely locating planes, people, and ships at Beiruts international airport. This &#34;spoofing&#34; involves sending false location signals to GPS satellites. Researchers have traced the spoofing to Israel, which is using it to deter rockets and missiles. The practice has prompted pilots to return to older navigation methods, as GPS signals are now unreliable. The false signals are also affecting shipping, disrupting the Automatic Identification System (AIS). The UNs International Telecommunications Union has recently allowed GPS spoofing for national security reasons, increasing risks for air traffic control and pilots.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">Looking for new ways to appreciate nature? 2 new birding books may help</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/22/untitled-design-60--dd9310a36570786e74f776512a0863de293d8d1f-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 10:02:00 &#43;0000 UTC">2024-04-22 10:02:00 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1245849320/amy-tan-the-backyard-bird-chronicles-trish-okane-birding-to-change-the-world">Link from NPR</a>
+                    </div>
+                    <p class="summary">Two books, one by environmental justice educator Trish OKane and one by novelist Amy Tan, explore the transformative power of observing birds. OKanes &#34;Birding to Change the World&#34; highlights the lessons she has learned from birds in her activism, particularly in the fight to protect Warner Park in Madison, Wisconsin, from harmful events like fireworks. Tans &#34;The Backyard Bird Chronicles&#34; shares her observations and drawings of various bird species in her California backyard, igniting her curiosity and inspiring her to question and appreciate the natural world. Both authors emphasize the importance of recognizing birds intelligence and complexity, encouraging readers to engage with them and advocate for their well-being. They invite us to find joy in the beauty of birds and use their experiences as models for collective action and environmental stewardship.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">Oncologists&#39; meetings with drug reps don&#39;t help cancer patients live longer</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/20/gettyimages-2092815-f4d04ecc06f2c27defd7720472209f8999825836-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 10:01:04 &#43;0000 UTC">2024-04-22 10:01:04 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/sections/health-shots/2024/04/22/1246054537/doctor-meetings-drug-reps-pharma-cancer-patients-live-longer-survival">Link from NPR</a>
+                    </div>
+                    <p class="summary">A recent study by economists revealed that one-on-one meetings between drug company representatives and doctors result in a 5% increase in oncology drug prescriptions for cancer patients. However, these meetings do not lead to longer survival rates for patients. The study analyzed Medicare claims data and a database that tracks payments from drug companies to doctors. Despite industry guidelines for such interactions, the researchers found no evidence that the increase in prescriptions benefits patient mortality compared to alternative drug choices. While the pharmaceutical industry emphasizes the educational value of these meetings and notes the decline in cancer deaths in recent decades, the study suggests that the meetings primarily influence prescribing patterns without impacting survival.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">Freedom Monument Park tells honest story of enslaved people</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/22/c-freedom-monument-sculpture-park-photo-credit-equal-justice-initiative--nikesha-breeze-108-death-masks-f07d16262f7ec7df454f46bd139c5c0a9b35bca0-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 09:49:57 &#43;0000 UTC">2024-04-22 09:49:57 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/21/1245895505/freedom-monument-park-tells-honest-story-of-enslaved-people">Link from NPR</a>
+                    </div>
+                    <p class="summary">The Freedom Monument Sculpture Park in Montgomery, Alabama, created by the Equal Justice Initiative, confronts the history of slavery in the United States. The park features 17 acres of sculptures and installations, including Nikesha Breezes &#34;108 Death Masks,&#34; which is bounded by the Alabama River and railroad tracks that once transported enslaved Africans and the goods they were forced to produce. The parks structures replicate the homes of enslaved individuals and showcase their experiences through works like Kwama Akoto-Bamfos &#34;We am very cold,&#34; which portrays chained figures shivering in a strange world. William Wells Browns writings, which describe the brutality of slavery, are also incorporated into the parks narrative. Sculptures depict the hardship of slavery, including leg chains and a young boy forced to drag a heavy cotton bag, while representations of faith and love are also present. The park culminates in the National Monument to Freedom, a 50-foot-high wall engraved with 100,000 last names of enslaved people set free after emancipation.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">How two good friends became sworn siblings — with the revival of an ancient ritual</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/20/sworn-sisters-diptych_wide-837f29188306324cfdd3522fa56746440fff2425-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 08:30:03 &#43;0000 UTC">2024-04-22 08:30:03 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/sections/goatsandsoda/2024/04/22/1245859170/siblings-brotherhood-sisterhood-greece-china">Link from NPR</a>
+                    </div>
+                    <p class="summary">Scholars Susan Ashbrook Harvey and Robin Darling Young formed an enduring bond during a research trip in 1985, which led to their recognition by Archbishop Dionysius Behnan Jajjawi of a &#34;deeper than blood&#34; friendship. Upon reaching Jerusalem, the Archbishop performed an ancient &#34;adelphopoiesis&#34; ritual, a practice dating back thousands of years, uniting them as &#34;sworn siblings.&#34; This ceremony, practiced in various cultures, extended social networks and emphasized loyalty. In China, sworn siblinghood was particularly prevalent during the end of dynasties, reflecting a need for support and survival. Today, Harvey and Young value their &#34;sisterhood&#34; bond, seeing it as a rare recognition of the importance of friendship. They advocate for the revival of ceremonies that honor and strengthen such relationships.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">TikTok faces its biggest threat yet; Earth Day tips for sustainable living</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/22/ap24108441577595_wide-6b6dc9b2cf709c618968be07aab1aaaf6c75f80c-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 07:50:19 &#43;0000 UTC">2024-04-22 07:50:19 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1246289050/up-first-newsletter-tiktok-ban-senate-earth-day-sustainability">Link from NPR</a>
+                    </div>
+                    <p class="summary">The House of Representatives has passed a bill that would require TikTok to sell its American operations within a year or face a ban. This measure, attached to a bill providing aid to Israel and Ukraine, represents the most significant threat to TikToks presence in the United States to date. The Supreme Court will hear a case today regarding the legality of punishing individuals for sleeping outside in the absence of available shelter, with potential implications for over 250,000 homeless individuals in the country. A European climate report reveals that Europe is warming at twice the global average, leading to increased heat-related deaths. Despite these challenges, Europe is making strides in adopting solar and wind energy. Passover, a Jewish festival commemorating the exodus from slavery in Egypt, begins tonight with a Seder meal featuring matzo, a flatbread symbolizing both suffering and freedom. The Dalí Museum in Florida has launched &#34;Ask Dalí,&#34; an exhibit featuring an AI-generated version of the artists voice, allowing visitors to interact with him virtually.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">Europe is warming up faster than any other continent, and the heat is deadly</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/19/ap22168575298458-12ba058b06d5ca078aa9a911dcd08dd322aa29b1-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 05:58:23 &#43;0000 UTC">2024-04-22 05:58:23 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1244791280/europe-is-warming-up-faster-than-any-other-continent-and-the-heat-is-deadly">Link from NPR</a>
+                    </div>
+                    <p class="summary">In the past two decades, heat-related deaths in Europe have risen significantly by 30%. Heat waves pose a significant threat to the European population, with the summer of 2023 witnessing a heat wave that claimed tens of thousands of lives. Europes warming is accelerated due to its proximity to the Arctic and the influence of warm ocean and atmospheric currents. Cities are particularly vulnerable due to the concentration of people and higher temperatures caused by buildings and roads. In response to the increasing heat danger, European cities are working to provide residents with access to air conditioning and reliable electricity, while simultaneously transitioning to renewable energy sources to reduce greenhouse gas emissions and mitigate future warming.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">How do you build without over polluting? That&#39;s the challenge of new Catan board game</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/19/new-energies-coming-soon-social-square-7faedd9485655745722b22899b40a47f1df8264c-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 05:30:15 &#43;0000 UTC">2024-04-22 05:30:15 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1245096795/catan-board-game-climate-change-pollution">Link from NPR</a>
+                    </div>
+                    <p class="summary">The new version of the popular board game Catan, titled &#34;New Energies,&#34; introduces energy production and pollution dynamics to the gameplay. Players must choose between renewable and fossil fuel-based power plants, with the latter allowing for faster growth but also creating more pollution. Excessive pollution triggers catastrophes, highlighting the consequences of neglecting environmental concerns. The game aims to foster discussions about the real-world implications of energy choices, pollution, and climate change. While the term &#34;climate change&#34; is not explicitly mentioned in promotional materials, the elements of pollution and its effects are presented as a reminder of the challenges posed by environmental degradation. Research has shown that board games can be effective tools for improving knowledge, promoting interpersonal interactions, and motivating participants in understanding complex issues.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">Many in Gen Z ditch colleges for trade schools. Meet the &#39;toolbelt generation&#39;</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/19/sy-kirby_vert-31bd8702cb6c2079b191fdb8a2808d0a05b068d7-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 05:02:45 &#43;0000 UTC">2024-04-22 05:02:45 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1245858737/gen-z-trade-vocational-schools-jobs-college">Link from NPR</a>
+                    </div>
+                    <p class="summary">Driven by financial concerns and a desire for alternative career paths, young people are increasingly opting for vocational schools and skilled trades over traditional college degrees. The high cost of college and the stigma associated with blue-collar work are major factors in this shift. Despite these challenges, skilled trades offer lucrative salaries, on-the-job training, and career advancement opportunities, particularly in sectors like construction and infrastructure. The rise of artificial intelligence and the demand for manual labor are also driving interest in these professions. As a result, vocational schools and apprenticeship programs are seeing increased enrollment, reflecting a growing embrace of skilled trades as a viable and rewarding career path.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">A cheap drug may slow down aging. A study will determine if it works</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/21/gettyimages-855886910_custom-334686aceb047cebf5119cc86431b17968dbe959-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 05:01:15 &#43;0000 UTC">2024-04-22 05:01:15 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/sections/health-shots/2024/04/22/1245872510/a-cheap-drug-may-slow-down-aging-a-study-will-determine-if-it-works">Link from NPR</a>
+                    </div>
+                    <p class="summary">Metformin, a medication commonly used for diabetes, has shown promising anti-inflammatory effects that may protect against diseases such as heart disease, cancer, and cognitive decline in older adults. Studies have observed a reduced risk of these conditions among people taking metformin, although further research is needed to establish causality. The TAME Trial, a clinical study, aims to determine whether metformin can prevent these diseases and promote a longer, healthier life in healthy individuals over 65. While metformin is currently approved only for type 2 diabetes, doctors can prescribe it off-label for potential benefits in delaying age-related diseases. Some research indicates it may improve energy levels and regularity, although a small percentage of users experience side effects such as GI distress and B12 deficiency. Despite funding challenges, the researchers hope that the TAME Trial will usher in a paradigm shift in treating age-related conditions by targeting the underlying biology of aging.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">Supreme Court weighs whether cities can punish unhoused people for sleeping outside</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/19/ap24103836729771_wide-440a5cc0672a33378e289e7c420612f53a2d1e6d-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 05:00:45 &#43;0000 UTC">2024-04-22 05:00:45 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1245575331/supreme-court-weighs-whether-cities-can-punish-unhoused-people-for-sleeping-outs">Link from NPR</a>
+                    </div>
+                    <p class="summary">The Supreme Court is hearing a case regarding whether sleeping outside can be criminalized in the absence of adequate shelter, with implications for the growing homeless population and municipalities struggling to address this issue. The case centers on Grants Pass, Oregon, where restrictions on camping were challenged on grounds of violating the Eighth Amendments ban on cruel and unusual punishment. The city argues that these restrictions protect public health and safety, while advocates argue they criminalize homelessness and hinder access to housing. The courts decision could overturn previous rulings by the 9th Circuit Court of Appeals, which found it unconstitutional to impose criminal penalties for sleeping outside when no shelter is available. Despite the potential impact of the ruling, it is unlikely to solve the underlying problem of homelessness, as cities face shortages of affordable housing and shelter beds.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">On Earth Day, Biden is launching a new site to apply for Climate Corps jobs</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/19/ap24096620122278-8079c5e7c2d00ffc6cc9f7cea52f49f98a3b33f0-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 05:00:45 &#43;0000 UTC">2024-04-22 05:00:45 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1245979643/biden-earth-day-climate-corps-solar">Link from NPR</a>
+                    </div>
+                    <p class="summary">President Biden has launched a Climate Corps jobs and training program website, targeting young Americans who largely supported him in 2020. The program, which aims to employ over 20,000 young people, has received over 42,000 expressions of interest, mostly from individuals aged 18-35. Despite support for the initiative from young climate advocates, they have expressed concerns about the Biden administrations approval of oil projects and urged the declaration of a climate emergency. Biden announced the program in northern Virginia at Prince William Forest Park, built by the original Civilian Conservation Corps during the Great Depression. The first 2,000 jobs will be available in June, with organizations focusing on clean energy and climate-impacted communities. The White House plans to regularly update the website with new positions, and participants can access training and federal government position applications through partnerships with the Building Trades Unions. Additionally, Biden announced $7 billion in grants for solar panel projects in lower-income communities, funded by the Inflation Reduction Act.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">&#39;Ban them all.&#39; With Paris Games looming, Chinese doping scandal rocks Olympic sport</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/21/gettyimages-1331270779_wide-0c3847fe5ea227a1bd42ff897705b67a0a2af5e7-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 05:00:45 &#43;0000 UTC">2024-04-22 05:00:45 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1246205969/china-swimming-doping-scandal-olympics">Link from NPR</a>
+                    </div>
+                    <p class="summary">A doping scandal has emerged involving 23 Chinese swimmers who tested positive for trimetazidine (TMZ) in 2021 ahead of the Tokyo Olympics. The World Anti-Doping Agency (WADA) accepted Chinas explanation that the positive tests were due to accidental contamination, but critics have raised concerns about a potential cover-up and compromised testing integrity. Despite the positive tests, the swimmers were not provisionally suspended as per international rules. The scandal has sparked outrage and calls for a full investigation, with the head of the U.S. Anti-Doping Agency questioning the plausibility of Chinas explanation. WADA has defended its actions, condemning accusations of wrongdoing and threatening legal action, while Chinas Anti-Doping Agency has maintained its stance that the TMZ levels were extremely low. The scandal adds to a history of doping allegations against China and other countries, raising concerns about the ability of international sports organizations to effectively combat doping.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">Four &#39;American Indicators&#39; share their view of the U.S. economy — and their politics</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/19/diptych-5-_wide-a9e14ceb1ac1d1a962f688c80ee3a0993c2b713d-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 05:00:15 &#43;0000 UTC">2024-04-22 05:00:15 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1245872098/four-american-indicators-share-their-view-of-the-u-s-economy-and-their-politics">Link from NPR</a>
+                    </div>
+                    <p class="summary">As the presidential election approaches, four &#34;American Indicators&#34; representing different economic sectors share their political perspectives. Bhavesh Patel, a hotel owner, expresses concerns about government regulations and undecided in his vote. Lee Camp, a housing attorney, advocates for affordable housing and student loan forgiveness. Brooke Neubauer, founder of a food distribution organization, emphasizes the need for social services and rejects unkind presidential candidates. Lisa Winton, a manufacturing company co-founder, prioritizes fiscal conservatism and remains undecided, seeking a moderate candidate who addresses both economic and social concerns. Despite improved unemployment rates, economic disparities and high consumer prices persist, influencing these individuals political views.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">Israeli military intelligence chief resigns over failure to prevent Oct. 7 attack</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/22/ap24113268172412-26898d798309d06c8bd3ed9d8642fe218e401977-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 03:51:23 &#43;0000 UTC">2024-04-22 03:51:23 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1246277716/israeli-military-intelligence-chief-resigns-over-failure-to-prevent-oct-7-attack">Link from NPR</a>
+                    </div>
+                    <p class="summary">Following Hamas October 7th attack, which resulted in over 1,200 Israeli deaths and led to the ongoing war in Gaza, Major General Aharon Haliva has resigned as head of Israels military intelligence directorate. Haliva cited the intelligence failures leading up to the attack as the reason for his resignation. His departure could lead to further resignations within Israels top security brass. The Hamas attack, which took Israel by surprise, has shaken the countrys trust in its military and sparked a humanitarian crisis in Gaza, resulting in over 34,000 Palestinian deaths and displacing 80% of the population. The attack has also heightened tensions within the Israeli-occupied West Bank and Israel.</p>
+                </div>
+            </button>
+			
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">North Korea fires short-range missiles into the sea in its latest weapons test</h2>
+                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/22/ap24113290733838-49983b27bf9e5d34c14919d7b4c1e909e12e998d-s1100-c50.jpg">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="2024-04-22 03:01:43 &#43;0000 UTC">2024-04-22 03:01:43 &#43;0000 UTC</time></h3>
+                        <a href="https://npr.org/2024/04/22/1246277182/north-korea-fires-missile-into-ocean">Link from NPR</a>
+                    </div>
+                    <p class="summary">North Korea has test-fired suspected short-range ballistic missiles into the sea, prompting condemnation from South Korea and Japan. The missiles flew approximately 300 kilometers and could potentially target sites in South Korea. Experts speculate that North Korea may soon launch a satellite into orbit, defying UN Security Council resolutions. South Korea and Japan have urged caution against falling objects. In recent months, North Korea has accelerated its weapons testing, including the launch of a &#34;super-large&#34; cruise missile warhead and an anti-aircraft missile. The country has also been preparing for a possible spy satellite launch, possibly to coincide with upcoming anniversaries.</p>
+                </div>
+            </button>
+			
+		</section>
+        <div>
+            <p>Well aren't you a _ravenous_ news consumer! Come back in a few hours for another batch of summaries 💯</p>
+        </div>
+    </body>
+</html>

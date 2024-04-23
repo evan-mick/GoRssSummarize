@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- <script src="./htmx.min.js"></script> -->
+    <script src="https://unpkg.com/htmx.org@1.9.4"></script> 
+    <head>
+        <title>NewsAgg.ai</title>
+    </head>
+    <body>
+
+        <div hx-get="http://localhost:9999/requests/entry" hx-swap="none" hx-trigger="load">
+            <h2 id='title' ></h2>
+            <p id='summary'></p>
+
+        </div>
+
+        <script>
+             document.addEventListener('htmx:afterSwap', function (event) {
+                
+                var data = JSON.parse(event.detail.xhr.response);
+                console.log(data)
+                document.getElementById('title').innerText = data.title;
+                document.getElementById('summary').innerText = data.summary;
+             });
+
+        </script>
+        
+
+    </body>
+</html>

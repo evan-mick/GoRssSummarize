@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <!-- <script src="./htmx.min.js"></script> -->
+    <script type='text/javascript' src="./main.js"></script>
+    <head>
+        <title>{{.Title}}</title>
+    </head>
+
+    <style>
+
+/* --mainback: #E5E5CB;
+            --secondback: #D5CEA3;
+            --textmain:  #1A120B;
+            --texttitle: #3C2A21; */
+        :root {
+            --mainback: #333333;
+            --secondback: #ffffff;
+            --textmain:  #252525;
+            --texttitle: #0078be;
+            --outlinecol: #f4690d;
+            --outlinesize: 0.15rem; 
+        }
+
+        /* #E8EAE3 #373833 #FA2742 */
+        #main-list {
+            background-color: var(--mainback);
+            padding: 3rem;
+            margin: 1rem;
+            display: flex;
+            /* flex-direction: row; */
+            justify-content: center;
+            
+            flex-wrap: wrap;
+            gap: 2rem 3rem;
+        }
+
+        #comic {
+            max-width: 25rem;
+            padding: 3rem;
+        }
+
+        #upper {
+            background-color: var(--mainback);
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        body {
+            /* background-color: #ffeaea; */
+            /* background-color: #ffffff; */
+            /* background: var(--mainback); */
+            /* background: radial-gradient(circle, var(--mainback) 0%, var(--secondback) 100%); */
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: var(--textmain);
+            background-color: var(--mainback);
+        }
+
+        .articleTitle {
+            font-weight: bolder;
+            color: var(--texttitle);
+        }
+
+
+        .published {
+            color: var(--texttitle); 
+            padding-top: 1rem;
+        }
+
+        .entry {
+            border-radius: .25rem;
+            border: var(--outlinesize) solid var(--outlinecol);
+            background-color: var(--secondback);
+
+            align-items: center;
+            display: flex;
+            justify-content: space-evenly;
+
+            /* margin: 2.5%; */
+            padding: 2rem;
+            min-width: 10rem;
+            max-width: 40rem;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            transition: transform 0.2s;
+            color: var(--textmain);
+            text-align: left;
+            font-size: large;
+            /* outline: .025rem; */
+            /* outline-color: black; */
+        }
+
+        .upper-in {
+            border-radius: .25rem;
+            border: var(--outlinesize) solid var(--outlinecol);
+            background-color: var(--secondback);
+            padding: 1rem;
+            color: var(--textmain);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            
+
+        }
+
+
+        :hover.entry {
+            
+            transform: scale(1.02);
+        }
+
+        .centered {
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .entryPhoto {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: contain;
+            padding-top: 1rem;
+        }
+
+        #title {
+            color: var(--texttitle);
+            /* font-size: xx-large; */
+            font-size: 5rem;
+        }
+
+        .summary {
+            color: var(--textmain);
+            padding-top: 1rem;
+        }
+
+        #header {
+            background-color: var(--secondback);
+            padding-top: 1rem;
+            min-width: 100%;
+            box-sizing:border-box;
+            padding-right: 4rem;
+            padding-left: 4rem;
+            padding-bottom: 2rem;
+            border: var(--outlinesize) solid var(--outlinecol);
+        }
+
+        * {
+            padding: 0;
+            margin: 0; 
+        }
+    </style>
+    <body>
+        <div id="header">
+            <h1 id="title">the HeadLiner 🙆‍♂️📈🔥</h1>
+            <h2>Line your head with summaries of the news. Its like skimming the headlines, but better!</h2>
+            <p>Disclaimer: AI can be so silly sometimes! Please don't ever use summaries as official references, as sometimes it can just make stuff up, bless 🙏.</p>
+        </div>
+        <div id="upper">
+            <div class="upper-in">
+                <p>But first, a Boomer comic! Now don't YOU feel informed? 🤭</p>
+                <img id="comic" decoding="async" src="https://filesrv.cagle.com/283181/750/283181.png">
+                <p>What delicious nuanced political commentary! Now lets get into the news.</p>
+            </div>
+        </div>
+        <section id="main-list">
+			{{range $index, $dat := .Entries}}
+			<button class="entry">
+                <div>
+                    <h2 class="articleTitle">{{$dat.Title}}</h2>
+                    <img class="entryPhoto" src="{{$dat.PhotoUrl}}">
+                </div>
+                <div>
+                    <div class="centered">
+                        <h3 class="published">Published: <time class="date" datetime="{{$dat.TimePublished}}">{{$dat.TimePublished}}</time></h3>
+                        <a href="{{ $dat.Url }}">Link from {{$dat.FromWeb}}</a>
+                    </div>
+                    <p class="summary">{{$dat.Summary}}</p>
+                </div>
+            </button>
+			{{end}}
+		</section>
+        <div>
+            <p>Well aren't you a _ravenous_ news consumer! Come back in a few hours for another batch of summaries 💯</p>
+        </div>
+    </body>
+</html>

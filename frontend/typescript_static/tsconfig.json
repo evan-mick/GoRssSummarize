@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "CommonJS",
+        //"sourceMap": true,
+        "outDir": "../static",
+        "lib": [ "ES2017", "DOM" ],
+    },
+    "files": ["main.ts"],
+    "compileOnSave": true
+}
