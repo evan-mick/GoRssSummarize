@@ -62,12 +62,21 @@ type SummaryEntry struct {
 const TimeLayout = "2006-01-02 15:04:05"
 
 type DatabaseInfo struct {
-	DB *sql.DB
+	DB   *sql.DB
+	Init bool
 }
 
-var Database DatabaseInfo
+var Database = DatabaseInfo{
+	DB:   nil,
+	Init: false,
+}
 
 func InitDB() {
+
+	if Database.Init {
+		fmt.Println("Database already initialized")
+		return
+	}
 
 	var (
 		databaseName       = os.Getenv("DB_DBNAME")
@@ -97,6 +106,8 @@ func InitDB() {
 
 	// _, err = db.Exec(`DROP TABLE entries`)
 
+	// Important that the if not exists there
+	// cause otherwise it will throw error and below logic won't work
 	_, err = db.Exec(`
 	CREATE TABLE IF NOT EXISTS entries (
 		url VARCHAR(255) PRIMARY KEY,
@@ -119,10 +130,12 @@ func InitDB() {
 	})*/
 
 	if err != nil {
+		db.Close()
 		log.Fatal("Issue with entries table " + err.Error())
 		return
 	}
 
+	Database.Init = true
 	fmt.Println("Post exec successfully")
 
 }
@@ -276,6 +289,11 @@ func SelectAllRows() ([]SummaryEntry, error) {
 }
 
 func CloseDB() {
+	if !Database.Init {
+		return
+	}
+	Database.Init = false
 	Database.DB.Close()
+	Database.DB = nil
 
 }

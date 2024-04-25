@@ -15,11 +15,16 @@ func ping(w http.ResponseWriter, req *http.Request) {
 	http.ServeFile(w, req, "../frontend/dev/ping.html")
 }
 
+var fs http.Handler
+
 // ServeMain is a requesthandler that serves the main static website
-/*func serveMain(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("MAIN SERVED")
-	http.ServeFile(w, req, "./frontend/static")
-}*/
+func serveMain(w http.ResponseWriter, req *http.Request) {
+	ip := req.Header.Get("X-FORWARDED-FOR")
+	fmt.Println("MAIN SERVED IP: " + ip)
+	//http.ServeFile(w, req, "./frontend/static")
+	fs.ServeHTTP(w, req)
+
+}
 
 // ReturnOneEntry is an API request handler that returns a single row from the database
 func returnOneEntry(w http.ResponseWriter, req *http.Request) {
@@ -27,6 +32,7 @@ func returnOneEntry(w http.ResponseWriter, req *http.Request) {
 	data := SelectOneRow()
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
+
 	json.NewEncoder(w).Encode(data)
 	//http.ServeFile(w, req, "./frontend/static")
 }
@@ -81,8 +87,9 @@ func InitAPIServer() {
 
 	// Make sure this one is last
 	// http.HandleFunc("/", serveMain)
-	fs := http.FileServer(http.Dir("../frontend/static"))
-	http.Handle("/", fs)
+	fs = http.FileServer(http.Dir("../frontend/static"))
+	http.HandleFunc("/", serveMain)
+	//http.Handle("/", serveMain)
 
 	// for many entries, needs to have args for what section to give back out
 	// make sure the bounds of such are checked

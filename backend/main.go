@@ -35,7 +35,6 @@ func main() {
 	// } else {
 	// 	fmt.Print("DB connected!")
 	// }
-	InitDB()
 
 	//InsertSummary()
 	defer CloseDB()
@@ -61,9 +60,11 @@ func main() {
 		if input == "refresh" || input == "r" {
 			OutputMainPage(dat)
 		} else if input == "cycle" || input == "c" {
+			InitDB()
 			FullRSSCycle()
 			CreateLocalCache()
 		} else if input == "DELETEitALlBIGBOi" {
+			InitDB()
 			DirectSQLCMD("DELETE FROM entries")
 		}
 	}
