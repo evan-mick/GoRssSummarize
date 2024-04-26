@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -47,10 +46,6 @@
         }
 
         body {
-            /* background-color: #ffeaea; */
-            /* background-color: #ffffff; */
-            /* background: var(--mainback); */
-            /* background: radial-gradient(circle, var(--mainback) 0%, var(--secondback) 100%); */
             font-family: Georgia, 'Times New Roman', Times, serif;
             color: var(--textmain);
             background-color: var(--mainback);
@@ -61,8 +56,8 @@
             padding-top: 1rem;
             min-width: 100%;
             box-sizing:border-box;
-            padding-right: 4rem;
-            padding-left: 4rem;
+            padding-right: 2rem;
+            padding-left: 2rem;
             padding-bottom: 2rem;
 
         }
@@ -132,8 +127,10 @@
             width: 40rem;
             max-width: 100%;
             aspect-ratio: 16 / 9;
-            object-fit: contain;
-            padding-top: 1rem;
+            object-fit: cover;
+            margin: 0.5rem;
+            object-position: 50% 0;
+            /* padding-top: 1rem; */
         }
 
         .articleTitle {
@@ -150,7 +147,32 @@
 
         #title {
             color: var(--texttitle);
-            font-size: 3rem;
+            font-size: 1.5rem;
+        }
+
+        h2 {
+            color: var(--outlinecol);
+            font-size: large;
+        }
+        h3 {
+            font-size: medium;
+        }
+
+        @media screen and (min-width: 600px) {
+            #title {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: larger;
+            }
+            h3 {
+                font-size: large;
+            }
+            .header-footer {
+                padding-left: 4rem;
+                padding-right: 4rem;
+            }
         }
 
         .entry-top {
@@ -175,7 +197,7 @@
                 font-size: large;
             }
             #title {
-                font-size: 5rem;
+                font-size: 4rem;
             }
         }
 
@@ -183,15 +205,23 @@
             .entry {
                 max-width: 25rem;
             }
+            #title {
+                font-size: 5rem;
+            }
+
+            h2 {
+                font-size: x-large;
+            }
+            h3 {
+                font-size: larger;
+            }
         }
 
         .hidden {
             display: none;
         }
 
-        h2 {
-            color: var(--outlinecol)
-        }
+       
 
         .published {
             color: var(--texttitle); 
@@ -217,9 +247,74 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+            background-color: rgba(0,0,0,0.7); /* Black background with opacity */
             z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
             cursor: pointer; /* Add a pointer on hover */
+        }
+
+        #inneroverlay {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            background-color: white; 
+            justify-content: center;
+            align-items: center;
+            width: 60%;
+            min-width: 20rem;
+        }
+
+        #overlaysummary {
+            color: var(--textmain);
+            padding: 0.2rem;
+            font-size: medium;
+        }
+
+        #overlaybody {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #overlaytitle {
+            font-weight: bolder;
+            font-size: large;
+            padding: 1rem;
+            color: var(--texttitle);
+            align-self: center;
+        }
+
+
+        @media screen and (min-width: 1000px) {
+            #overlaytitle {
+                font-size: x-large;
+            }
+            #overlaysummary {
+                font-size: large;
+                padding: 0.5rem;
+            }
+        }
+
+        @media screen and (min-width: 1500px) {
+
+            #overlaytitle {
+                font-size: 2.5rem;
+            }
+            #inneroverlay {
+                width: 80%;
+                height: 60%;
+            }
+            #overlaybody {
+                display: flex;
+                flex-direction: row;
+            }
+            #overlaysummary {
+                font-size: x-large;
+                max-width: 50rem;
+                padding: 1rem;
+                padding-left: 2rem;
+            }
         }
 
 
@@ -282,6 +377,8 @@
     <script>
 
         var condensed = false; 
+        var overlay; 
+        var entries; 
 
         window.onload = () => {
             // REFORMAT DATES (its weird before)
@@ -308,8 +405,13 @@
                 
             });
 
+            overlay = document.getElementById("overlay");
+            entries = document.getElementById("main-list").childElementCount;
+            console.log("entries " + entries);
             
         };
+
+        
 
         
 
@@ -318,10 +420,33 @@
         }
 
         function overlayOn(inNum) {
-            document.getElementById("overlay").style.display = "block";
+            overlay.style.display = "flex";
 
             var ele = document.getElementById("entry_" + inNum);
-            console.log(ele.children);
+
+            console.log("ELEMENT " + ele)
+
+            var dat = {
+                summary: ele.querySelector(".summary").textContent,
+                title: ele.querySelector(".articleTitle").textContent,
+                photo: ele.querySelector(".entryPhoto").src,
+                published: ele.querySelector(".date").textContent,
+                url: ele.querySelector("a").href,
+                urlTxt: ele.querySelector("a").textContent,
+            }
+
+
+
+            overlay.querySelector("#overlaysummary").textContent = dat.summary;
+            overlay.querySelector("#overlaytitle").textContent = dat.title;
+            overlay.querySelector(".entryPhoto").src = dat.photo;
+            overlay.querySelector(".date").textContent = dat.published;
+            overlay.querySelector("a").href = dat.url;
+            overlay.querySelector("a").textContent = dat.urlTxt;
+            
+
+            //overlay.querySelector("#inneroverlay").textContent = dat.summary; 
+            console.log(dat);
         }
 
         function overlayOff() {
@@ -346,11 +471,10 @@
             <h2>Line your head with news summaries.</h2>
             <h3>Like skimming the headlines, but better!</h3>
             <br>
-            <p><b>Disclaimer:</b> AI can be so silly sometimes! Please don't ever use summaries as official references, as sometimes it can just make stuff up, bless 🙏.</p>
-            <br>
             <p>Click on a headline to <b>focus</b></p>
             <p>Click on the button in the <b>lower left corner</b> to show all summaries (or click 's')</p>
-            
+            <br>
+            <p><b>Disclaimer:</b> AI can be so silly! Please use the original sources for references, as <i> sometimes </i> the summarizer hallucinates, bless 🙏.</p>
             
             <!-- <button onclick="toggleCondensed()">Toggle Condensed</button> -->
         </div>
@@ -359,7 +483,7 @@
 			<div id="entry_{{$index}}" class="entry bordered" onclick="overlayOn({{$index}})">
                 <div class="entry-top">
                     <h2 class="articleTitle">{{$dat.Title}}</h2>
-                    <img class="entryPhoto" src="{{$dat.PhotoUrl}}">
+                    <img class="entryPhoto bordered" src="{{$dat.PhotoUrl}}">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -386,9 +510,23 @@
         </section>
         <section id="padding" style="padding: 2rem;"></section>
 
-        <div id="overlay" onclick="overlayOff()">
-            <div>
+        <div id="overlay" onclick="overlayOff()" style="justify-content: center; align-items: center;">
+            <div id="inneroverlay" class="bordered">
+                <h2 id="overlaytitle"></h2>
+                <div id="overlaybody">
+                    <div style=" display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
+                        <img class="entryPhoto bordered" src="">
+                        <h3 class="published" style="text-align: center;"><time class="date" datetime=""></time></h3>
+                        <a style="justify-content: center; text-align: center;" target='_blank' rel="noopener noreferrer"></a>
+                    </div>
+                    <p id="overlaysummary"></p>
+                    <!-- <div class="entrybody">
+                        <div>
+                           
+                        </div>
+                    </div> -->
+                </div>
             </div>
         </div>
         

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -47,10 +46,6 @@
         }
 
         body {
-             
-             
-             
-             
             font-family: Georgia, 'Times New Roman', Times, serif;
             color: var(--textmain);
             background-color: var(--mainback);
@@ -61,8 +56,8 @@
             padding-top: 1rem;
             min-width: 100%;
             box-sizing:border-box;
-            padding-right: 4rem;
-            padding-left: 4rem;
+            padding-right: 2rem;
+            padding-left: 2rem;
             padding-bottom: 2rem;
 
         }
@@ -132,8 +127,10 @@
             width: 40rem;
             max-width: 100%;
             aspect-ratio: 16 / 9;
-            object-fit: contain;
-            padding-top: 1rem;
+            object-fit: cover;
+            margin: 0.5rem;
+            object-position: 50% 0;
+             
         }
 
         .articleTitle {
@@ -150,7 +147,32 @@
 
         #title {
             color: var(--texttitle);
-            font-size: 3rem;
+            font-size: 1.5rem;
+        }
+
+        h2 {
+            color: var(--outlinecol);
+            font-size: large;
+        }
+        h3 {
+            font-size: medium;
+        }
+
+        @media screen and (min-width: 600px) {
+            #title {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: larger;
+            }
+            h3 {
+                font-size: large;
+            }
+            .header-footer {
+                padding-left: 4rem;
+                padding-right: 4rem;
+            }
         }
 
         .entry-top {
@@ -175,7 +197,7 @@
                 font-size: large;
             }
             #title {
-                font-size: 5rem;
+                font-size: 4rem;
             }
         }
 
@@ -183,15 +205,23 @@
             .entry {
                 max-width: 25rem;
             }
+            #title {
+                font-size: 5rem;
+            }
+
+            h2 {
+                font-size: x-large;
+            }
+            h3 {
+                font-size: larger;
+            }
         }
 
         .hidden {
             display: none;
         }
 
-        h2 {
-            color: var(--outlinecol)
-        }
+       
 
         .published {
             color: var(--texttitle); 
@@ -217,9 +247,74 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0,0,0,0.5);  
+            background-color: rgba(0,0,0,0.7);  
             z-index: 2;  
             cursor: pointer;  
+        }
+
+        #inneroverlay {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            background-color: white; 
+            justify-content: center;
+            align-items: center;
+            width: 60%;
+            min-width: 20rem;
+        }
+
+        #overlaysummary {
+            color: var(--textmain);
+            padding: 0.2rem;
+            font-size: medium;
+        }
+
+        #overlaybody {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #overlaytitle {
+            font-weight: bolder;
+            font-size: large;
+            padding: 1rem;
+            color: var(--texttitle);
+            align-self: center;
+        }
+
+
+        @media screen and (min-width: 1000px) {
+            #overlaytitle {
+                font-size: x-large;
+            }
+            #overlaysummary {
+                font-size: large;
+                padding: 0.5rem;
+            }
+        }
+
+        @media screen and (min-width: 1500px) {
+
+            #overlaytitle {
+                font-size: 2.5rem;
+            }
+            #inneroverlay {
+                width: 80%;
+                height: 60%;
+            }
+            #overlaybody {
+                display: flex;
+                flex-direction: row;
+            }
+            #overlaysummary {
+                font-size: x-large;
+                max-width: 50rem;
+                padding: 1rem;
+                padding-left: 2rem;
+            }
         }
 
 
@@ -282,6 +377,8 @@
     <script>
 
         var condensed = false; 
+        var overlay; 
+        var entries; 
 
         window.onload = () => {
             
@@ -308,8 +405,13 @@
                 
             });
 
+            overlay = document.getElementById("overlay");
+            entries = document.getElementById("main-list").childElementCount;
+            console.log("entries " + entries);
             
         };
+
+        
 
         
 
@@ -318,10 +420,33 @@
         }
 
         function overlayOn(inNum) {
-            document.getElementById("overlay").style.display = "block";
+            overlay.style.display = "flex";
 
             var ele = document.getElementById("entry_" + inNum);
-            console.log(ele.children);
+
+            console.log("ELEMENT " + ele)
+
+            var dat = {
+                summary: ele.querySelector(".summary").textContent,
+                title: ele.querySelector(".articleTitle").textContent,
+                photo: ele.querySelector(".entryPhoto").src,
+                published: ele.querySelector(".date").textContent,
+                url: ele.querySelector("a").href,
+                urlTxt: ele.querySelector("a").textContent,
+            }
+
+
+
+            overlay.querySelector("#overlaysummary").textContent = dat.summary;
+            overlay.querySelector("#overlaytitle").textContent = dat.title;
+            overlay.querySelector(".entryPhoto").src = dat.photo;
+            overlay.querySelector(".date").textContent = dat.published;
+            overlay.querySelector("a").href = dat.url;
+            overlay.querySelector("a").textContent = dat.urlTxt;
+            
+
+            
+            console.log(dat);
         }
 
         function overlayOff() {
@@ -346,11 +471,10 @@
             <h2>Line your head with news summaries.</h2>
             <h3>Like skimming the headlines, but better!</h3>
             <br>
-            <p><b>Disclaimer:</b> AI can be so silly sometimes! Please don't ever use summaries as official references, as sometimes it can just make stuff up, bless 🙏.</p>
-            <br>
             <p>Click on a headline to <b>focus</b></p>
             <p>Click on the button in the <b>lower left corner</b> to show all summaries (or click 's')</p>
-            
+            <br>
+            <p><b>Disclaimer:</b> AI can be so silly! Please use the original sources for references, as <i> sometimes </i> the summarizer hallucinates, bless 🙏.</p>
             
             
         </div>
@@ -358,8 +482,180 @@
 			
 			<div id="entry_0" class="entry bordered" onclick="overlayOn( 0 )">
                 <div class="entry-top">
+                    <h2 class="articleTitle">What to know about a possible Israeli military offensive in Rafah</h2>
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/24/gettyimages-2149373237_slide-c91192cb6040e61cec55065327e367fb81e58f54-s1100-c50.jpg">
+                </div>
+                <div class="entrybody">
+                    <div>
+                        <div class="centered">
+                            <h3 class="published"><time class="date" datetime="2024-04-26 05:19:07 &#43;0000 UTC">2024-04-26 05:19:07 &#43;0000 UTC</time></h3>
+                            <a href="https://npr.org/2024/04/26/1246857306/rafah-gaza-israel-military-offensive" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+                        </div>
+                    </div>
+                    <div class="hideable hidden">
+                        <p class="summary">Over 1 million displaced Palestinians in Gazas Rafah are facing the threat of an Israeli military offensive. Israel claims the offensive is necessary to eliminate Hamas and release hostages, but negotiations for a ceasefire have stalled. Multiple officials have expressed concern over the potential civilian death toll, and the US has urged Israel to consider &#34;alternate ways&#34; of addressing the Hamas military presence.
+
+The Israeli military has called up two reserve brigades and erected new tent encampments near Rafah, indicating preparations for an attack. Aid groups and UN agencies fear a humanitarian crisis, as Rafah is the main exit point for wounded Palestinians and humanitarian aid.
+
+Humanitarian organizations have contingency plans for evacuation but lack specific information from Israel. The United Nations reports that hundreds of bodies are still being recovered in Gaza City after an Israeli raid on Al-Shifa hospital. Despite the threat, some displaced Palestinians are considering fleeing to Egypt or returning to Gaza City, as Israeli airstrikes have killed over 230 civilians in Rafah since March 21.</p>
+                    </div>
+                </div>
+            </div>
+			
+			<div id="entry_1" class="entry bordered" onclick="overlayOn( 1 )">
+                <div class="entry-top">
+                    <h2 class="articleTitle">More than 500 people have been arrested at pro-Palestinian protests at colleges</h2>
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/26/ap24117022318527_custom-84e5030418c344d6fcc13a5388e2eb8f67e8be02-s1100-c50.jpg">
+                </div>
+                <div class="entrybody">
+                    <div>
+                        <div class="centered">
+                            <h3 class="published"><time class="date" datetime="2024-04-26 05:18:20 &#43;0000 UTC">2024-04-26 05:18:20 &#43;0000 UTC</time></h3>
+                            <a href="https://npr.org/2024/04/26/1247408281/student-protests-colleges-universities-israel-palestine" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+                        </div>
+                    </div>
+                    <div class="hideable hidden">
+                        <p class="summary">Amidst ongoing pro-Palestinian protests on college campuses nationwide, over 500 arrests have been made. At Columbia University, more than 100 protesters were detained after police attempted to dismantle an encampment, while negotiations are ongoing. The University of Southern California experienced 93 arrests and canceled its commencement due to protests, including an assault charge. The University of Texas at Austin cleared protestors and charges were dropped for most of the 60 arrested. Emerson College apprehended over 100 protestors following the removal of an encampment. On Thursday, arrests were made at Princeton University, Emory University, The Ohio State University, and the University of Minnesota.</p>
+                    </div>
+                </div>
+            </div>
+			
+			<div id="entry_2" class="entry bordered" onclick="overlayOn( 2 )">
+                <div class="entry-top">
+                    <h2 class="articleTitle">United Methodist Church begins reorganization over LGBTQ&#43; issues</h2>
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/methodist-church-7c1f4ad0b27673b6ffebde51b4947d35201dd20c-s1100-c50.jpg">
+                </div>
+                <div class="entrybody">
+                    <div>
+                        <div class="centered">
+                            <h3 class="published"><time class="date" datetime="2024-04-26 05:01:12 &#43;0000 UTC">2024-04-26 05:01:12 &#43;0000 UTC</time></h3>
+                            <a href="https://npr.org/2024/04/26/1247390905/united-methodist-church-umc-reorganization-lgbtq-same-sex-marriage-issues" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+                        </div>
+                    </div>
+                    <div class="hideable hidden">
+                        <p class="summary">The United Methodist Churchs General Conference has voted to potentially lift the bans on LGBTQ&#43; clergy and same-sex weddings. A regionalization proposal would allow different geographic regions to create their own rules, enabling the U.S. to potentially end such bans while other regions make their own decisions. This move aims to address the disparity in sentiment towards LGBTQ&#43; issues among different parts of the church, particularly between the U.S. and Africa. The regionalization plan passed with 78% of the vote, but needs ratification by local annual conferences. Despite official bans, many local geographic conferences, especially in the U.S., have chosen not to enforce them, leading to departures from the denomination. The regionalization vote could make subsequent proposals to remove the bans globally less contentious.</p>
+                    </div>
+                </div>
+            </div>
+			
+			<div id="entry_3" class="entry bordered" onclick="overlayOn( 3 )">
+                <div class="entry-top">
+                    <h2 class="articleTitle">A year later, Florida businesses say the state&#39;s immigration law dealt a huge blow.</h2>
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/21/039_plantcity_slide-647ca980fac2338c3a8d7eb5b9ba98aaf875ca91-s1100-c50.jpg">
+                </div>
+                <div class="entrybody">
+                    <div>
+                        <div class="centered">
+                            <h3 class="published"><time class="date" datetime="2024-04-26 05:01:10 &#43;0000 UTC">2024-04-26 05:01:10 &#43;0000 UTC</time></h3>
+                            <a href="https://npr.org/2024/04/26/1242236604/florida-economy-immigration-businesses-workers-undocumented" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+                        </div>
+                    </div>
+                    <div class="hideable hidden">
+                        <p class="summary">In Plant City, Florida, the immigration crackdown initiated by Governor Ron DeSantis has resulted in a shortage of farmworkers, causing significant losses for local businesses. Over 40% of farmworkers nationwide are estimated to be undocumented, and the fear of arrest under the new law has led many of them to leave Florida. The Florida Policy Institute estimates the law could cost the states economy $12.6 billion in the first year. Despite the availability of H-2A guest worker programs, farmers face high costs and bureaucratic hurdles that hinder their effectiveness. The labor shortage is also impacting non-agricultural industries, with businesses experiencing difficulties finding workers, particularly in roofing. The law has also created a climate of fear for undocumented workers and their families, leading many of them to consider moving out of Florida.</p>
+                    </div>
+                </div>
+            </div>
+			
+			<div id="entry_4" class="entry bordered" onclick="overlayOn( 4 )">
+                <div class="entry-top">
+                    <h2 class="articleTitle">Alabama woman who says police assaulted her after calling 911 files federal lawsuit</h2>
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/twyla-1--db6527286c2db6705cc2ef266dcff817d79cdeba-s1100-c50.jpg">
+                </div>
+                <div class="entrybody">
+                    <div>
+                        <div class="centered">
+                            <h3 class="published"><time class="date" datetime="2024-04-26 05:00:40 &#43;0000 UTC">2024-04-26 05:00:40 &#43;0000 UTC</time></h3>
+                            <a href="https://npr.org/2024/04/26/1247187053/alabama-twyla-stallworth-police-assault-calling-911-lawsuit" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+                        </div>
+                    </div>
+                    <div class="hideable hidden">
+                        <p class="summary">Twyla Stallworth, a Black woman from Alabama, filed a federal lawsuit against Andalusia City, its police department, and Officer Grant Barton for her unlawful arrest and illegal detention. The incident arose from a noise complaint Stallworth made, which prompted Barton to demand her identification. Stallworth refused, and Barton arrested her for failing to comply. The lawsuit alleges that Stallworth was assaulted, strip-searched, and jailed for 15 hours, despite not committing any crimes. Stallworth and her son, Jermari Marshall, are seeking unspecified compensatory and punitive damages. Andalusias mayor apologized for the incident and stated that Barton was disciplined, but the lawsuit does not specify the nature of the punishment. Stallworths attorney, Harry Daniels, condemned Bartons actions, highlighting the danger posed by officers who disregard citizens rights.</p>
+                    </div>
+                </div>
+            </div>
+			
+			<div id="entry_5" class="entry bordered" onclick="overlayOn( 5 )">
+                <div class="entry-top">
+                    <h2 class="articleTitle">Former tabloid publisher details actions on behalf of Trump ahead of 2016 election</h2>
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2149588216_slide-283d0a27671edf397204f9dc298246e031222eb3-s1100-c50.jpg">
+                </div>
+                <div class="entrybody">
+                    <div>
+                        <div class="centered">
+                            <h3 class="published"><time class="date" datetime="2024-04-26 05:00:40 &#43;0000 UTC">2024-04-26 05:00:40 &#43;0000 UTC</time></h3>
+                            <a href="https://npr.org/2024/04/26/1247352050/trump-hush-money-trial-david-pecker" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+                        </div>
+                    </div>
+                    <div class="hideable hidden">
+                        <p class="summary">In the ongoing hush-money trial against former President Trump, David Pecker, ex-publisher of the National Enquirer, testified that Keith Davidson approached the tabloid in 2016 with a story about Karen MacDougal, a model alleging an affair with Trump. Trump instructed Pecker to purchase and suppress the story, which American Media Inc. did at Cohens promise of reimbursement. Peckers testimony supports the prosecutions claim that Trump had direct knowledge of the hush-money payments. The trial also heard details of secret payments and buried stories, providing insight into Trumps methods of controlling information during his 2016 campaign. Peckers actions, motivated by Trumps gratitude, included a dinner at the White House where Trump inquired about MacDougal. Despite Trumps plea of not guilty to charges of falsifying business records, Peckers testimony suggests Trumps involvement in the payments.</p>
+                    </div>
+                </div>
+            </div>
+			
+			<div id="entry_6" class="entry bordered" onclick="overlayOn( 6 )">
+                <div class="entry-top">
+                    <h2 class="articleTitle">Where can you call an artist on a lobster? Find out in the quiz</h2>
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/elon-taylor-tapir_wide-37f1a92c8790d305669693f2c4b2caa555b7dc18-s1100-c50.jpg">
+                </div>
+                <div class="entrybody">
+                    <div>
+                        <div class="centered">
+                            <h3 class="published"><time class="date" datetime="2024-04-26 05:00:10 &#43;0000 UTC">2024-04-26 05:00:10 &#43;0000 UTC</time></h3>
+                            <a href="https://npr.org/2024/04/26/1246676328/dali-museum-elon-musk-taylor-swift" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+                        </div>
+                    </div>
+                    <div class="hideable hidden">
+                        <p class="summary">This week marked Earth Day, an event often associated with corporate greenwashing and the misconception that individual actions can significantly reduce pollution. The concept of individual responsibility in reducing pollution was created by industries promoting single-use plastics. This topic is explored in depth in the Throughline podcasts Earth Day quiz, which challenges listeners with questions about the environmental impact of various products.</p>
+                    </div>
+                </div>
+            </div>
+			
+			<div id="entry_7" class="entry bordered" onclick="overlayOn( 7 )">
+                <div class="entry-top">
+                    <h2 class="articleTitle">China&#39;s influence operations against the U.S. are bigger than TikTok</h2>
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2150026521_slide-f00bbdf18d95f1a7744393a94e8ea7b27c0c7f71-s1100-c50.jpg">
+                </div>
+                <div class="entrybody">
+                    <div>
+                        <div class="centered">
+                            <h3 class="published"><time class="date" datetime="2024-04-26 05:00:10 &#43;0000 UTC">2024-04-26 05:00:10 &#43;0000 UTC</time></h3>
+                            <a href="https://npr.org/2024/04/26/1247347363/china-tiktok-national-security" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+                        </div>
+                    </div>
+                    <div class="hideable hidden">
+                        <p class="summary">Amid national security concerns, a new law mandates the sale of the Chinese-owned TikTok app in the US. Lawmakers cite fears of China potentially accessing user data, conducting surveillance, and disseminating misinformation. While classified intelligence briefings have raised concerns about TikTok, no evidence has been publicly released.
+
+Chinas efforts to manipulate Americans through social media have intensified, including attempts to influence elections, spread disinformation, and exacerbate existing divisions. While much attention has been given to Russian interference, Chinas efforts are also a growing threat.
+
+TikTok has been utilized in Chinas influence operations, but not more than other platforms like Facebook. However, in Taiwan, China has aggressively used TikTok to undermine democracy, creating proxy accounts to disseminate official state narratives without disclosing their origins.
+
+Despite efforts to sway Taiwanese voters, the pro-independence candidate opposed by China won re-election, indicating that these influence operations have not had a significant impact.</p>
+                    </div>
+                </div>
+            </div>
+			
+			<div id="entry_8" class="entry bordered" onclick="overlayOn( 8 )">
+                <div class="entry-top">
+                    <h2 class="articleTitle">Ukraine pulls U.S.-provided Abrams tanks from the front lines over drone threats</h2>
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/26/ap24116849334436-f4cb27fc49c9455936ac8b4443377afbcdf67b11-s1100-c50.jpg">
+                </div>
+                <div class="entrybody">
+                    <div>
+                        <div class="centered">
+                            <h3 class="published"><time class="date" datetime="2024-04-26 04:27:00 &#43;0000 UTC">2024-04-26 04:27:00 &#43;0000 UTC</time></h3>
+                            <a href="https://npr.org/2024/04/26/1247403968/ukraine-pulls-abrams-tanks-from-front-lines-russia-drone-threats" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+                        </div>
+                    </div>
+                    <div class="hideable hidden">
+                        <p class="summary">Due to Russian drone warfare, Ukraine has temporarily suspended the use of US-provided Abrams M1A1 tanks, as they have become highly vulnerable to detection and attack. The tanks have faced difficulties operating without being quickly located and targeted by Russian drones. Despite the US providing 31 Abrams tanks in January 2023, five have been lost to Russian attacks. The battlefield has shifted, making it challenging to protect the tanks from detection and strikes. The US and Ukraine are collaborating to modify tactics to enhance the effectiveness of the tanks in the current drone-heavy environment. While the tanks remain significant, the US is emphasizing counter-drone capabilities, air defenses, and alternative vehicles in its recent military aid packages. Ukraine has not yet adopted combined arms warfare tactics, which could increase the effectiveness of the Abrams tanks.</p>
+                    </div>
+                </div>
+            </div>
+			
+			<div id="entry_9" class="entry bordered" onclick="overlayOn( 9 )">
+                <div class="entry-top">
                     <h2 class="articleTitle">17 states challenge federal rules entitling workers to accommodations for abortion</h2>
-                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/ap24116849011157_slide-d8632fafae25efdd5bdf1f523b239af88a3777da-s1100-c50.jpg">
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/ap24116849011157_slide-d8632fafae25efdd5bdf1f523b239af88a3777da-s1100-c50.jpg">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -374,10 +670,10 @@
                 </div>
             </div>
 			
-			<div id="entry_1" class="entry bordered" onclick="overlayOn( 1 )">
+			<div id="entry_10" class="entry bordered" onclick="overlayOn( 10 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Why experts say inflation is relatively low but voters feel differently</h2>
-                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2008640078_wide-a45766cb5f08807ed26cf28b1f194c22407ac6c5-s1100-c50.jpg">
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2008640078_wide-a45766cb5f08807ed26cf28b1f194c22407ac6c5-s1100-c50.jpg">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -392,10 +688,10 @@
                 </div>
             </div>
 			
-			<div id="entry_2" class="entry bordered" onclick="overlayOn( 2 )">
+			<div id="entry_11" class="entry bordered" onclick="overlayOn( 11 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Kim Kardashian visits the White House to highlight criminal justice reform</h2>
-                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2149583174-2f838c9e2ee7045ea8617262a0ffca6bb9b2e307-s1100-c50.jpg">
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2149583174-2f838c9e2ee7045ea8617262a0ffca6bb9b2e307-s1100-c50.jpg">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -410,10 +706,10 @@
                 </div>
             </div>
 			
-			<div id="entry_3" class="entry bordered" onclick="overlayOn( 3 )">
+			<div id="entry_12" class="entry bordered" onclick="overlayOn( 12 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Haiti&#39;s Prime Minister Ariel Henry has resigned as a transitional council takes over</h2>
-                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/ap24116597482866-d4efb878dcab7e2a64dda2f2122dfcb8fe390824-s1100-c50.jpg">
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/ap24116597482866-d4efb878dcab7e2a64dda2f2122dfcb8fe390824-s1100-c50.jpg">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -428,10 +724,10 @@
                 </div>
             </div>
 			
-			<div id="entry_4" class="entry bordered" onclick="overlayOn( 4 )">
+			<div id="entry_13" class="entry bordered" onclick="overlayOn( 13 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Venice tests a 5-euro fee for day-trippers as the city grapples with overtourism</h2>
-                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/ap24116292846671_custom-597d2aac0d75d1b37c54d0d6c6b4f76b169c8112-s1100-c50.jpg">
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/ap24116292846671_custom-597d2aac0d75d1b37c54d0d6c6b4f76b169c8112-s1100-c50.jpg">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -446,10 +742,10 @@
                 </div>
             </div>
 			
-			<div id="entry_5" class="entry bordered" onclick="overlayOn( 5 )">
+			<div id="entry_14" class="entry bordered" onclick="overlayOn( 14 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">After two Boeing 737 Max crashes, families are still seeking answers from DOJ</h2>
-                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2149446484_custom-5d7c63ff65436f821007e39d86b8af2a54e084e4-s1100-c50.jpg">
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2149446484_custom-5d7c63ff65436f821007e39d86b8af2a54e084e4-s1100-c50.jpg">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -464,10 +760,10 @@
                 </div>
             </div>
 			
-			<div id="entry_6" class="entry bordered" onclick="overlayOn( 6 )">
+			<div id="entry_15" class="entry bordered" onclick="overlayOn( 15 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Some 300 musicians, from Diplo to Nile Rodgers, lobby Congress for ticketing reform</h2>
-                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/ticketing-reform-1_custom-9f3f780f75ae90562a602f005715153b629f11ea-s1100-c50.jpg">
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/ticketing-reform-1_custom-9f3f780f75ae90562a602f005715153b629f11ea-s1100-c50.jpg">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -482,10 +778,10 @@
                 </div>
             </div>
 			
-			<div id="entry_7" class="entry bordered" onclick="overlayOn( 7 )">
+			<div id="entry_16" class="entry bordered" onclick="overlayOn( 16 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Harvey Weinstein&#39;s 2020 sex crimes conviction in New York overturned</h2>
-                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-1243724529-f731c51382691a6bb4dbb0d485d37a70f04dcaca-s1100-c50.jpg">
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-1243724529-f731c51382691a6bb4dbb0d485d37a70f04dcaca-s1100-c50.jpg">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -500,10 +796,10 @@
                 </div>
             </div>
 			
-			<div id="entry_8" class="entry bordered" onclick="overlayOn( 8 )">
+			<div id="entry_17" class="entry bordered" onclick="overlayOn( 17 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">An American hostage is seen alive for the first time since Oct. 7 in a Hamas video</h2>
-                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/ap24057589554710-4989e81248c888e433c2710ced88ea88d573f8aa-s1100-c50.jpg">
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/25/ap24057589554710-4989e81248c888e433c2710ced88ea88d573f8aa-s1100-c50.jpg">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -518,10 +814,10 @@
                 </div>
             </div>
 			
-			<div id="entry_9" class="entry bordered" onclick="overlayOn( 9 )">
+			<div id="entry_18" class="entry bordered" onclick="overlayOn( 18 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">How&#39;s your city attracting people downtown these days? NPR wants to hear from you</h2>
-                    <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/24/gettyimages-1415602912-0dbe26d560a2c10af76f3e19755bfc6360e04860-s1100-c50.jpg">
+                    <img class="entryPhoto bordered" src="https://media.npr.org/assets/img/2024/04/24/gettyimages-1415602912-0dbe26d560a2c10af76f3e19755bfc6360e04860-s1100-c50.jpg">
                 </div>
                 <div class="entrybody">
                     <div>
@@ -548,9 +844,19 @@
         </section>
         <section id="padding" style="padding: 2rem;"></section>
 
-        <div id="overlay" onclick="overlayOff()">
-            <div>
+        <div id="overlay" onclick="overlayOff()" style="justify-content: center; align-items: center;">
+            <div id="inneroverlay" class="bordered">
+                <h2 id="overlaytitle"></h2>
+                <div id="overlaybody">
+                    <div style=" display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
+                        <img class="entryPhoto bordered" src="">
+                        <h3 class="published" style="text-align: center;"><time class="date" datetime=""></time></h3>
+                        <a style="justify-content: center; text-align: center;" target='_blank' rel="noopener noreferrer"></a>
+                    </div>
+                    <p id="overlaysummary"></p>
+                    
+                </div>
             </div>
         </div>
         
