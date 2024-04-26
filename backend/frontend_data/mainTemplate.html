@@ -1,17 +1,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <!-- <script src="./htmx.min.js"></script> -->
-    <script type='text/javascript' src="./main.js"></script>
     <head>
         <title>{{.Title}}</title>
     </head>
-
     <style>
         :root {
             --mainback: #333333;
             --secondback: #ffffff;
-            --textmain:  #252525;
+            --textmain:  #434343;
             --texttitle: #0078be;
             --outlinecol: #f4690d;
             --outlinesize: 0.15rem; 
@@ -43,8 +40,6 @@
             flex-direction: column;
             align-items: center;
             max-width: 40rem;
-            border-radius: .25rem;
-            border: var(--outlinesize) solid var(--outlinecol);
             background-color: var(--secondback);
             padding: 1rem;
             color: var(--textmain);
@@ -69,7 +64,7 @@
             padding-right: 4rem;
             padding-left: 4rem;
             padding-bottom: 2rem;
-            border: var(--outlinesize) solid var(--outlinecol);
+
         }
 
 
@@ -89,9 +84,12 @@
 
         /* ENTRIES */
 
-        .entry {
+        .bordered {
             border-radius: .25rem;
             border: var(--outlinesize) solid var(--outlinecol);
+        }
+
+        .entry {
             background-color: var(--secondback);
 
             align-items: center;
@@ -248,9 +246,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
+            background-color: var(--texttitle);
+            -webkit-transition: .15s;
+            transition: .15s;
         }
 
         .slider:before {
@@ -261,12 +259,12 @@
             left: 4px;
             bottom: 4px;
             background-color: white;
-            -webkit-transition: .2s;
-            transition: .2s;
+            -webkit-transition: .15s;
+            transition: .15s;
         }
 
         input:checked + .slider {
-            background-color: var(--texttitle);
+            background-color: var(--outlinecol);
         }
 
         input:focus + .slider {
@@ -294,12 +292,26 @@
                 element.textContent = formattedDate;
             });
 
-            toggleCondensed();
-        };
+            var check = document.getElementById("checkbox");
+            document.addEventListener("keydown", (e) => {
+                // if (event.defaultPrevented) {
+                //     return; // Should do nothing if the default action has been cancelled
+                // }
+                if (e.key !== undefined) {
+                    if (e.key === "s") {
+                        check.click();
+                    }
+                    return
+                } else if (e.keyCode !== undefined) {
+                    return
+                }
+                
+            });
 
-        window.onresize = function(event) {
             
         };
+
+        
 
         function testPrint(inDat) {
             console.log(inDat)
@@ -329,25 +341,22 @@
 
     </script>
     <body>
-        <div id="header" class="header-footer">
+        <div id="header" class="header-footer bordered">
             <h1 id="title">the HeadLiner 🙆‍♂️📈🔥</h1>
-            <h2>Line your head with summaries of the news. Its like skimming the headlines, but better!</h2>
+            <h2>Line your head with news summaries.</h2>
+            <h3>Like skimming the headlines, but better!</h3>
+            <br>
             <p><b>Disclaimer:</b> AI can be so silly sometimes! Please don't ever use summaries as official references, as sometimes it can just make stuff up, bless 🙏.</p>
-
-            <div>
-                <p>Click on a summary to focus on it OR</p>
-                <p>Toggle this to show all summaries </p>
-                <label class="switch">
-                    <input type="checkbox" onclick="toggleCondensed()">
-                    <span class="slider"></span>
-                </label>
-            </div>
+            <br>
+            <p>Click on a headline to <b>focus</b></p>
+            <p>Click on the button in the <b>lower left corner</b> to show all summaries (or click 's')</p>
+            
             
             <!-- <button onclick="toggleCondensed()">Toggle Condensed</button> -->
         </div>
         <section id="main-list">
 			{{range $index, $dat := .Entries}}
-			<div id="entry_{{$index}}" class="entry" onclick="overlayOn({{$index}})">
+			<div id="entry_{{$index}}" class="entry bordered" onclick="overlayOn({{$index}})">
                 <div class="entry-top">
                     <h2 class="articleTitle">{{$dat.Title}}</h2>
                     <img class="entryPhoto" src="{{$dat.PhotoUrl}}">
@@ -359,7 +368,7 @@
                             <a href="{{ $dat.Url }}" target='_blank' rel="noopener noreferrer">Link ({{$dat.FromWeb}})</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">{{$dat.Summary}}</p>
                     </div>
                 </div>
@@ -368,18 +377,27 @@
 		</section>
         
         <section id="comic-sec">
-            <div class="comic-in">
+            <div class="comic-in bordered">
                 <!--  Now don't YOU feel informed? 🤭 -->
                 <p>Well aren't you a _ravenous_ news consumer! Treat yourself to a Boomer comic.</p>
                 <img id="comic" decoding="async" src="https://filesrv.cagle.com/283181/750/283181.png">
                 <p>What delicious nuanced political commentary! Come back in a few hours for another batch of summaries 💯</p>
             </div>
         </section>
+        <section id="padding" style="padding: 2rem;"></section>
 
         <div id="overlay" onclick="overlayOff()">
             <div>
 
             </div>
+        </div>
+        
+        <div id="summarytoggle" class="bordered" style="padding: 0.25rem; text-align: center; width: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--secondback); position: fixed; bottom: 0.5rem; left: 0.5rem;">
+            <p>Summaries </p>
+            <label class="switch">
+                <input id="checkbox" type="checkbox" onclick="toggleCondensed()">
+                <span class="slider"></span>
+            </label>
         </div>
         <div class=".header-footer">
             <!-- <p> Come back in a few hours </p> -->

@@ -1,19 +1,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    
-    <script type='text/javascript' src="./main.js"></script>
     <head>
         <title>Website</title>
     </head>
-
     <style>
-
- 
         :root {
             --mainback: #333333;
             --secondback: #ffffff;
-            --textmain:  #252525;
+            --textmain:  #434343;
             --texttitle: #0078be;
             --outlinecol: #f4690d;
             --outlinesize: 0.15rem; 
@@ -45,8 +40,6 @@
             flex-direction: column;
             align-items: center;
             max-width: 40rem;
-            border-radius: .25rem;
-            border: var(--outlinesize) solid var(--outlinecol);
             background-color: var(--secondback);
             padding: 1rem;
             color: var(--textmain);
@@ -71,7 +64,7 @@
             padding-right: 4rem;
             padding-left: 4rem;
             padding-bottom: 2rem;
-            border: var(--outlinesize) solid var(--outlinecol);
+
         }
 
 
@@ -91,9 +84,12 @@
 
          
 
-        .entry {
+        .bordered {
             border-radius: .25rem;
             border: var(--outlinesize) solid var(--outlinecol);
+        }
+
+        .entry {
             background-color: var(--secondback);
 
             align-items: center;
@@ -196,18 +192,12 @@
         h2 {
             color: var(--outlinecol)
         }
-        
-
 
         .published {
             color: var(--texttitle); 
             padding-top: 1rem;
         }
         
-
-        
-
-
         .centered {
             margin: auto;
             display: flex;
@@ -256,9 +246,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
+            background-color: var(--texttitle);
+            -webkit-transition: .15s;
+            transition: .15s;
         }
 
         .slider:before {
@@ -269,12 +259,12 @@
             left: 4px;
             bottom: 4px;
             background-color: white;
-            -webkit-transition: .2s;
-            transition: .2s;
+            -webkit-transition: .15s;
+            transition: .15s;
         }
 
         input:checked + .slider {
-            background-color: var(--texttitle);
+            background-color: var(--outlinecol);
         }
 
         input:focus + .slider {
@@ -302,12 +292,26 @@
                 element.textContent = formattedDate;
             });
 
-            toggleCondensed();
-        };
+            var check = document.getElementById("checkbox");
+            document.addEventListener("keydown", (e) => {
+                
+                
+                
+                if (e.key !== undefined) {
+                    if (e.key === "s") {
+                        check.click();
+                    }
+                    return
+                } else if (e.keyCode !== undefined) {
+                    return
+                }
+                
+            });
 
-        window.onresize = function(event) {
             
         };
+
+        
 
         function testPrint(inDat) {
             console.log(inDat)
@@ -337,27 +341,22 @@
 
     </script>
     <body>
-        <div id="header" class="header-footer">
+        <div id="header" class="header-footer bordered">
             <h1 id="title">the HeadLiner 🙆‍♂️📈🔥</h1>
-            <h2>Line your head with summaries of the news. Its like skimming the headlines, but better!</h2>
+            <h2>Line your head with news summaries.</h2>
+            <h3>Like skimming the headlines, but better!</h3>
+            <br>
             <p><b>Disclaimer:</b> AI can be so silly sometimes! Please don't ever use summaries as official references, as sometimes it can just make stuff up, bless 🙏.</p>
-
-            <div>
-                <p>Click on a summary to focus on it OR</p>
-                <p>Toggle this to show all summaries </p>
-                <div>
-                <label class="switch">
-                    <input type="checkbox" onclick="toggleCondensed()">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            </div>
+            <br>
+            <p>Click on a headline to <b>focus</b></p>
+            <p>Click on the button in the <b>lower left corner</b> to show all summaries (or click 's')</p>
+            
             
             
         </div>
         <section id="main-list">
 			
-			<div id="entry_0" class="entry" onclick="overlayOn( 0 )">
+			<div id="entry_0" class="entry bordered" onclick="overlayOn( 0 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">17 states challenge federal rules entitling workers to accommodations for abortion</h2>
                     <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/ap24116849011157_slide-d8632fafae25efdd5bdf1f523b239af88a3777da-s1100-c50.jpg">
@@ -369,13 +368,13 @@
                             <a href="https://npr.org/2024/04/25/1247366138/eeoc-rules-abortion-accommodations-states-challenge" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">Republican attorneys general from 17 states have filed a lawsuit challenging new federal regulations that entitle workers to time off and other accommodations for abortions. The lawsuit alleges that the rules, finalized on Monday by the Equal Employment Opportunity Commission (EEOC), exceed the scope of the 2022 Pregnant Workers Fairness Act, which passed with bipartisan support. The regulations, which go into effect on June 18th, allow workers to seek time off to obtain and recover from an abortion. The lawsuit argues that the regulations force employers to accommodate abortions, even if they are illegal under state law. The EEOC maintains that the regulations only provide for time off, which does not have to be paid. The lawsuit was led by Tennessee and Arkansas, with Alabama, Florida, and 12 other states joining.</p>
                     </div>
                 </div>
             </div>
 			
-			<div id="entry_1" class="entry" onclick="overlayOn( 1 )">
+			<div id="entry_1" class="entry bordered" onclick="overlayOn( 1 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Why experts say inflation is relatively low but voters feel differently</h2>
                     <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2008640078_wide-a45766cb5f08807ed26cf28b1f194c22407ac6c5-s1100-c50.jpg">
@@ -387,13 +386,13 @@
                             <a href="https://npr.org/2024/04/25/1247177492/why-experts-say-inflation-is-relatively-low-but-voters-feel-differently" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">Purdue Universitys report indicates that a majority of consumers anticipate continued food price increases, potentially impacting voter sentiment. Despite heightened consumer perception of inflation, data from the Bureau of Labor Statistics shows a lower 2.2% increase in food prices over the past year. The report also reveals a political divide in perceived inflation, with Republicans reporting higher rates than Democrats. Consumers may overestimate price changes due to a broader time frame than the CPIs one-month comparison. The report suggests that rising food prices could negatively impact election outcomes, although specific drivers of inflation have diminished. While labor costs remain a lingering factor, the report does not anticipate a return to previous levels of food price inflation.</p>
                     </div>
                 </div>
             </div>
 			
-			<div id="entry_2" class="entry" onclick="overlayOn( 2 )">
+			<div id="entry_2" class="entry bordered" onclick="overlayOn( 2 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Kim Kardashian visits the White House to highlight criminal justice reform</h2>
                     <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2149583174-2f838c9e2ee7045ea8617262a0ffca6bb9b2e307-s1100-c50.jpg">
@@ -405,13 +404,13 @@
                             <a href="https://npr.org/2024/04/25/1247183807/kim-kardashian-white-house-criminal-justice-reform" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">Vice President Kamala Harris met with reality TV star Kim Kardashian to discuss criminal justice reform. The meeting focused on a new rule by the Small Business Administration that eases loan restrictions for individuals with criminal records. Harris emphasized the importance of second chances and resources for ex-offenders. President Biden has recently granted clemency to 11 individuals for non-violent drug offenses and commuted the sentences of five others. Bidens reforms aim to address disproportionate sentencing and attract young and minority voters, who advocate for marijuana reform. Kardashians advocacy played a role in elevating the issue during the previous administration.</p>
                     </div>
                 </div>
             </div>
 			
-			<div id="entry_3" class="entry" onclick="overlayOn( 3 )">
+			<div id="entry_3" class="entry bordered" onclick="overlayOn( 3 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Haiti&#39;s Prime Minister Ariel Henry has resigned as a transitional council takes over</h2>
                     <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/ap24116597482866-d4efb878dcab7e2a64dda2f2122dfcb8fe390824-s1100-c50.jpg">
@@ -423,13 +422,13 @@
                             <a href="https://npr.org/2024/04/25/1247157493/haiti-prime-minister-ariel-henry-resigns" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">Ariel Henry, Haitis de facto prime minister, has resigned and appointed Finance Minister Michel Patrick Boisvert as interim prime minister. A nine-person transitional council, including seven voting members, has been sworn in to select Haitis new prime minister and cabinet. The councils swearing-in ceremony occurred amidst gunfire, as gangs have vowed to topple the government. Gangs control most of the capital, cutting it off from the outside world and displacing over 90,000 people. Former Prime Minister Henry is unable to return to Haiti from Los Angeles due to gang-led violence. The transitional council is tasked with paving the way for an international peacekeeping force.</p>
                     </div>
                 </div>
             </div>
 			
-			<div id="entry_4" class="entry" onclick="overlayOn( 4 )">
+			<div id="entry_4" class="entry bordered" onclick="overlayOn( 4 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Venice tests a 5-euro fee for day-trippers as the city grapples with overtourism</h2>
                     <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/ap24116292846671_custom-597d2aac0d75d1b37c54d0d6c6b4f76b169c8112-s1100-c50.jpg">
@@ -441,13 +440,13 @@
                             <a href="https://npr.org/2024/04/25/1247162570/venice-entry-fee-day-trippers-tourists" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">Venice has introduced a pilot program requiring day-trippers to pay a €5 entry fee between 8:30 a.m. and 4 p.m. on specific dates through July to reduce overtourism and improve livability for residents. The measure includes separate entrances for tourists and residents, with on-site stewards guiding visitors through the QR code payment process. Despite protests, the program aims to track arrivals more accurately and monitor crowd levels. Critics argue that the fee is ineffective and that the city should focus on increasing the resident population and services to address tourisms negative impact. Venice officials have recorded approximately 10,000 paid day-tripper arrivals on the first day, with over 70,000 others downloading QR codes for exemptions.</p>
                     </div>
                 </div>
             </div>
 			
-			<div id="entry_5" class="entry" onclick="overlayOn( 5 )">
+			<div id="entry_5" class="entry bordered" onclick="overlayOn( 5 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">After two Boeing 737 Max crashes, families are still seeking answers from DOJ</h2>
                     <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-2149446484_custom-5d7c63ff65436f821007e39d86b8af2a54e084e4-s1100-c50.jpg">
@@ -459,13 +458,13 @@
                             <a href="https://npr.org/2024/04/25/1247123011/boeing-crash-737-max-doj" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">Families of victims killed in two 737 Max jet crashes in 2018 and 2019 met with Justice Department prosecutors and expressed frustration over the lack of criminal prosecution against Boeing. Despite the company reaching a $2.5 billion settlement with the department, victims relatives believe Boeing avoided criminal charges and are urging prosecutors to hold the company accountable. Although Boeing has paid billions in settlements, the families view the Justice Departments agreement with the company as a betrayal. The families frustration was compounded by a recent incident where a door plug panel blew out of a 737 Max jet, prompting a Justice Department investigation. Prosecutors have yet to provide substantial answers to the families questions, leaving them doubting their concerns are being taken seriously. The Justice Department could extend Boeings probation deal or drop the criminal case altogether within the next two months.</p>
                     </div>
                 </div>
             </div>
 			
-			<div id="entry_6" class="entry" onclick="overlayOn( 6 )">
+			<div id="entry_6" class="entry bordered" onclick="overlayOn( 6 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Some 300 musicians, from Diplo to Nile Rodgers, lobby Congress for ticketing reform</h2>
                     <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/ticketing-reform-1_custom-9f3f780f75ae90562a602f005715153b629f11ea-s1100-c50.jpg">
@@ -477,13 +476,13 @@
                             <a href="https://npr.org/2024/04/25/1247130677/musicians-congress-letter-ticketing-fans-first-act-billie-eilish-green-day" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">Over 280 musicians, including Billie Eilish, Dave Matthews, and Diplo, have signed a letter urging senators to reform the concert ticketing system. They argue that predatory resellers inflate ticket prices and deprive fans of affordable access. The artists support the Fans First Act, which aims to increase transparency, protect consumers, and deter illegal activities in the ticketing industry. Senator Amy Klobuchar, a co-sponsor of the bill, expressed support for its passage. The letters release comes amidst increased scrutiny of Ticketmaster and Live Nation, following the chaotic sale of Taylor Swift tour tickets and allegations of anti-competitive practices. Lawmakers have introduced multiple bills to address ticketing concerns, and the Justice Department is reportedly investigating Live Nation.</p>
                     </div>
                 </div>
             </div>
 			
-			<div id="entry_7" class="entry" onclick="overlayOn( 7 )">
+			<div id="entry_7" class="entry bordered" onclick="overlayOn( 7 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">Harvey Weinstein&#39;s 2020 sex crimes conviction in New York overturned</h2>
                     <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/gettyimages-1243724529-f731c51382691a6bb4dbb0d485d37a70f04dcaca-s1100-c50.jpg">
@@ -495,13 +494,13 @@
                             <a href="https://npr.org/2024/04/25/1247131054/harvey-weinsteins-2020-sex-crimes-conviction-in-new-york-overturned" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">The New York State Court of Appeals overturned Harvey Weinsteins 2020 felony sex crime conviction due to the admission of testimony from women not involved in the case, violating his rights to a fair trial. The court ruled that the testimony from these &#34;Molineux witnesses&#34; unfairly bolstered the credibility of the complainants by emphasizing Weinsteins past behavior. Critics argue that the subjective application of the &#34;Molineux Rule&#34; can lead to challenges to verdicts. The Manhattan district attorneys office intends to retry the case, while Weinstein currently faces a 16-year sentence from a separate Los Angeles conviction. As of now, he is being held in the Mohawk Correctional Facility in upstate New York.</p>
                     </div>
                 </div>
             </div>
 			
-			<div id="entry_8" class="entry" onclick="overlayOn( 8 )">
+			<div id="entry_8" class="entry bordered" onclick="overlayOn( 8 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">An American hostage is seen alive for the first time since Oct. 7 in a Hamas video</h2>
                     <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/25/ap24057589554710-4989e81248c888e433c2710ced88ea88d573f8aa-s1100-c50.jpg">
@@ -513,13 +512,13 @@
                             <a href="https://npr.org/2024/04/25/1247120388/american-hostage-hamas-video-hersh-goldberg-polin" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">Hamas has released a video showing Hersh Goldberg-Polin, an Israeli-American hostage kidnapped in Gaza in October 2023. The video marks the first time Hamas has released a video of one of the five Americans it holds captive. Goldberg-Polin, 24, appears in the video with a healed stump where his left forearm was amputated. He criticizes Israeli Prime Minister Netanyahu and claims Israeli airstrikes have killed other hostages. The video has sparked protests in Israel, with Goldberg-Polins parents urging negotiators to reach a cease-fire to reunite families and end suffering. President Biden and leaders of 17 other countries have issued a joint statement calling on Hamas to agree to a cease-fire deal that would include the release of the hostages.</p>
                     </div>
                 </div>
             </div>
 			
-			<div id="entry_9" class="entry" onclick="overlayOn( 9 )">
+			<div id="entry_9" class="entry bordered" onclick="overlayOn( 9 )">
                 <div class="entry-top">
                     <h2 class="articleTitle">How&#39;s your city attracting people downtown these days? NPR wants to hear from you</h2>
                     <img class="entryPhoto" src="https://media.npr.org/assets/img/2024/04/24/gettyimages-1415602912-0dbe26d560a2c10af76f3e19755bfc6360e04860-s1100-c50.jpg">
@@ -531,7 +530,7 @@
                             <a href="https://npr.org/2024/04/25/1246898656/hows-your-city-attracting-people-downtown-these-days-npr-wants-to-hear-from-you" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
                         </div>
                     </div>
-                    <div class="hideable">
+                    <div class="hideable hidden">
                         <p class="summary">Many downtowns are facing reduced activity due to hybrid work and other post-pandemic lifestyle changes. In response, cities are implementing various initiatives to revitalize these areas. These efforts include hosting special events, offering business incentives, and increasing housing options near office buildings. NPR is seeking submissions from individuals about what attracts them to downtowns and ideas for their revitalization. Submissions will be subject to NPRs Terms of Use and Privacy Policy, which notes that journalistic activities and freedom of expression may have exemptions that override certain privacy rights.</p>
                     </div>
                 </div>
@@ -540,18 +539,27 @@
 		</section>
         
         <section id="comic-sec">
-            <div class="comic-in">
+            <div class="comic-in bordered">
                 
                 <p>Well aren't you a _ravenous_ news consumer! Treat yourself to a Boomer comic.</p>
                 <img id="comic" decoding="async" src="https://filesrv.cagle.com/283181/750/283181.png">
                 <p>What delicious nuanced political commentary! Come back in a few hours for another batch of summaries 💯</p>
             </div>
         </section>
+        <section id="padding" style="padding: 2rem;"></section>
 
         <div id="overlay" onclick="overlayOff()">
             <div>
 
             </div>
+        </div>
+        
+        <div id="summarytoggle" class="bordered" style="padding: 0.25rem; text-align: center; width: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--secondback); position: fixed; bottom: 0.5rem; left: 0.5rem;">
+            <p>Summaries </p>
+            <label class="switch">
+                <input id="checkbox" type="checkbox" onclick="toggleCondensed()">
+                <span class="slider"></span>
+            </label>
         </div>
         <div class=".header-footer">
             
