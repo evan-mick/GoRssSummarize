@@ -8,11 +8,6 @@
     </head>
 
     <style>
-
-/* --mainback: #E5E5CB;
-            --secondback: #D5CEA3;
-            --textmain:  #1A120B;
-            --texttitle: #3C2A21; */
         :root {
             --mainback: #333333;
             --secondback: #ffffff;
@@ -22,25 +17,18 @@
             --outlinesize: 0.15rem; 
         }
 
-        /* #E8EAE3 #373833 #FA2742 */
-        #main-list {
-            background-color: var(--mainback);
-            padding: 3rem;
-            margin: 1rem;
-            display: flex;
-            /* flex-direction: row; */
-            justify-content: center;
-            
-            flex-wrap: wrap;
-            gap: 2rem 3rem;
+        * {
+            padding: 0;
+            margin: 0; 
         }
-
+            
         #comic {
             max-width: 25rem;
-            padding: 3rem;
+            width: 100%;
+            /* padding: 3rem; */
         }
 
-        #upper {
+        #comic-sec {
             background-color: var(--mainback);
             justify-content: center;
             display: flex;
@@ -48,6 +36,19 @@
             align-items: center;
             margin-top: 4rem;
             margin-bottom: 2rem;
+        }
+
+        .comic-in {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 40rem;
+            border-radius: .25rem;
+            border: var(--outlinesize) solid var(--outlinecol);
+            background-color: var(--secondback);
+            padding: 1rem;
+            color: var(--textmain);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
         body {
@@ -60,86 +61,7 @@
             background-color: var(--mainback);
         }
 
-        .articleTitle {
-            font-weight: bolder;
-            color: var(--texttitle);
-        }
-
-
-        .published {
-            color: var(--texttitle); 
-            padding-top: 1rem;
-        }
-
-        .entry {
-            border-radius: .25rem;
-            border: var(--outlinesize) solid var(--outlinecol);
-            background-color: var(--secondback);
-
-            align-items: center;
-            display: flex;
-            justify-content: space-evenly;
-
-            /* margin: 2.5%; */
-            padding: 2rem;
-            min-width: 10rem;
-            max-width: 40rem;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-            transition: transform 0.2s;
-            color: var(--textmain);
-            text-align: left;
-            font-size: large;
-            /* outline: .025rem; */
-            /* outline-color: black; */
-        }
-
-        .upper-in {
-            border-radius: .25rem;
-            border: var(--outlinesize) solid var(--outlinecol);
-            background-color: var(--secondback);
-            padding: 1rem;
-            color: var(--textmain);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            
-
-        }
-
-
-        :hover.entry {
-            
-            transform: scale(1.02);
-        }
-
-        .centered {
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        .entryPhoto {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: contain;
-            padding-top: 1rem;
-        }
-
-        #title {
-            color: var(--texttitle);
-            /* font-size: xx-large; */
-            font-size: 5rem;
-        }
-
-        .summary {
-            color: var(--textmain);
-            padding-top: 1rem;
-        }
-
-        #header {
+        .header-footer {
             background-color: var(--secondback);
             padding-top: 1rem;
             min-width: 100%;
@@ -150,43 +72,317 @@
             border: var(--outlinesize) solid var(--outlinecol);
         }
 
-        * {
-            padding: 0;
-            margin: 0; 
+
+        /* #E8EAE3 #373833 #FA2742 */
+        #main-list {
+            background-color: var(--mainback);
+            /* padding: 1rem; */
+            margin: 1rem;
+            display: flex;
+            /* flex-direction: row; */
+            justify-content: center;
+            
+            flex-wrap: wrap;
+            gap: 2rem 2rem;
         }
+
+
+        /* ENTRIES */
+
+        .entry {
+            border-radius: .25rem;
+            border: var(--outlinesize) solid var(--outlinecol);
+            background-color: var(--secondback);
+
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+
+            /* margin: 2.5%; */
+            padding: 2rem;
+            min-width: 6rem;
+            max-width: 20rem;
+            /* max-height: 50rem; */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            transition: transform 0.2s;
+            color: var(--textmain);
+            text-align: left;
+            font-size: large;
+            /* outline: .025rem; */
+            /* outline-color: black; */
+        }
+
+        :hover.entry {
+            transform: scale(1.02);
+        }
+
+
+        .entrybody {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            width: 100%;
+            height: 100%;
+            font-size: small;
+        }
+
+        .entryPhoto {
+            min-width: 2rem;
+            width: 40rem;
+            max-width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: contain;
+            padding-top: 1rem;
+        }
+
+        .articleTitle {
+            font-weight: bolder;
+            font-size: large;
+            color: var(--texttitle);
+        }
+
+        .summary {
+            color: var(--textmain);
+            padding-top: 1rem;
+            font-size: small;
+        }
+
+        #title {
+            color: var(--texttitle);
+            font-size: 3rem;
+        }
+
+        .entry-top {
+            display: flex;
+            flex-direction: row;
+        }
+
+        @media screen and (min-width: 900px) {
+            .entry {
+                max-width: 22rem;
+            }
+            .entrybody {
+                font-size: large;
+            }
+            .entry-top {
+                flex-direction: column;
+            }
+            .articleTitle {
+                font-size: larger;
+            }
+            .summary {
+                font-size: large;
+            }
+            #title {
+                font-size: 5rem;
+            }
+        }
+
+        @media screen and (min-width: 1100px) {
+            .entry {
+                max-width: 25rem;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h2 {
+            color: var(--outlinecol)
+        }
+
+        .published {
+            color: var(--texttitle); 
+            padding-top: 1rem;
+        }
+        
+        .centered {
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        } 
+        
+
+        #overlay {
+            position: fixed; /* Sit on top of the page content */
+            display: none; /* Hidden by default */
+            width: 100%; /* Full width (cover the whole page) */
+            height: 100%; /* Full height (cover the whole page) */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+            z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+            cursor: pointer; /* Add a pointer on hover */
+        }
+
+
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .2s;
+            transition: .2s;
+        }
+
+        input:checked + .slider {
+            background-color: var(--texttitle);
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--texttitle);
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+       
     </style>
+
+    <script>
+
+        var condensed = false; 
+
+        window.onload = () => {
+            // REFORMAT DATES (its weird before)
+            var dateElements = document.getElementsByClassName("date");
+            Array.from(dateElements).forEach(element => {
+                const date = new Date(element.textContent)
+                const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                element.textContent = formattedDate;
+            });
+
+            toggleCondensed();
+        };
+
+        window.onresize = function(event) {
+            
+        };
+
+        function testPrint(inDat) {
+            console.log(inDat)
+        }
+
+        function overlayOn(inNum) {
+            document.getElementById("overlay").style.display = "block";
+
+            var ele = document.getElementById("entry_" + inNum);
+            console.log(ele.children);
+        }
+
+        function overlayOff() {
+            ele = document.getElementById("overlay");
+            ele.style.display = "none";
+        }
+        
+        function toggleCondensed() {
+            hideables = document.getElementsByClassName("hideable");
+
+            condensed = !condensed;
+            Array.from(hideables).forEach(h => {
+                h.classList.toggle("hidden");
+            });
+
+        }
+
+    </script>
     <body>
-        <div id="header">
+        <div id="header" class="header-footer">
             <h1 id="title">the HeadLiner 🙆‍♂️📈🔥</h1>
             <h2>Line your head with summaries of the news. Its like skimming the headlines, but better!</h2>
-            <p>Disclaimer: AI can be so silly sometimes! Please don't ever use summaries as official references, as sometimes it can just make stuff up, bless 🙏.</p>
-        </div>
-        <div id="upper">
-            <div class="upper-in">
-                <p>But first, a Boomer comic! Now don't YOU feel informed? 🤭</p>
-                <img id="comic" decoding="async" src="https://filesrv.cagle.com/283181/750/283181.png">
-                <p>What delicious nuanced political commentary! Now lets get into the news.</p>
+            <p><b>Disclaimer:</b> AI can be so silly sometimes! Please don't ever use summaries as official references, as sometimes it can just make stuff up, bless 🙏.</p>
+
+            <div>
+                <p>Click on a summary to focus on it OR</p>
+                <p>Toggle this to show all summaries </p>
+                <label class="switch">
+                    <input type="checkbox" onclick="toggleCondensed()">
+                    <span class="slider"></span>
+                </label>
             </div>
+            
+            <!-- <button onclick="toggleCondensed()">Toggle Condensed</button> -->
         </div>
         <section id="main-list">
 			{{range $index, $dat := .Entries}}
-			<button class="entry">
-                <div>
+			<div id="entry_{{$index}}" class="entry" onclick="overlayOn({{$index}})">
+                <div class="entry-top">
                     <h2 class="articleTitle">{{$dat.Title}}</h2>
                     <img class="entryPhoto" src="{{$dat.PhotoUrl}}">
                 </div>
-                <div>
-                    <div class="centered">
-                        <h3 class="published">Published: <time class="date" datetime="{{$dat.TimePublished}}">{{$dat.TimePublished}}</time></h3>
-                        <a href="{{ $dat.Url }}">Link from {{$dat.FromWeb}}</a>
+                <div class="entrybody">
+                    <div>
+                        <div class="centered">
+                            <h3 class="published"><time class="date" datetime="{{$dat.TimePublished}}">{{$dat.TimePublished}}</time></h3>
+                            <a href="{{ $dat.Url }}" target='_blank' rel="noopener noreferrer">Link ({{$dat.FromWeb}})</a>
+                        </div>
                     </div>
-                    <p class="summary">{{$dat.Summary}}</p>
+                    <div class="hideable">
+                        <p class="summary">{{$dat.Summary}}</p>
+                    </div>
                 </div>
-            </button>
+            </div>
 			{{end}}
 		</section>
-        <div>
-            <p>Well aren't you a _ravenous_ news consumer! Come back in a few hours for another batch of summaries 💯</p>
+        
+        <section id="comic-sec">
+            <div class="comic-in">
+                <!--  Now don't YOU feel informed? 🤭 -->
+                <p>Well aren't you a _ravenous_ news consumer! Treat yourself to a Boomer comic.</p>
+                <img id="comic" decoding="async" src="https://filesrv.cagle.com/283181/750/283181.png">
+                <p>What delicious nuanced political commentary! Come back in a few hours for another batch of summaries 💯</p>
+            </div>
+        </section>
+
+        <div id="overlay" onclick="overlayOff()">
+            <div>
+
+            </div>
+        </div>
+        <div class=".header-footer">
+            <!-- <p> Come back in a few hours </p> -->
         </div>
     </body>
 </html>

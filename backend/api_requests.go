@@ -14,7 +14,7 @@ import (
 
 const prompt = `Act as a news summarizer 
 and create a concise summary of the news article I provide. 
-The summary can be up to 6 sentences in length, 
+The summary can be up to 4 sentences in length, 
 expressing the key points in paragraph form without line breaks. 
 Include concepts written in the original article without adding your interpretations 
 and include as many specific details from the article as possible. 
