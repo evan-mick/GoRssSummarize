@@ -87,15 +87,12 @@
         .entry {
             background-color: var(--secondback);
 
-            align-items: center;
+            align-items: flex-start;
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
-
-            /* margin: 2.5%; */
             padding: 2rem;
-            min-width: 6rem;
-            max-width: 20rem;
+            max-width: 18rem; 
             /* max-height: 50rem; */
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -143,11 +140,12 @@
             color: var(--textmain);
             padding-top: 1rem;
             font-size: small;
+            overflow-y: scroll;
         }
 
         #title {
             color: var(--texttitle);
-            font-size: 1.5rem;
+            font-size: 3rem;
         }
 
         h2 {
@@ -158,11 +156,17 @@
             font-size: medium;
         }
 
+        .entry-top {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: start;
+        }
+
         @media screen and (min-width: 600px) {
             #title {
-                font-size: 2rem;
+                font-size: 4rem;
             }
-
             h2 {
                 font-size: larger;
             }
@@ -173,23 +177,24 @@
                 padding-left: 4rem;
                 padding-right: 4rem;
             }
-        }
-
-        .entry-top {
-            display: flex;
-            flex-direction: row;
-        }
-
-        @media screen and (min-width: 900px) {
             .entry {
-                max-width: 22rem;
-            }
-            .entrybody {
-                font-size: large;
+                max-width: 12rem;
             }
             .entry-top {
                 flex-direction: column;
             }
+        }
+
+        
+
+        @media screen and (min-width: 900px) {
+            .entry {
+                max-width: 20rem;
+            }
+            .entrybody {
+                font-size: large;
+            }
+
             .articleTitle {
                 font-size: larger;
             }
@@ -197,7 +202,7 @@
                 font-size: large;
             }
             #title {
-                font-size: 4rem;
+                font-size: 5rem;
             }
         }
 
@@ -206,7 +211,7 @@
                 max-width: 25rem;
             }
             #title {
-                font-size: 5rem;
+                font-size: 6rem;
             }
 
             h2 {
@@ -250,6 +255,7 @@
             background-color: rgba(0,0,0,0.7); /* Black background with opacity */
             z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
             cursor: pointer; /* Add a pointer on hover */
+            gap: 1rem;
         }
 
         #inneroverlay {
@@ -261,12 +267,14 @@
             align-items: center;
             width: 60%;
             min-width: 20rem;
+            
         }
 
         #overlaysummary {
             color: var(--textmain);
             padding: 0.2rem;
             font-size: medium;
+            overflow-y: scroll;
         }
 
         #overlaybody {
@@ -372,13 +380,57 @@
             transform: translateX(26px);
         }
        
+        .arrow { 
+            margin: 50px 20px;
+            width: 75px;
+            height: 75px; 
+            float: left;
+            background-color: var(--texttitle);
+        }
+        .prev { 
+            -webkit-transform: rotate(315deg); 
+        }
+        .next {
+            -webkit-transform: rotate(135deg);
+        }
+        .arrow:hover {
+            background-color: #f4690d;
+        }
+
+        .arrow:after {
+            content: '';
+            width: 75px;
+            height: 75px;
+            background: white;
+            position: absolute; 
+            left: 3px;
+            top: 3px;
+        }
+
+
+        button {
+            background-color: white;
+            color: inherit;
+            border: none;
+            padding: 0;
+            font: inherit;
+            /* cursor: pointer; */
+            /* outline: inherit; */
+        }
+
+
+        
+
+
     </style>
 
     <script>
 
-        var condensed = false; 
+        let condensed = false; 
+        let overlayIsOn = false; 
         var overlay; 
         var entries; 
+        let selectedEntry = 0; 
 
         window.onload = () => {
             // REFORMAT DATES (its weird before)
@@ -389,31 +441,68 @@
                 element.textContent = formattedDate;
             });
 
-            var check = document.getElementById("checkbox");
+            let check = document.getElementById("checkbox");
+            let overlay_prev = document.getElementById("overlay-prev");
+            let overlay_next = document.getElementById("overlay-next");
             document.addEventListener("keydown", (e) => {
-                // if (event.defaultPrevented) {
-                //     return; // Should do nothing if the default action has been cancelled
-                // }
-                if (e.key !== undefined) {
-                    if (e.key === "s") {
-                        check.click();
-                    }
-                    return
-                } else if (e.keyCode !== undefined) {
-                    return
+                if (event.defaultPrevented) {
+                    return; // Should do nothing if the default action has been cancelled
                 }
-                
+                if (e.key !== undefined) {
+                    if (overlayIsOn) {
+                        // console.log("OVERLAY ON " + e.key)
+                        if ([ "d", "ArrowRight", "l" ].includes(e.key)) {
+                            overlay_next.click();
+                        } else if ([ "a", "ArrowLeft", "h" ].includes(e.key)) {
+                            overlay_prev.click();
+                        } else if (["Alt", "j", "s"]) {
+                            overlayOff();
+                        }
+                    } else {
+                        // console.log("OVERLAY OFF " + e.key)
+                        if (["w", "l", "Alt"].includes(e.key)) {
+                            overlayOn(selectedEntry);
+                        } else if (e.key === "s") {
+                            check.click();
+                        }
+                    }
+
+                    return
+                }                 
             });
 
             overlay = document.getElementById("overlay");
             entries = document.getElementById("main-list").childElementCount;
             console.log("entries " + entries);
+
+            overlay.addEventListener("click", (e) => {
+                if (e.defaultPrevented) {
+                    return; // Should do nothing if the default action has been cancelled
+                }
+                overlayOff();
+            })
+
+            arrows = document.getElementsByClassName("arrow");
+
+
+            Array.from(document.getElementsByClassName("eventBlocker")).forEach(element => {
+                element.addEventListener("click", (event) => {
+                    event.stopPropagation();
+                    // event.preventDefault();
+                })
+            });
             
         };
 
-        
 
-        
+        function arrowClick(event, num) {
+            event.preventDefault();
+            let newNum = Math.max(Math.min(entries - 1, num + selectedEntry), 0); 
+            if (newNum === selectedEntry) {
+                return; 
+            }
+            overlayOn(newNum);
+        }
 
         function testPrint(inDat) {
             console.log(inDat)
@@ -423,9 +512,7 @@
             overlay.style.display = "flex";
 
             var ele = document.getElementById("entry_" + inNum);
-
-            console.log("ELEMENT " + ele)
-
+            // console.log("ELEMENT " + ele)
             var dat = {
                 summary: ele.querySelector(".summary").textContent,
                 title: ele.querySelector(".articleTitle").textContent,
@@ -434,24 +521,21 @@
                 url: ele.querySelector("a").href,
                 urlTxt: ele.querySelector("a").textContent,
             }
-
-
-
             overlay.querySelector("#overlaysummary").textContent = dat.summary;
             overlay.querySelector("#overlaytitle").textContent = dat.title;
             overlay.querySelector(".entryPhoto").src = dat.photo;
             overlay.querySelector(".date").textContent = dat.published;
             overlay.querySelector("a").href = dat.url;
             overlay.querySelector("a").textContent = dat.urlTxt;
-            
 
-            //overlay.querySelector("#inneroverlay").textContent = dat.summary; 
-            console.log(dat);
+            selectedEntry = inNum;
+            overlayIsOn = true; 
         }
 
         function overlayOff() {
             ele = document.getElementById("overlay");
             ele.style.display = "none";
+            overlayIsOn = false; 
         }
         
         function toggleCondensed() {
@@ -510,10 +594,13 @@
         </section>
         <section id="padding" style="padding: 2rem;"></section>
 
-        <div id="overlay" onclick="overlayOff()" style="justify-content: center; align-items: center;">
+        <div id="overlay" style="justify-content: center; align-items: center;">
+            <button id="overlay-prev" onclick="arrowClick(event, -1)">
+                <i class="arrow prev"></i>
+            </button>
             <div id="inneroverlay" class="bordered">
                 <h2 id="overlaytitle"></h2>
-                <div id="overlaybody">
+                <div id="overlaybody" class="eventBlocker">
                     <div style=" display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
                         <img class="entryPhoto bordered" src="">
@@ -528,6 +615,10 @@
                     </div> -->
                 </div>
             </div>
+
+            <button id="overlay-next" onclick="arrowClick(event, 1)">
+                <i class="arrow next"></i>
+            </button>
         </div>
         
         <div id="summarytoggle" class="bordered" style="padding: 0.25rem; text-align: center; width: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--secondback); position: fixed; bottom: 0.5rem; left: 0.5rem;">
