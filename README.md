@@ -21,3 +21,67 @@ thanks infinity free for hosting <3
 
 
 Templ renders html, puts it in static folder
+
+
+
+NEWS SOURCES
+
+FOR PROCESSING
+- add check that there are at least 10 sentences
+
+npr.org
+bbc.com (https://feeds.bbci.co.uk/news/world/rss.xml)
+reuters (https://www.reutersagency.com/feed/?best-sectors=economy&post_type=best)
+newsweek (https://www.newsweek.com/rss)
+associated press (https://apnews.com/index.rss)
+reason (https://reason.com/latest/feed/)
+CBS (https://www.cbsnews.com/latest/rss/main)
+
+Why this selection?
+They're pretty trustworthy sources (though with various bias), and importantly, they're free to access. no paywalls. And, most importantly, they're some of my favs <3
+
+How do you get article content?
+Webscraping, each source I have a slightly different script for getting their articles.
+
+
+Article processing
+
+The article is then
+- checked if more than 10 sentences 
+- given a priority score based on its words
+- summarized
+
+
+types of news:
+- disaster
+- policy
+- economy
+- war
+- research
+
+HIGH PRIORITY (+6)
+- Ukraine, Kyiv, Russia, Gaza, Israel, Palestine, Zionist, Genocide, War, Ethnic cleansing
+
+Disaster (+4)
+- Tornado, Disaster, Hurriance, Ruin, Wreckage, 
+
+Priority (+3)
+- Union, Inflation, Economics, Congress, Bill, Law, AI, Supreme Court, Protest
+- Biden, Trump, Xi jinping, AOC, Racism, Pandemic, LGBT, Minimum Wage, Trade, Military
+- European Union, Middle East, Migrant, immigrant, Abortion, crisis, strike, administration,
+- climate change, artificial intelligence
+
+Low Priority (+1)
+- Study, Inflation, Journal, Research, Scientific, Net Neutrality, unemployment, doctor, AI
+
+DEPRIORITY (-5)
+- editorial or opinion pieces
+- celebrities, royalty
+    - taylor swift, kim kardashian, drake, kanye (ye), britney spears, elon musk, mark zuckerberg
+    - King Charles, Prince, Queen, Buckingham Palace, 
+I don't care, I don't want to hear about them.
+
+If a word is in the title, then it gets 10x the points (either positive or negative)
+If priority is negative, it won't show up
+
+Most of this is catered to what I want to see, sorry! This is my bias, although if you think there's a topic thats ellided you think should be there, or if you think a priority is unjustifiably off, then email me and I will consider.  
