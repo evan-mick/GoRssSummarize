@@ -38,7 +38,7 @@ reason (https://reason.com/latest/feed/)
 CBS (https://www.cbsnews.com/latest/rss/main)
 
 Why this selection?
-They're pretty trustworthy sources (though with various bias), and importantly, they're free to access. no paywalls. And, most importantly, they're some of my favs <3
+They're pretty trustworthy sources (though with various bias) they're free to access. no paywalls. And, most importantly, I like them <3
 
 How do you get article content?
 Webscraping, each source I have a slightly different script for getting their articles.

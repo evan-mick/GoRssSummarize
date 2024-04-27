@@ -120,16 +120,22 @@ func FullRSSCycle() {
 
 func summarizeAndInsertEntries(entries []SummaryEntry, text []string) {
 	for i, entry := range entries {
-		var err error
-		entry.Summary, err = googleRequest(text[i])
-		entry.Summary = strings.ReplaceAll(entry.Summary, "'", "")
-		if err != nil {
-			fmt.Println("SUM INSERT ERR " + err.Error())
-			continue
-		}
+		go func(i int, entry SummaryEntry) {
+			// why sleep? to space out google requests
+			// gemini free if you have <60 requests a minute
+			time.Sleep(time.Duration(float64(i) * 1.25 * float64(time.Second)))
+			var err error
+			entry.Summary, err = googleRequest(text[i])
+			entry.Summary = strings.ReplaceAll(entry.Summary, "'", "")
+			if err != nil {
+				fmt.Println("SUM INSERT ERR " + err.Error())
+				return
+				// continue
+			}
 
-		fmt.Println("Inserting")
-		InsertSummary(entry)
+			fmt.Println("Inserting")
+			InsertSummary(entry)
+		}(i, entry)
 	}
 }
 
