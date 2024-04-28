@@ -5,7 +5,7 @@
     </head>
     <style>
         :root {
-            --mainback: #4a4a4a;
+            --mainback: #ffffff;
             --secondback: #ffffff;
             --textmain:  #434343;
             --texttitle: #434343;
@@ -75,30 +75,36 @@
             justify-content: center;
             
             flex-wrap: wrap;
-            gap: 2rem 2rem;
+            /* gap: 2rem 2rem; */
         }
 
 
         /* ENTRIES */
 
         .bordered {
-            border-radius: .25rem;
-            border: var(--outlinesize) solid var(--outlinecol);
+            /* border-radius: .25rem; */
+            border-bottom: var(--outlinesize) solid var(--outlinecol);
+        }
+
+        .photoBordered {
+            /* border-radius: .25rem; */
+            border-bottom: var(--outlinesize) solid var(--textmain);
         }
 
         .entry {
             background-color: var(--secondback);
 
+            border-bottom: var(--outlinesize) solid var(--outlinecol);
             align-items: flex-start;
             display: flex;
             flex-direction: column;
             justify-content: first baseline;
             padding: 2rem;
-            max-width: 18rem; 
+            max-width: 22rem; 
             /* max-height: 50rem; */
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 
-            transition: transform 0.2s;
+            transition: transform 0.05s;
             color: var(--textmain);
             text-align: left;
             font-size: large;
@@ -108,12 +114,25 @@
             /* outline-color: black; */
         }
 
-        :hover.entry {
-            transform: scale(1.02);
+        /* :hover.entry { */
+            /* transform: scale(1.004); */
+        /* } */
+        .articleTitle {
+            font-weight: bolder;
+            font-size: large;
+            color: var(--texttitle);
+            cursor: default;
+        }
+
+        :hover.entry .articleTitle {
+            color: var(--outlinecol)
         }
 
 
         .entrybody {
+
+            margin-top: 2rem;
+            border-top: var(--outlinesize) solid var(--textmain);
             align-items: flex-start;
             display: flex;
             flex-direction: column;
@@ -136,12 +155,7 @@
             /* padding-top: 1rem; */
         }
 
-        .articleTitle {
-            font-weight: bolder;
-            font-size: large;
-            color: var(--texttitle);
-            cursor: default;
-        }
+        
 
         .eventBlocker {
             cursor: default;
@@ -582,16 +596,14 @@
 			<div id="entry_{{$index}}" class="entry bordered" ontouchend="overlayOn({{$index}})" onclick="overlayOn({{$index}})">
                 <div class="entry-top">
                     <h2 class="articleTitle eventBlocker">{{$dat.Title}}</h2>
-                    <img class="entryPhoto bordered" src="{{$dat.PhotoUrl}}">
+                    <img class="entryPhoto photoBordered" src="{{$dat.PhotoUrl}}">
                 </div>
                 <div class="centered eventBlocker">
                     <h3 class="published"><time class="date" datetime="{{$dat.TimePublished}}">{{$dat.TimePublished}}</time></h3>
                     <a href="{{ $dat.Url }}" target='_blank' rel="noopener noreferrer">Link ({{$dat.FromWeb}})</a>
                 </div>
-                <div class="entrybody eventBlocker">
-                    <div class="hideable hidden">
-                        <p class="summary">{{$dat.Summary}}</p>
-                    </div>
+                <div class="entrybody eventBlocker hideable hidden">
+                    <p class="summary">{{$dat.Summary}}</p>
                 </div>
             </div>
 			{{end}}
@@ -612,11 +624,11 @@
                 <i class="arrow prev"></i>
             </button>
             <div id="inneroverlay" class="bordered">
-                <h2 id="overlaytitle" class="eventBlocker"></h2>
+                <h2 id="overlaytitle" class="eventBlocker bordered"></h2>
                 <div id="overlaybody">
                     <div style=" display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
-                        <img class="entryPhoto bordered" src="">
+                        <img class="entryPhoto photoBordered" src="">
                         <h3 class="published eventBlocker" style="text-align: center;"><time class="date" datetime=""></time></h3>
                         <a class="eventBlocker" style="justify-content: center; text-align: center;" target='_blank' rel="noopener noreferrer"></a>
                     </div>

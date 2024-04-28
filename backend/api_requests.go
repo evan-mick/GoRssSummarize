@@ -136,7 +136,7 @@ func googleRequest(toSummarize string) (string, error) {
 		//fmt.Println(input.Candidates[0].Content.Parts[0].Text)
 		return input.Candidates[0].Content.Parts[0].Text, nil
 	}
-	fmt.Print(resp)
+	fmt.Println(resp)
 	//fmt.Println("NO CONTENT FOUND")
 	return "", fmt.Errorf("No content found, Google API issue ")
 }

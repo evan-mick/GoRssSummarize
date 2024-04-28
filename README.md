@@ -30,12 +30,17 @@ FOR PROCESSING
 - add check that there are at least 10 sentences
 
 npr.org
-bbc.com (https://feeds.bbci.co.uk/news/world/rss.xml)
-reuters (https://www.reutersagency.com/feed/?best-sectors=economy&post_type=best)
 newsweek (https://www.newsweek.com/rss)
 associated press (https://apnews.com/index.rss)
 reason (https://reason.com/latest/feed/)
 CBS (https://www.cbsnews.com/latest/rss/main)
+
+
+
+bbc.com (https://feeds.bbci.co.uk/news/world/rss.xml)
+reuters (https://www.reutersagency.com/feed/?best-sectors=economy&post_type=best)
+- "story-collection__list-item__j4SQe" (just go through all of these and get summary, publish, link)
+WILL PROBABLY HAVE TO WEBSCRAPE FRONT PAGE
 
 Why this selection?
 They're pretty trustworthy sources (though with various bias) they're free to access. no paywalls. And, most importantly, I like them <3
@@ -79,6 +84,10 @@ DEPRIORITY (-5)
 - celebrities, royalty
     - taylor swift, kim kardashian, drake, kanye (ye), britney spears, elon musk, mark zuckerberg
     - King Charles, Prince, Queen, Buckingham Palace, 
+Title Depriority (-50, if in title)
+- photo, video
+- so we're not summarizing non-articles
+
 I don't care, I don't want to hear about them.
 
 If a word is in the title, then it gets 10x the points (either positive or negative)

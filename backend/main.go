@@ -19,6 +19,11 @@ import (
 func main() {
 	err := godotenv.Load(".env")
 
+	//scr := AP.Scrape("https://apnews.com/article/israel-hamas-war-news-04-27-2024-7ea816cac94138492f7dddf2865c1d2f")
+
+	//fmt.Println(scr.allText)
+
+	//return
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}

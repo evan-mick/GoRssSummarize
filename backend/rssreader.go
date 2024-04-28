@@ -59,54 +59,10 @@ func FullRSSCycle() {
 		go func(web Website) {
 			fmt.Println("Routine spun for: " + web.Name)
 			// web.RSSLink
-
-			rss := GetRSSDataFromLink(web.RSSLink)
-
-			var w sync.WaitGroup
-			for _, item := range rss.Channel.Items {
-				// for i := 0; i < 3; i++ {
-				w.Add(1)
-				go func(item Item) {
-					defer w.Done()
-
-					if IsInDB(item.Link) {
-						fmt.Println(item.Link + " already in DB!")
-						return
-					}
-
-					// item := rss.Channel.Items[i]
-					scrape := NPR.Scrape(item.Link)
-
-					parsedPublishedTime, err := time.Parse(time.RFC1123Z, item.Published)
-
-					if err != nil {
-						fmt.Println("Could not get parsed time: " + err.Error())
-						return
-					}
-
-					if scrape.allText != "" {
-						mut.Lock()
-						//links = append(links, item.Link)
-						entries = append(entries, SummaryEntry{
-							Url:           item.Link,
-							FromWeb:       NPR.Name,
-							Summary:       "",
-							TimeAdded:     time.Now().UTC(),
-							Title:         item.Title,
-							TimePublished: parsedPublishedTime,
-							PhotoUrl:      scrape.photoUrl,
-						})
-						itemsChecked++
-						text = append(text, scrape.allText)
-						mut.Unlock()
-					}
-				}(item)
-			}
-
-			w.Wait()
-			fmt.Println(web.Name + " routine finished")
+			OneScrapeCycle(web, &mut, &text, &entries, &itemsChecked)
 			rssWG.Done()
 		}(web)
+
 	}
 
 	rssWG.Wait()
@@ -118,8 +74,60 @@ func FullRSSCycle() {
 	summarizeAndInsertEntries(entries, text)
 }
 
+func OneScrapeCycle(web Website, mut *sync.Mutex, text *[]string, entries *[]SummaryEntry, itemsChecked *int) {
+	rss := GetRSSDataFromLink(web.RSSLink)
+
+	var w sync.WaitGroup
+	for _, item := range rss.Channel.Items {
+		// for i := 0; i < 3; i++ {
+		w.Add(1)
+		go func(item Item) {
+			defer w.Done()
+
+			if IsInDB(item.Link) {
+				fmt.Println(item.Link + " already in DB!")
+				return
+			}
+
+			// item := rss.Channel.Items[i]
+			scrape := web.Scrape(item.Link)
+
+			parsedPublishedTime, err := time.Parse(time.RFC1123Z, item.Published)
+
+			if err != nil {
+				fmt.Println("Could not get parsed time: " + err.Error())
+				return
+			}
+
+			if scrape.allText != "" {
+				mut.Lock()
+				//links = append(links, item.Link)
+				*entries = append(*entries, SummaryEntry{
+					Url:           item.Link,
+					FromWeb:       NPR.Name,
+					Summary:       "",
+					TimeAdded:     time.Now().UTC(),
+					Title:         item.Title,
+					TimePublished: parsedPublishedTime,
+					PhotoUrl:      scrape.photoUrl,
+				})
+				*itemsChecked++
+				*text = append(*text, scrape.allText)
+				mut.Unlock()
+			}
+		}(item)
+	}
+
+	w.Wait()
+	fmt.Println(web.Name + " routine finished")
+
+}
+
 func summarizeAndInsertEntries(entries []SummaryEntry, text []string) {
+
+	var insertGroup sync.WaitGroup
 	for i, entry := range entries {
+		insertGroup.Add(1)
 		go func(i int, entry SummaryEntry) {
 			// why sleep? to space out google requests
 			// gemini free if you have <60 requests a minute
@@ -135,8 +143,10 @@ func summarizeAndInsertEntries(entries []SummaryEntry, text []string) {
 
 			fmt.Println("Inserting")
 			InsertSummary(entry)
+			insertGroup.Done()
 		}(i, entry)
 	}
+	insertGroup.Wait()
 }
 
 func GetRSSDataFromLink(link string) Rss {
