@@ -8,10 +8,10 @@
             --mainback: #ffffff;
             --secondback: #ffffff;
             --textmain:  #434343;
-            --texttitle: #434343;
              
              
-            --outlinecol: #8d3900; 
+             
+            --maincol: #8d3900; 
             --outlinesize: 0.15rem; 
         }
 
@@ -83,7 +83,7 @@
 
         .bordered {
              
-            border-bottom: var(--outlinesize) solid var(--outlinecol);
+            border-bottom: var(--outlinesize) solid var(--maincol);
         }
 
         .photoBordered {
@@ -94,7 +94,7 @@
         .entry {
             background-color: var(--secondback);
 
-            border-bottom: var(--outlinesize) solid var(--outlinecol);
+            border-bottom: var(--outlinesize) solid var(--maincol);
             align-items: flex-start;
             display: flex;
             flex-direction: column;
@@ -120,12 +120,12 @@
         .articleTitle {
             font-weight: bolder;
             font-size: large;
-            color: var(--texttitle);
+            color: var(--textmain);
             cursor: default;
         }
 
         :hover.entry .articleTitle {
-            color: var(--outlinecol)
+            color: var(--maincol)
         }
 
 
@@ -170,7 +170,7 @@
         }
 
         #title {
-            color: var(--outlinecol);
+            color: var(--maincol);
             font-size: 3rem;
         }
 
@@ -256,7 +256,7 @@
        
 
         .published {
-            color: var(--texttitle); 
+            color: var(--textmain); 
             padding-top: 1rem;
         }
         
@@ -316,7 +316,7 @@
             font-weight: bolder;
             font-size: large;
             padding: 1rem;
-            color: var(--texttitle);
+            color: var(--textmain);
             align-self: center;
         }
 
@@ -376,7 +376,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: var(--texttitle);
+            background-color: var(--textmain);
             -webkit-transition: .15s;
             transition: .15s;
         }
@@ -394,11 +394,11 @@
         }
 
         input:checked + .slider {
-            background-color: var(--outlinecol);
+            background-color: var(--maincol);
         }
 
         input:focus + .slider {
-            box-shadow: 0 0 1px var(--texttitle);
+            box-shadow: 0 0 1px var(--textmain);
         }
 
         input:checked + .slider:before {
@@ -412,7 +412,7 @@
             width: 75px;
             height: 75px; 
             float: left;
-            background-color: var(--texttitle);
+            background-color: var(--textmain);
         }
         .prev { 
             -webkit-transform: rotate(315deg); 
@@ -579,13 +579,14 @@
     <body>
         <div id="header" class="header-footer bordered">
             <h1 id="title">The HeadLiner</h1>
-            <h2>Line your head with news summaries.</h2>
-            <h3>Like skimming the headlines, but better!</h3>
+            <h2>Line your head with news summaries. Its like skimming the headlines, but better!</h2>
             <br>
+
+            <p>Click button at <b>left corner</b> for summaries (or 's')</p>
+            <br>
+            <p>Click on photo to <b>focus</b> (or 'Alt'), while focused, click arrow keys to <b>change summaries</b></p>
             
-            <p>Click on the button in the <b>lower left corner</b> to show all summaries (or click 's')</p>
-            <p>Click on a photo to <b>focus</b> (or click Alt, W, or K, unfocus with Alt, S, or J)</p>
-            <p>While in focus, click the arrow keys, A and D, or H and L to <b>move between summaries</b></p>
+            
             <br>
             <p><b>Disclaimer:</b> AI can be so silly! Please use the original sources for references, as <i> sometimes </i> the summarizer hallucinates, bless 🙏.</p>
             
@@ -1325,7 +1326,7 @@ Despite efforts to sway Taiwanese voters, the pro-independence candidate opposed
         </div>
         
         <div id="summarytoggle" class="bordered" style="padding: 0.25rem; text-align: center; width: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--secondback); position: fixed; bottom: 0.5rem; left: 0.5rem;">
-            <p>Summaries </p>
+            <p>Summaries ('s')</p>
             <label class="switch">
                 <input id="checkbox" type="checkbox" onclick="toggleCondensed()">
                 <span class="slider"></span>
