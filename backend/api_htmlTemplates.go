@@ -73,14 +73,33 @@ func LoadLocalCache() ([]SummaryEntry, error) {
 	return retVal, nil
 }
 
-func CreateLocalCache() {
+func StoreEntriesLocally(writeEntries []SummaryEntry) {
+
+	file, err := os.Create("frontend_data/data.json")
+	if err != nil {
+		fmt.Println("Local file create error " + err.Error())
+		return
+	}
+	dat, err := json.Marshal(writeEntries)
+	if err != nil {
+		log.Printf("Error with marshal: " + err.Error())
+		return
+	}
+	file.Write(dat)
+	if err != nil {
+		log.Printf("Error with write file: " + err.Error())
+		return
+	}
+}
+
+/*func CreateLocalCache() {
 	file, err := os.Create("frontend_data/data.json")
 	if err != nil {
 		fmt.Println("Local file create error " + err.Error())
 		return
 	}
 
-	writeEntries, err := SelectAllRows() // SelectNRows(5, 0)
+	writeEntries, err := SelectNRows(18, 0)
 	if err != nil {
 		log.Printf("Error with getting files: " + err.Error())
 		return
@@ -95,4 +114,4 @@ func CreateLocalCache() {
 		log.Printf("Error with write file: " + err.Error())
 		return
 	}
-}
+}*/

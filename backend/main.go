@@ -19,11 +19,12 @@ import (
 func main() {
 	err := godotenv.Load(".env")
 
-	//scr := AP.Scrape("https://apnews.com/article/israel-hamas-war-news-04-27-2024-7ea816cac94138492f7dddf2865c1d2f")
+	// scr := AP.Scrape("https://apnews.com/article/house-speaker-jeffries-johnson-marjorie-taylor-greene-41bf396eca6b0ef3b2bfb71a3cf1fc91")
+	// OneScrapeCycle(AP)
 
-	//fmt.Println(scr.allText)
+	// fmt.Println(txt)
 
-	//return
+	// return
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
@@ -64,14 +65,29 @@ func main() {
 
 		if input == "refresh" || input == "r" {
 			OutputMainPage(dat)
+			fmt.Println("REFRESHED")
 		} else if input == "cycle" || input == "c" {
-			InitDB()
-			FullRSSCycle()
-			CreateLocalCache()
+			// InitDB()
+			// FullRSSCycle()
+			CollectAllLocal()
+			fmt.Println("COLLECT COMPLETE")
 		} else if input == "DELETEitALlBIGBOi" {
 			InitDB()
 			DirectSQLCMD("DELETE FROM entries")
+			fmt.Println("DELETED")
 		}
+
+		/*else if input == "s" {
+			InitDB()
+			CreateLocalCache()
+			fmt.Println("CACHE CREATED")
+		}*/
 	}
 
+}
+
+func CollectAllLocal() {
+	ent, txt := FullRSSCycle()
+	summEntry := summarizeEntries(ent, txt)
+	StoreEntriesLocally(summEntry)
 }

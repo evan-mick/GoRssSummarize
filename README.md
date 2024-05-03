@@ -68,7 +68,7 @@ HIGH PRIORITY (+6)
 - Ukraine, Kyiv, Russia, Gaza, Israel, Palestine, Zionist, Genocide, War, Ethnic cleansing
 
 Disaster (+4)
-- Tornado, Disaster, Hurriance, Ruin, Wreckage, 
+- Tornado, Disaster, Hurriance, Ruin, Wreckage, wildfire
 
 Priority (+3)
 - Union, Inflation, Economics, Congress, Bill, Law, AI, Supreme Court, Protest
@@ -81,8 +81,10 @@ Low Priority (+1)
 
 DEPRIORITY (-5)
 - editorial or opinion pieces
+- jackpot, lottery (don't care about the lottery)
+- scores, playoff, (don't care for sports), sign off, football, linebaker, quarterback, etc.
 - celebrities, royalty
-    - taylor swift, kim kardashian, drake, kanye (ye), britney spears, elon musk, mark zuckerberg
+    - taylor swift, kim kardashian, drake, kanye (ye), britney spears, elon musk, mark zuckerberg, billie ellish 
     - King Charles, Prince, Queen, Buckingham Palace, 
 Title Depriority (-50, if in title)
 - photo, video
@@ -91,6 +93,6 @@ Title Depriority (-50, if in title)
 I don't care, I don't want to hear about them.
 
 If a word is in the title, then it gets 10x the points (either positive or negative)
-If priority is negative, it won't show up
+If priority is negative, or the article has less than 10 sentences, it won't show up, and no summary will be added to database
 
 Most of this is catered to what I want to see, sorry! This is my bias, although if you think there's a topic thats ellided you think should be there, or if you think a priority is unjustifiably off, then email me and I will consider.  

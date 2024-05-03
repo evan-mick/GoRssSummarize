@@ -293,7 +293,7 @@
             justify-content: center;
             align-items: center;
             max-width: 60%;
-            width: 60%;
+            /* width: 60%; */
             min-width: 20rem;
         }
 
@@ -301,7 +301,11 @@
             color: var(--textmain);
             padding: 0.2rem;
             font-size: medium;
-            overflow-y: scroll;
+            overflow: scroll;
+            text-overflow: ellipsis;
+            display: block;
+            line-height: 1.2em; /* a */
+            max-height: 18em; /* a x number of line to show (ex : 2 line)  */
         }
 
         #overlaybody {
@@ -314,7 +318,7 @@
 
         #overlaytitle {
             font-weight: bolder;
-            font-size: large;
+            font-size: x-large;
             padding: 1rem;
             color: var(--textmain);
             align-self: center;
@@ -322,9 +326,6 @@
 
 
         @media screen and (min-width: 1000px) {
-            #overlaytitle {
-                font-size: x-large;
-            }
             #overlaysummary {
                 font-size: large;
                 padding: 0.5rem;
@@ -334,11 +335,11 @@
         @media screen and (min-width: 1500px) {
 
             #overlaytitle {
-                font-size: 2.5rem;
+                font-size: xx-large;
             }
             #inneroverlay {
                 width: 80%;
-                height: 60%;
+                height: 70%;
             }
             #overlaybody {
                 display: flex;
@@ -346,9 +347,9 @@
             }
             #overlaysummary {
                 font-size: x-large;
-                max-width: 50rem;
+                max-width: 35rem;
                 padding: 1rem;
-                padding-left: 2rem;
+                padding-left: 1.5rem;
             }
         }
 
@@ -599,7 +600,7 @@
 			<div id="entry_{{$index}}" class="entry bordered" ontouchend="overlayOn({{$index}})" onclick="overlayOn({{$index}})">
                 <div class="entry-top">
                     <h2 class="articleTitle eventBlocker">{{$dat.Title}}</h2>
-                    <img class="entryPhoto photoBordered" src="{{$dat.PhotoUrl}}">
+                    <img rel="preload" class="entryPhoto photoBordered" src="{{$dat.PhotoUrl}}">
                 </div>
                 <div class="centered eventBlocker">
                     <h3 class="published"><time class="date" datetime="{{$dat.TimePublished}}">{{$dat.TimePublished}}</time></h3>

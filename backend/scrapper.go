@@ -36,12 +36,12 @@ func (b *Website) Scrape(htmlstring string) ScrapeReturn {
 
 func getDefaultCollector() *colly.Collector {
 	c := colly.NewCollector()
-	c.CheckHead = true
+	//c.CheckHead = true
 	c.DisableCookies()
 	c.IgnoreRobotsTxt = true
 	c.OnRequest(func(r *colly.Request) {
-		// r.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36")
-		r.Headers.Set("User-Agent", "THE HEADLINER (NON-COMMERCIAL) WEB-SCRAPER (THIS BOT COLLECTS ARTICLE DATA TO SUMMARIZE)")
+		r.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36")
+		//r.Headers.Set("User-Agent", "THE HEADLINER (NON-COMMERCIAL) WEB-SCRAPER (THIS BOT COLLECTS ARTICLE DATA TO SUMMARIZE)")
 	})
 	return c
 }
@@ -85,20 +85,35 @@ var NPR = Website{RSSLink: "https://feeds.npr.org/1001/rss.xml", Name: "NPR", sc
 }}
 
 // MUST ADD PHOTO
-var AP = Website{RSSLink: "https://apnews.com/index.rss", scrapeFunc: func(htmlstring string) (ScrapeReturn, error) {
+var AP = Website{RSSLink: "https://apnews.com/index.rss", Name: "AP", scrapeFunc: func(htmlstring string) (ScrapeReturn, error) {
 	c := getDefaultCollector()
 
 	var ret ScrapeReturn
 
 	c.OnHTML(".RichTextStoryBody", func(e *colly.HTMLElement) {
-		fmt.Println("ON HTML")
+		// fmt.Println("ON HTML")
 		ret.allText = e.ChildText("p")
 	})
 
+	c.OnHTML(".Page-main .CarouselSlide-media img.Image", func(e *colly.HTMLElement) {
+		// first := e.DOM.First()
+		// Extract the `src` attribute value
+		if ret.photoUrl == "" {
+			ret.photoUrl = e.Attr("src")
+
+			// ret.photoUrl = strings.Split(ret.photoUrl, "\n")[0]
+			// fmt.Println(ret.photoUrl)
+		}
+
+	})
 	err := c.Visit(htmlstring)
 
 	if err != nil {
 		return ret, err
+	}
+
+	if ret.photoUrl == "" {
+		ret.photoUrl = "https://dims.apnews.com/dims4/default/6e4b276/2147483647/strip/true/crop/640x236+0+0/resize/640x236!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Fc3%2F4c%2F65482a7b452db66043542c093eaf%2Fpromo-2x.png" //"https://assets.apnews.com/fa/ba/9258a7114f5ba5c7202aaa1bdd66/aplogo.svg"
 	}
 
 	return ret, nil
