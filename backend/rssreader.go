@@ -59,7 +59,11 @@ func FullRSSCycle() (unsummarizedEntries []SummaryEntry, text []string) {
 		go func(web Website) {
 			fmt.Println("Routine spun for: " + web.Name)
 			// web.RSSLink
-			newText, newEntries, newItemsChecked := OneScrapeCycle(web)
+			newText, newEntries, newItemsChecked, err := OneScrapeCycle(web)
+			if err != nil {
+				rssWG.Done()
+				return
+			}
 
 			mut.Lock()
 			text = append(text, newText...)
@@ -97,8 +101,13 @@ func attemptTimeParse(checkTime string) (time.Time, error) {
 	return toRet, err
 }
 
-func OneScrapeCycle(web Website) (text []string, entries []SummaryEntry, checked int) {
-	rss := GetRSSDataFromLink(web.RSSLink)
+func OneScrapeCycle(web Website) (text []string, entries []SummaryEntry, checked int, err_ret error) {
+	rss, err := GetRSSDataFromLink(web.RSSLink)
+
+	if err != nil {
+		fmt.Printf("Error getting rss data for %s: %s\n", web, err.Error())
+		return nil, nil, 0, err
+	}
 
 	var mut sync.Mutex
 	var w sync.WaitGroup
@@ -161,7 +170,7 @@ func OneScrapeCycle(web Website) (text []string, entries []SummaryEntry, checked
 
 	w.Wait()
 	fmt.Println(web.Name + " routine finished")
-	return text, entries, checked
+	return text, entries, checked, nil
 }
 
 func summarizeEntries(entries []SummaryEntry, text []string) (newEntries []SummaryEntry) {
@@ -196,7 +205,7 @@ func summarizeEntries(entries []SummaryEntry, text []string) (newEntries []Summa
 	return newEntries
 }
 
-func GetRSSDataFromLink(link string) Rss {
+func GetRSSDataFromLink(link string) (Rss, error) {
 	// Get data from rss
 	res, err := http.Get(link)
 
@@ -210,14 +219,17 @@ func GetRSSDataFromLink(link string) Rss {
 	//fmt.Println(string(body))
 
 	if err != nil {
-		panic(err)
+		// fmt.printf("Error parsing rss: %s", err.Error())
+		return Rss{}, err
 	}
 
 	var rss Rss
 	err = xml.Unmarshal(body, &rss)
 
 	if err != nil {
-		panic(err)
+		// panic(err)
+		// fmt.printf("Error getting rss: %s", err.Error())
+		return Rss{}, err
 	}
-	return rss
+	return rss, nil
 }

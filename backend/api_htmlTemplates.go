@@ -8,7 +8,9 @@ import (
 	"os"
 )
 
-const templateOutput = `../frontend/static/`
+const templateOutput = `./frontend/static/`
+
+//../frontend/static/`
 
 type htmlDat struct {
 	Title   string

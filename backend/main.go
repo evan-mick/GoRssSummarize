@@ -18,6 +18,7 @@ import (
 
 func main() {
 	err := godotenv.Load(".env")
+	fmt.Println("STARTING UP")
 
 	// scr := AP.Scrape("https://apnews.com/article/house-speaker-jeffries-johnson-marjorie-taylor-greene-41bf396eca6b0ef3b2bfb71a3cf1fc91")
 	// OneScrapeCycle(AP)
@@ -50,17 +51,24 @@ func main() {
 
 	//FullRSSCycle()
 	//OutputMainPage(dat)
-
+	// reader := bufio.NewReader(os.Stdin)
+	scanner := bufio.NewScanner(os.Stdin)
 	// CLI
 	for {
 
-		reader := bufio.NewReader(os.Stdin)
 		// ReadString will block until the delimiter is entered
-		input, err := reader.ReadString('\n')
-		if err != nil {
-			fmt.Println("An error occured while reading input. Please try again", err)
-			return
+		// input, err := reader.ReadString('\n')
+		// scanner.Scan
+
+		if !scanner.Scan() {
+			continue
 		}
+
+		input := scanner.Text()
+		// if err != nil {
+		// 	fmt.Println("An error occured while reading input. Please try again", err)
+		// 	continue
+		// }
 		input = strings.TrimSuffix(input, "\n")
 
 		if input == "refresh" || input == "r" {
@@ -83,6 +91,7 @@ func main() {
 			fmt.Println("CACHE CREATED")
 		}*/
 	}
+	fmt.Println(scanner.Err())
 
 }
 

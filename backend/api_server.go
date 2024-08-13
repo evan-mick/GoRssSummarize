@@ -12,7 +12,7 @@ import (
 // Ping is a request handler that simple serves a test html file.
 func ping(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("PINGED")
-	http.ServeFile(w, req, "../frontend/dev/ping.html")
+	//http.ServeFile(w, req, "../frontend/dev/ping.html")
 }
 
 var fs http.Handler
@@ -87,7 +87,7 @@ func InitAPIServer() {
 
 	// Make sure this one is last
 	// http.HandleFunc("/", serveMain)
-	fs = http.FileServer(http.Dir("../frontend/static"))
+	fs = http.FileServer(http.Dir(templateOutput))
 	http.HandleFunc("/", serveMain)
 	//http.Handle("/", serveMain)
 
