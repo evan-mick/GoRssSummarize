@@ -37,7 +37,7 @@ type Rss struct {
 func FullRSSCycle() (unsummarizedEntries []SummaryEntry, text []string) {
 	const dur = time.Duration(time.Minute * 60)
 
-	var websites = [...]Website{NPR, AP} //, BBC}
+	var websites = [...]Website{NPR, BBC}
 
 	var rssWG sync.WaitGroup
 
@@ -182,8 +182,8 @@ func summarizeEntries(entries []SummaryEntry, text []string) (newEntries []Summa
 		go func(i int, entry SummaryEntry) {
 			defer insertGroup.Done()
 			// why sleep? to space out google requests
-			// gemini free if you have <60 requests a minute
-			time.Sleep(time.Duration(float64(i) * 1.25 * float64(time.Second)))
+			// gemini free if you have <15 requests a minute
+			time.Sleep(time.Duration(float64(i) * 3.25 * float64(time.Second)))
 			var err error
 			entry.Summary, err = googleRequest(text[i])
 			entry.Summary = strings.ReplaceAll(entry.Summary, "'", "")

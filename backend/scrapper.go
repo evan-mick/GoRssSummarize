@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/gocolly/colly"
 )
@@ -47,7 +46,7 @@ func getDefaultCollector() *colly.Collector {
 }
 
 // BELOW HERE ARE GLOBALS
-var NPR = Website{RSSLink: "https://feeds.npr.org/1001/rss.xml", Name: "NPR", scrapeFunc: func(htmlstring string) (ScrapeReturn, error) {
+var NPR = Website{RSSLink: "https://feeds.npr.org/1002/rss.xml", Name: "NPR", scrapeFunc: func(htmlstring string) (ScrapeReturn, error) {
 	c := getDefaultCollector()
 
 	var ret ScrapeReturn
@@ -57,15 +56,16 @@ var NPR = Website{RSSLink: "https://feeds.npr.org/1001/rss.xml", Name: "NPR", sc
 		//ret.photoUrl = "https://media.npr.org/chrome_svg/npr-logo.svg"
 	})
 
-	var def bool
+	var def bool = false
 	// THIS NOT WORKING
-	c.OnHTML("div#storytext div.bucketwrap picture img.img", func(e *colly.HTMLElement) {
+	c.OnHTML(".storytext picture img.img", func(e *colly.HTMLElement) {
 		first := e.DOM.First()
 		var exists bool
 		// Extract the `src` attribute value
 
 		if !def {
 			ret.photoUrl, exists = first.Attr("src")
+			//fmt.Print(ret.photoUrl)
 
 			if !exists {
 				ret.photoUrl = "https://media.npr.org/chrome_svg/npr-logo.svg"
@@ -76,6 +76,10 @@ var NPR = Website{RSSLink: "https://feeds.npr.org/1001/rss.xml", Name: "NPR", sc
 	})
 
 	err := c.Visit(htmlstring)
+
+	if !def {
+		ret.photoUrl = "https://media.npr.org/chrome_svg/npr-logo.svg"
+	}
 
 	if err != nil {
 		return ret, err
@@ -142,28 +146,46 @@ var Reuters = Website{RSSLink: "https://www.reutersagency.com/feed/?best-sectors
 
 // NOT WORKING
 // https://feeds.bbci.co.uk/news/rss.xml
-var BBC = Website{RSSLink: "https://feeds.bbci.co.uk/news/world/rss.xml", scrapeFunc: func(htmlstring string) (ScrapeReturn, error) {
+// https://feeds.bbci.co.uk/news/world/rss.xml"
+var BBC = Website{RSSLink: "https://feeds.bbci.co.uk/news/rss.xml", Name: "BBC", scrapeFunc: func(htmlstring string) (ScrapeReturn, error) {
 	c := getDefaultCollector()
-	c.Async = true
+	// c.Async = true
 
 	var ret ScrapeReturn
 
-	c.OnHTML("p", func(e *colly.HTMLElement) {
-		fmt.Println("IN HTML ")
+	c.OnHTML("article", func(e *colly.HTMLElement) {
+
+		ret.allText = e.ChildText("p")
+		//fmt.Println(ret.allText)
 	})
 
-	c.OnScraped(func(r *colly.Response) {
-		fmt.Println("Page fully loaded and scraped.")
+	var exists bool = false
+	c.OnHTML(".sc-814e9212-1 img", func(e *colly.HTMLElement) {
+		ele := e.DOM.First()
+
+		ret.photoUrl, exists = ele.Attr("src")
+
+		if !exists {
+			ret.photoUrl = "https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg"
+		}
 	})
+
+	if !exists {
+		ret.photoUrl = "https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg"
+	}
+
+	/*c.OnScraped(func(r *colly.Response) {
+		fmt.Println("Page fully loaded and scraped.")
+	})*/
 
 	err := c.Visit(htmlstring)
 
 	if err != nil {
 		return ret, err
 	}
-	time.Sleep(2 * time.Second)
+	// time.Sleep(2 * time.Second)
 
-	c.Wait()
+	// c.Wait()
 
 	return ret, nil
 }}
