@@ -105,7 +105,7 @@ func OneScrapeCycle(web Website) (text []string, entries []SummaryEntry, checked
 	rss, err := GetRSSDataFromLink(web.RSSLink)
 
 	if err != nil {
-		fmt.Printf("Error getting rss data for %s: %s\n", web, err.Error())
+		fmt.Printf("Error getting rss data for %v: %s\n", web, err.Error())
 		return nil, nil, 0, err
 	}
 

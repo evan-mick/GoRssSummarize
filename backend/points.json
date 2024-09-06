@@ -1,0 +1,10 @@
+{
+   "D" : [ "disaster", "tornado", "earthquake", "wildfire", "debris" ],
+   "H" : [ "gaza", "palestine", "war", "genocide", "bombing" ], 
+   "M" : [],
+   "L" : [], 
+
+   "B" : [],
+   "W" : [],
+   "N" : []
+}
