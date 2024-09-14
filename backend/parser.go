@@ -66,7 +66,6 @@ func GetWebsiteScoreFull(body string, title string, scoreMap map[string][]string
 }
 
 func GetPointsFromText(scoring map[string]int, text string) int {
-
 	strs := strings.Split(text, " ")
 	var points int = 0
 	for _, str := range strs {
