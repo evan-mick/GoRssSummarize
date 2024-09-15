@@ -17,7 +17,7 @@ type htmlDat struct {
 	Entries []SummaryEntry
 }
 
-func OutputMainPage(dat SummaryEntry) {
+func OutputMainPage() {
 
 	t1 := template.New("Main Page")
 

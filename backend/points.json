@@ -1,10 +1,10 @@
 {
-   "D" : [ "disaster", "tornado", "flood", "earthquake", "typhoon", "wildfire", "debris" ],
+   "D" : [ "disaster", "tornado", "flood", "earthquake", "typhoon", "wildfire", "debris", "explosion", "kill", "devastate"],
    "H" : [ "gaza", "palestine", "war", "genocide", "bombing", "ukraine", "russia", "coup" ], 
-   "M" : [ "deport", "trump", "biden", "kamala", "zelensky", "biodiversity"],
+   "M" : [ "deport", "trump", "biden", "kamala", "zelensky", "biodiversity", "migrant", "drug"],
    "L" : ["pension", "immigrant", "interest rate", "election", "climate change", "pope", "nasa", "government", "union", "federal reserve", "economic"], 
 
    "B" : [],
    "W" : [ "sculpture", "new book", "movie", "social media influencer" ],
-   "N" : ["chappell roan", "download now", "download app", "taylor swift", "kanye", "bieber", "kardashian", "mr. beast" ]
+   "N" : ["chappell roan", "download now", "download app", "taylor swift", "kanye", "bieber", "kardashian", "mr. beast", "prince harry", "royal family"]
 }

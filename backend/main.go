@@ -8,6 +8,8 @@ import (
 	"strings"
 
 	"github.com/joho/godotenv"
+	// Consider gocron?
+	"time"
 )
 
 // https://feeds.npr.org/1001/rss.xml
@@ -15,6 +17,10 @@ import (
 // FLOW OF PROGRAM
 // Main parts are the API responses, the RSS reading cycle,
 // database communications, then summarizing with Google's Gemini
+
+var quit bool = false
+var loopTime time.Duration = time.Minute * 2
+var currentLoopTimer time.Duration = loopTime
 
 func main() {
 	err := godotenv.Load(".env")
@@ -30,49 +36,21 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	dat := SummaryEntry{
-		Title: "Test",
-	}
-
-	// InitAPIServer()
-	// For all items in our rss, save the html to a local file
-
-	// if err != nil {
-	// 	log.Fatal(err)
-	// } else {
-	// 	fmt.Print("DB connected!")
-	// }
-
-	//InsertSummary()
 	defer CloseDB()
-	// go
-	// SelectOneRow()
 	go InitAPIServer()
 
-	//FullRSSCycle()
-	//OutputMainPage(dat)
-	// reader := bufio.NewReader(os.Stdin)
 	scanner := bufio.NewScanner(os.Stdin)
 	// CLI
 	for {
-
-		// ReadString will block until the delimiter is entered
-		// input, err := reader.ReadString('\n')
-		// scanner.Scan
-
 		if !scanner.Scan() {
 			continue
 		}
 
 		input := scanner.Text()
-		// if err != nil {
-		// 	fmt.Println("An error occured while reading input. Please try again", err)
-		// 	continue
-		// }
 		input = strings.TrimSuffix(input, "\n")
 
 		if input == "refresh" || input == "r" {
-			OutputMainPage(dat)
+			OutputMainPage()
 			fmt.Println("REFRESHED")
 		} else if input == "cycle" || input == "c" {
 			// InitDB()
@@ -82,6 +60,14 @@ func main() {
 		} else if input == "s" {
 			SummarizeLocalCache()
 			fmt.Println("SUMMARIZE COMPLETE")
+		} else if input == "b" {
+			fmt.Println("BEGINNING FULL TIMED LOOP")
+			go MainLoop()
+		} else if input == "q" {
+			quit = true
+			break
+		} else if input == "t" {
+			fmt.Printf("%f minutes left\n", (loopTime - currentLoopTimer).Minutes())
 		}
 
 		/*else if input == "DELETEitALlBIGBOi" {
@@ -98,6 +84,37 @@ func main() {
 	}
 }
 
+func MainLoop() {
+
+	for {
+		if quit {
+			break
+		}
+
+		time.Sleep(time.Second)
+		currentLoopTimer += time.Second
+
+		if currentLoopTimer >= loopTime {
+			fmt.Println("TIMER COMPLETE, BEGINNING FULL REFRESH")
+			go RunOneFullRefresh()
+			currentLoopTimer = 0
+		}
+	}
+}
+
+func RunOneFullRefresh() {
+
+	CollectAllLocal()
+	fmt.Println("FULL LOOP: COLLECT COMPLETE")
+	fmt.Println("FULL LOOP: SUMMARIZE START")
+	SummarizeLocalCache()
+	fmt.Println("FULL LOOP: SUMMARIZE END")
+	OutputMainPage()
+	fmt.Println("FULL LOOP: OUTPUT COMPLETE")
+	fmt.Println("FULL LOOP: FULL REFRESH COMPLETE")
+
+}
+
 func SummarizeLocalCache() {
 
 	entries, err := LoadLocalCache()
@@ -107,7 +124,7 @@ func SummarizeLocalCache() {
 		return
 	}
 
-	fmt.Printf("%d to summarize", len(entries))
+	fmt.Printf("%d to summarize\n", len(entries))
 	summEntry := summarizeEntries(entries)
 	StoreEntriesLocally(summEntry)
 }
