@@ -1,1 +1,1 @@
-docker run -p 9999:9999 -it rsssummarize
+docker run -p 9999:9999 -it evanmick/headliner:latest

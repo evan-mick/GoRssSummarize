@@ -3,6 +3,7 @@
 FROM golang:1.22-alpine3.18
 WORKDIR /container
 COPY go.mod go.sum ./
+COPY points.json ./
 COPY ./frontend_data ./frontend_data
 COPY ./frontend ./frontend
 COPY .env ./
