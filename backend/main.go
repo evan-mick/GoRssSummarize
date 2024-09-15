@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/joho/godotenv"
@@ -19,7 +20,7 @@ import (
 // database communications, then summarizing with Google's Gemini
 
 var quit bool = false
-var loopTime time.Duration = time.Minute * 2
+var loopTime time.Duration = time.Hour * 6
 var currentLoopTimer time.Duration = loopTime
 
 func main() {
@@ -68,6 +69,25 @@ func main() {
 			break
 		} else if input == "t" {
 			fmt.Printf("%f minutes left\n", (loopTime - currentLoopTimer).Minutes())
+		} else if input == "st" {
+			fmt.Println("Enter time (in minutes) to set current loop to")
+			scanner.Scan()
+			in := scanner.Text()
+			if i, err := strconv.Atoi(in); err == nil {
+				currentLoopTimer = time.Minute * time.Duration(i)
+				continue
+			}
+			fmt.Println("Invalid time input")
+
+		} else if input == "stl" {
+			fmt.Println("Enter time (in minutes) to set loop time to")
+			scanner.Scan()
+			in := scanner.Text()
+			if i, err := strconv.Atoi(in); err == nil {
+				loopTime = time.Minute * time.Duration(i)
+				continue
+			}
+			fmt.Println("Invalid time input")
 		}
 
 		/*else if input == "DELETEitALlBIGBOi" {
