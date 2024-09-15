@@ -34,7 +34,7 @@ type Rss struct {
 	TimePublished: time.Now(),
 })*/
 
-func FullRSSCycle() (unsummarizedEntries []SummaryEntry, text []string) {
+func FullRSSCycle() (unsummarizedEntries []SummaryEntry) {
 	const dur = time.Duration(time.Minute * 60)
 
 	var websites = [...]Website{NPR, BBC}
@@ -59,14 +59,13 @@ func FullRSSCycle() (unsummarizedEntries []SummaryEntry, text []string) {
 		go func(web Website) {
 			fmt.Println("Routine spun for: " + web.Name)
 			// web.RSSLink
-			newText, newEntries, newItemsChecked, err := OneScrapeCycle(web)
+			newEntries, newItemsChecked, err := OneScrapeCycle(web)
 			if err != nil {
 				rssWG.Done()
 				return
 			}
 
 			mut.Lock()
-			text = append(text, newText...)
 			unsummarizedEntries = append(unsummarizedEntries, newEntries...)
 			itemsChecked += newItemsChecked
 			mut.Unlock()
@@ -78,7 +77,7 @@ func FullRSSCycle() (unsummarizedEntries []SummaryEntry, text []string) {
 
 	rssWG.Wait()
 	fmt.Printf("RSS done, parsed items: %d\n", itemsChecked)
-	return unsummarizedEntries, text
+	return unsummarizedEntries
 
 	//fmt.Println(links[1])
 	//fmt.Println(text[1])
@@ -101,12 +100,12 @@ func attemptTimeParse(checkTime string) (time.Time, error) {
 	return toRet, err
 }
 
-func OneScrapeCycle(web Website) (text []string, entries []SummaryEntry, checked int, err_ret error) {
+func OneScrapeCycle(web Website) (entries []SummaryEntry, checked int, err_ret error) {
 	rss, err := GetRSSDataFromLink(web.RSSLink)
 
 	if err != nil {
 		fmt.Printf("Error getting rss data for %v: %s\n", web, err.Error())
-		return nil, nil, 0, err
+		return nil, 0, err
 	}
 
 	var mut sync.Mutex
@@ -135,23 +134,9 @@ func OneScrapeCycle(web Website) (text []string, entries []SummaryEntry, checked
 				fmt.Println("Could not get parsed time: " + err.Error())
 				return
 			}
-			/*if err != nil {
-				err = nil
-				parsedPublishedTime, err = time.Parse(time.ANSIC, item.Published)
-				if err != nil {
-
-					err = nil
-					parsedPublishedTime, err = time.Parse(time.UnixDate, item.Published)
-					if err != nil {
-						fmt.Println("Could not get parsed time: " + err.Error())
-						return
-					}
-				}
-			}*/
 
 			if scrape.allText != "" {
 				mut.Lock()
-				//links = append(links, item.Link)
 				entries = append(entries, SummaryEntry{
 					Url:           item.Link,
 					FromWeb:       web.Name,
@@ -160,9 +145,11 @@ func OneScrapeCycle(web Website) (text []string, entries []SummaryEntry, checked
 					Title:         item.Title,
 					TimePublished: parsedPublishedTime,
 					PhotoUrl:      scrape.photoUrl,
+
+					FullText: scrape.allText,
+					Score:    0,
 				})
 				checked++
-				text = append(text, scrape.allText)
 				mut.Unlock()
 			}
 		}(item)
@@ -170,10 +157,10 @@ func OneScrapeCycle(web Website) (text []string, entries []SummaryEntry, checked
 
 	w.Wait()
 	fmt.Println(web.Name + " routine finished")
-	return text, entries, checked, nil
+	return entries, checked, nil
 }
 
-func summarizeEntries(entries []SummaryEntry, text []string) (newEntries []SummaryEntry) {
+func summarizeEntries(entries []SummaryEntry) (newEntries []SummaryEntry) {
 
 	var mut sync.Mutex
 	var insertGroup sync.WaitGroup
@@ -185,7 +172,7 @@ func summarizeEntries(entries []SummaryEntry, text []string) (newEntries []Summa
 			// gemini free if you have <15 requests a minute
 			time.Sleep(time.Duration(float64(i) * 3.25 * float64(time.Second)))
 			var err error
-			entry.Summary, err = googleRequest(text[i])
+			entry.Summary, err = googleRequest(entry.FullText)
 			entry.Summary = strings.ReplaceAll(entry.Summary, "'", "")
 			if err != nil {
 				fmt.Println("SUM INSERT ERR " + err.Error())

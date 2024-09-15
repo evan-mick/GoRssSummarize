@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"sort"
 	"strings"
 )
 
@@ -27,6 +28,36 @@ var titleMulti = 10
 // setup like "h" : [ "word1", "word2" ]
 var _scoringMap map[string][]string = nil
 var _jsonInfoPath string = "./points.json"
+
+func RankEntries(entries *[]SummaryEntry) {
+
+	if entries == nil {
+		return
+	}
+
+	for i, entry := range *entries {
+
+		sentences := CheckNumberOfSentences(entry.FullText)
+
+		// Probably not even a full article
+		if sentences < 6 {
+			(*entries)[i].Score = -1000
+			continue
+		}
+
+		score := GetWebsiteScore(entry.FullText, entry.Title)
+
+		if score > 0 {
+			score += sentences * 3
+		}
+
+		(*entries)[i].Score = score
+	}
+
+	sort.Slice((*entries)[:], func(i, j int) bool {
+		return (*entries)[i].Score > (*entries)[j].Score
+	})
+}
 
 // Default get website score
 // Stateful, uses global maping and json path variables

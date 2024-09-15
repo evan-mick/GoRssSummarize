@@ -79,11 +79,16 @@ func main() {
 			// FullRSSCycle()
 			CollectAllLocal()
 			fmt.Println("COLLECT COMPLETE")
-		} else if input == "DELETEitALlBIGBOi" {
+		} else if input == "s" {
+			SummarizeLocalCache()
+			fmt.Println("SUMMARIZE COMPLETE")
+		}
+
+		/*else if input == "DELETEitALlBIGBOi" {
 			InitDB()
 			DirectSQLCMD("DELETE FROM entries")
 			fmt.Println("DELETED")
-		}
+		}*/
 
 		/*else if input == "s" {
 			InitDB()
@@ -91,12 +96,30 @@ func main() {
 			fmt.Println("CACHE CREATED")
 		}*/
 	}
-	fmt.Println(scanner.Err())
+}
 
+func SummarizeLocalCache() {
+
+	entries, err := LoadLocalCache()
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	fmt.Printf("%d to summarize", len(entries))
+	summEntry := summarizeEntries(entries)
+	StoreEntriesLocally(summEntry)
 }
 
 func CollectAllLocal() {
-	ent, txt := FullRSSCycle()
-	summEntry := summarizeEntries(ent, txt)
-	StoreEntriesLocally(summEntry)
+	allEntries := FullRSSCycle()
+
+	RankEntries(&allEntries)
+
+	for i, entry := range allEntries {
+		fmt.Printf("%d: %d %s \n", i, entry.Score, entry.Title)
+	}
+	//summEntry := summarizeEntries(allEntries)
+	StoreEntriesLocally(allEntries[:15])
 }

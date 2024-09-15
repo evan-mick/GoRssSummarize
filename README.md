@@ -26,8 +26,21 @@ Templ renders html, puts it in static folder
 
 NEWS SOURCES
 
+
+ON IPHONE
+- scaling fucked
+-make sure the click thing on scroll ain't it
+
+
+
+
+
+
+
 FOR PROCESSING
 - add check that there are at least 10 sentences
+- COULD DO "retrival augmented generation", have ai do the scoring and go from there 
+- thumbs up or down to iterate
 
 npr.org
 newsweek (https://www.newsweek.com/rss)

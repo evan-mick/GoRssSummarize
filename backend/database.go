@@ -57,6 +57,9 @@ type SummaryEntry struct {
 	TimeAdded     time.Time `json:"timeAdded"`
 	TimePublished time.Time `json:"timePublished"`
 	PhotoUrl      string    `json:"photoUrl"`
+
+	FullText string `json:"text"` // should I do this??
+	Score    int    `json:"score"`
 }
 
 const TimeLayout = "2006-01-02 15:04:05"
