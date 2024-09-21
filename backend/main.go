@@ -21,7 +21,10 @@ import (
 
 var quit bool = false
 var loopTime time.Duration = time.Hour * 6
-var currentLoopTimer time.Duration = loopTime
+
+// var currentLoopTimer time.Duration = loopTime
+var lastLoopCheck time.Time = time.Now()
+var toLoopTime time.Time = time.Now()
 
 func main() {
 	err := godotenv.Load(".env")
@@ -68,13 +71,13 @@ func main() {
 			quit = true
 			break
 		} else if input == "t" {
-			fmt.Printf("%f minutes left\n", (loopTime - currentLoopTimer).Minutes())
+			fmt.Printf("%f minutes left\n", (toLoopTime.Sub(time.Now())).Minutes())
 		} else if input == "st" {
 			fmt.Println("Enter time (in minutes) to set current loop to")
 			scanner.Scan()
 			in := scanner.Text()
 			if i, err := strconv.Atoi(in); err == nil {
-				currentLoopTimer = time.Minute * time.Duration(i)
+				toLoopTime = time.Now().Add(time.Minute * time.Duration(i))
 				continue
 			}
 			fmt.Println("Invalid time input")
@@ -112,12 +115,14 @@ func MainLoop() {
 		}
 
 		time.Sleep(time.Second)
-		currentLoopTimer += time.Second
+		//currentLoopTimer += time.Second
 
-		if currentLoopTimer >= loopTime {
+		if time.Now().Compare(toLoopTime) > -1 {
+			//		}
+			//		if currentLoopTimer >= loopTime {
 			fmt.Println("TIMER COMPLETE, BEGINNING FULL REFRESH")
 			go RunOneFullRefresh()
-			currentLoopTimer = 0
+			toLoopTime = time.Now().Add(loopTime)
 		}
 	}
 }
