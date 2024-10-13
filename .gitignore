@@ -20,5 +20,5 @@
 # Go workspace file
 go.work
 .env copy
-backend/.env
+.env
 frontend_data/data.json
