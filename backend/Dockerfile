@@ -12,7 +12,6 @@ COPY *.go ./
 RUN CGO_ENABLED=0 GOOS=linux go build -o /rsssummarize
 RUN ["chmod", "+x", "/rsssummarize"]
 RUN ls
-EXPOSE 9999
 EXPOSE 8080
 
 # CMD ["./rsssummarize"]

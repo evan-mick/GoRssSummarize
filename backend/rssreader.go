@@ -34,6 +34,7 @@ type Rss struct {
 	TimePublished: time.Now(),
 })*/
 
+// Go through all websites and return a big list of unsummarized entries
 func FullRSSCycle() (unsummarizedEntries []SummaryEntry) {
 	const dur = time.Duration(time.Minute * 60)
 
@@ -100,6 +101,9 @@ func attemptTimeParse(checkTime string) (time.Time, error) {
 	return toRet, err
 }
 
+// Given a website struct,
+// scrape their whole RSS feed and return a list of SummaryEntries
+// as well as the number of total websites checked
 func OneScrapeCycle(web Website) (entries []SummaryEntry, checked int, err_ret error) {
 	rss, err := GetRSSDataFromLink(web.RSSLink)
 
@@ -160,6 +164,8 @@ func OneScrapeCycle(web Website) (entries []SummaryEntry, checked int, err_ret e
 	return entries, checked, nil
 }
 
+// Given a list of SummaryEntries without a summary,
+// return a new list of identical SummaryEntries that have a summary
 func summarizeEntries(entries []SummaryEntry) (newEntries []SummaryEntry) {
 
 	var mut sync.Mutex
@@ -192,6 +198,7 @@ func summarizeEntries(entries []SummaryEntry) (newEntries []SummaryEntry) {
 	return newEntries
 }
 
+// Given a link to an RSS feed, convert that feed to our internal struct
 func GetRSSDataFromLink(link string) (Rss, error) {
 	// Get data from rss
 	res, err := http.Get(link)

@@ -97,6 +97,6 @@ func InitAPIServer() {
 
 	fmt.Println("API server initialized")
 
-	http.ListenAndServe(":9999", nil)
+	http.ListenAndServe(":"+port, nil)
 
 }

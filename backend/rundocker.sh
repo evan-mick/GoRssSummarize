@@ -1,1 +1,1 @@
-docker run -p 9999:9999 -it evanmick/headliner:latest
+docker run -p 8080:8080 -it evanmick/headliner:latest
