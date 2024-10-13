@@ -21,3 +21,4 @@
 go.work
 .env copy
 backend/.env
+frontend_data/data.json

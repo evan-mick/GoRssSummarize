@@ -1,664 +1,694 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>{{.Title}}</title>
-    </head>
-    <style>
-        :root {
-            --mainback: #ffffff;
-            --secondback: #ffffff;
-            --textmain:  #434343;
-            /* --textmain: #434343; */
-            /* --maincol: #303030; */
-            /* --textmain: #0078be;*/
-            --maincol: #8d3900; 
-            --outlinesize: 0.15rem; 
-        }
 
-        * {
-            padding: 0;
-            margin: 0; 
-        }
-            
-        #comic {
-            max-width: 25rem;
-            width: 100%;
-            /* padding: 3rem; */
-        }
+<head>
+    <title>{{.Title}}</title>
+</head>
+<style>
+    :root {
+        --mainback: #ffffff;
+        --secondback: #ffffff;
+        --textmain: #434343;
+        /* --textmain: #434343; */
+        /* --maincol: #303030; */
+        /* --textmain: #0078be;*/
+        --maincol: #8d3900;
+        --outlinesize: 0.15rem;
+    }
 
-        #comic-sec {
-            background-color: var(--mainback);
-            justify-content: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 4rem;
-            margin-bottom: 2rem;
-        }
+    * {
+        padding: 0;
+        margin: 0;
+    }
 
-        .comic-in {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 40rem;
-            background-color: var(--secondback);
-            padding: 1rem;
-            color: var(--textmain);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        }
+    #comic {
+        max-width: 25rem;
+        width: 100%;
+        /* padding: 3rem; */
+    }
 
-        body {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            color: var(--textmain);
-            background-color: var(--mainback);
-        }
+    #comic-sec {
+        background-color: var(--mainback);
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+    }
 
-        .header-footer {
-            background-color: var(--secondback);
-            padding-top: 1rem;
-            min-width: 100%;
-            box-sizing:border-box;
-            padding-right: 2rem;
-            padding-left: 2rem;
-            padding-bottom: 2rem;
+    .comic-in {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 40rem;
+        background-color: var(--secondback);
+        padding: 1rem;
+        color: var(--textmain);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
 
-        }
+    body {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: var(--textmain);
+        background-color: var(--mainback);
+    }
 
+    .header-footer {
+        background-color: var(--secondback);
+        padding-top: 1rem;
+        min-width: 100%;
+        box-sizing: border-box;
+        padding-right: 2rem;
+        padding-left: 2rem;
+        padding-bottom: 2rem;
 
-        /* #E8EAE3 #373833 #FA2742 */
-        #main-list {
-            background-color: var(--mainback);
-            /* padding: 1rem; */
-            margin: 1rem;
-            display: flex;
-            /* flex-direction: row; */
-            justify-content: center;
-            
-            flex-wrap: wrap;
-            /* gap: 2rem 2rem; */
-        }
+    }
 
 
-        /* ENTRIES */
+    /* #E8EAE3 #373833 #FA2742 */
+    #main-list {
+        background-color: var(--mainback);
+        /* padding: 1rem; */
+        margin: 1rem;
+        display: flex;
+        /* flex-direction: row; */
+        justify-content: center;
 
-        .bordered {
-            /* border-radius: .25rem; */
-            border-bottom: var(--outlinesize) solid var(--maincol);
-        }
-
-        .photoBordered {
-            /* border-radius: .25rem; */
-            border-bottom: var(--outlinesize) solid var(--textmain);
-        }
-
-        .entry {
-            background-color: var(--secondback);
-
-            border-bottom: var(--outlinesize) solid var(--maincol);
-            align-items: flex-start;
-            display: flex;
-            flex-direction: column;
-            justify-content: first baseline;
-            padding: 2rem;
-            max-width: 22rem; 
-            /* max-height: 50rem; */
-            /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-
-            transition: transform 0.05s;
-            color: var(--textmain);
-            text-align: left;
-            font-size: large;
-
-            cursor: pointer;
-            /* outline: .025rem; */
-            /* outline-color: black; */
-        }
-
-        /* :hover.entry { */
-            /* transform: scale(1.004); */
-        /* } */
-        .articleTitle {
-            font-weight: bolder;
-            font-size: large;
-            color: var(--textmain);
-            cursor: default;
-        }
-
-        :hover.entry .articleTitle {
-            color: var(--maincol)
-        }
+        flex-wrap: wrap;
+        /* gap: 2rem 2rem; */
+    }
 
 
-        .entrybody {
+    /* ENTRIES */
 
-            margin-top: 2rem;
-            border-top: var(--outlinesize) solid var(--textmain);
-            align-items: flex-start;
-            display: flex;
-            flex-direction: column;
-            /* justify-content: space-evenly; */
-            width: 100%;
-            height: 100%;
-            font-size: small;
-            cursor: default;
-        }
+    .bordered {
+        /* border-radius: .25rem; */
+        border-bottom: var(--outlinesize) solid var(--maincol);
+    }
 
-        .entryPhoto {
-            min-width: 2rem;
-            width: 40rem;
-            max-width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: contain;
-            margin: 0.5rem;
-            object-position: 50% 0;
-            cursor: pointer;
-            /* padding-top: 1rem; */
-        }
+    .photoBordered {
+        /* border-radius: .25rem; */
+        border-bottom: var(--outlinesize) solid var(--textmain);
+    }
 
-        
+    .entry {
+        background-color: var(--secondback);
 
-        .eventBlocker {
-            cursor: default;
-        }
+        border-bottom: var(--outlinesize) solid var(--maincol);
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: first baseline;
+        padding: 2rem;
+        max-width: 22rem;
+        /* max-height: 50rem; */
+        /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 
-        .summary {
-            color: var(--textmain);
-            padding-top: 1rem;
-            font-size: small;
-            overflow-y: scroll;
-            cursor: default;
-        }
+        transition: transform 0.05s;
+        color: var(--textmain);
+        text-align: left;
+        font-size: large;
 
+        cursor: pointer;
+        /* outline: .025rem; */
+        /* outline-color: black; */
+    }
+
+    /* :hover.entry { */
+    /* transform: scale(1.004); */
+    /* } */
+    .articleTitle {
+        font-weight: bolder;
+        font-size: large;
+        color: var(--textmain);
+        cursor: default;
+    }
+
+    :hover.entry .articleTitle {
+        color: var(--maincol)
+    }
+
+
+    .entrybody {
+
+        margin-top: 2rem;
+        border-top: var(--outlinesize) solid var(--textmain);
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-evenly; */
+        width: 100%;
+        height: 100%;
+        font-size: small;
+        cursor: default;
+    }
+
+    .entryPhoto {
+        min-width: 2rem;
+        width: 40rem;
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+        margin: 0.5rem;
+        object-position: 50% 0;
+        cursor: pointer;
+        /* padding-top: 1rem; */
+    }
+
+
+
+    .eventBlocker {
+        cursor: default;
+    }
+
+    .summary {
+        color: var(--textmain);
+        padding-top: 1rem;
+        font-size: small;
+        overflow-y: scroll;
+        cursor: default;
+    }
+
+    #title {
+        color: var(--maincol);
+        font-size: 3rem;
+    }
+
+    h2 {
+        /* color: var(--maincol); */
+        color: var(--textmain);
+        font-size: large;
+    }
+
+    h3 {
+        font-size: medium;
+    }
+
+    .entry-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+    }
+
+    @media screen and (min-width: 600px) {
         #title {
-            color: var(--maincol);
-            font-size: 3rem;
+            font-size: 4rem;
         }
 
         h2 {
-            /* color: var(--maincol); */
-            color: var(--textmain);
+            font-size: larger;
+        }
+
+        h3 {
             font-size: large;
         }
-        h3 {
-            font-size: medium;
+
+        .header-footer {
+            padding-left: 4rem;
+            padding-right: 4rem;
+        }
+
+        .entry {
+            max-width: 12rem;
         }
 
         .entry-top {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: start;
-        }
-
-        @media screen and (min-width: 600px) {
-            #title {
-                font-size: 4rem;
-            }
-            h2 {
-                font-size: larger;
-            }
-            h3 {
-                font-size: large;
-            }
-            .header-footer {
-                padding-left: 4rem;
-                padding-right: 4rem;
-            }
-            .entry {
-                max-width: 12rem;
-            }
-            .entry-top {
-                flex-direction: column;
-            }
-        }
-
-        
-
-        @media screen and (min-width: 900px) {
-            .entry {
-                max-width: 20rem;
-            }
-            .entrybody {
-                font-size: large;
-            }
-
-            .articleTitle {
-                font-size: larger;
-            }
-            .summary {
-                font-size: large;
-            }
-            #title {
-                font-size: 5rem;
-            }
-        }
-
-        @media screen and (min-width: 1100px) {
-            .entry {
-                max-width: 25rem;
-            }
-            #title {
-                font-size: 6rem;
-            }
-
-            h2 {
-                font-size: x-large;
-            }
-            h3 {
-                font-size: larger;
-            }
-        }
-
-        .hidden {
-            display: none;
-        }
-
-       
-
-        .published {
-            color: var(--textmain); 
-            padding-top: 1rem;
-        }
-        
-        .centered {
-            margin: auto;
-            display: flex;
             flex-direction: column;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
-        } 
-        
+        }
+    }
 
-        #overlay {
-            position: fixed; /* Sit on top of the page content */
-            display: none; /* Hidden by default */
-            width: 100%; /* Full width (cover the whole page) */
-            height: 100%; /* Full height (cover the whole page) */
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0,0,0,0.7); /* Black background with opacity */
-            z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-            cursor: pointer; /* Add a pointer on hover */
-            gap: 1rem;
+
+
+    @media screen and (min-width: 900px) {
+        .entry {
+            max-width: 20rem;
+        }
+
+        .entrybody {
+            font-size: large;
+        }
+
+        .articleTitle {
+            font-size: larger;
+        }
+
+        .summary {
+            font-size: large;
+        }
+
+        #title {
+            font-size: 5rem;
+        }
+    }
+
+    @media screen and (min-width: 1100px) {
+        .entry {
+            max-width: 25rem;
+        }
+
+        #title {
+            font-size: 6rem;
+        }
+
+        h2 {
+            font-size: x-large;
+        }
+
+        h3 {
+            font-size: larger;
+        }
+    }
+
+    .hidden {
+        display: none;
+    }
+
+
+
+    .published {
+        color: var(--textmain);
+        padding-top: 1rem;
+    }
+
+    .centered {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #overlay {
+        position: fixed;
+        /* Sit on top of the page content */
+        display: none;
+        /* Hidden by default */
+        width: 100%;
+        /* Full width (cover the whole page) */
+        height: 100%;
+        /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        /* Black background with opacity */
+        z-index: 2;
+        /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer;
+        /* Add a pointer on hover */
+        gap: 1rem;
+    }
+
+    #inneroverlay {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        justify-content: center;
+        align-items: center;
+        max-width: 60%;
+        /* width: 60%; */
+        min-width: 20rem;
+    }
+
+    #overlaysummary {
+        color: var(--textmain);
+        padding: 0.2rem;
+        font-size: medium;
+        overflow: scroll;
+        text-overflow: ellipsis;
+        display: block;
+        line-height: 1.2em;
+        /* a */
+        max-height: 18em;
+        /* a x number of line to show (ex : 2 line)  */
+    }
+
+    #overlaybody {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #overlaytitle {
+        font-weight: bolder;
+        font-size: x-large;
+        padding: 1rem;
+        color: var(--textmain);
+        align-self: center;
+    }
+
+
+    @media screen and (min-width: 1000px) {
+        #overlaysummary {
+            font-size: large;
+            padding: 0.5rem;
+        }
+    }
+
+    @media screen and (min-width: 1500px) {
+
+        #overlaytitle {
+            font-size: xx-large;
         }
 
         #inneroverlay {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            background-color: white; 
-            justify-content: center;
-            align-items: center;
-            max-width: 60%;
-            /* width: 60%; */
-            min-width: 20rem;
-        }
-
-        #overlaysummary {
-            color: var(--textmain);
-            padding: 0.2rem;
-            font-size: medium;
-            overflow: scroll;
-            text-overflow: ellipsis;
-            display: block;
-            line-height: 1.2em; /* a */
-            max-height: 18em; /* a x number of line to show (ex : 2 line)  */
+            width: 80%;
+            height: 70%;
         }
 
         #overlaybody {
-            width: 100%;
-            height: 100%;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
         }
 
-        #overlaytitle {
-            font-weight: bolder;
+        #overlaysummary {
             font-size: x-large;
+            max-width: 35rem;
             padding: 1rem;
-            color: var(--textmain);
-            align-self: center;
+            padding-left: 1.5rem;
         }
+    }
 
 
-        @media screen and (min-width: 1000px) {
-            #overlaysummary {
-                font-size: large;
-                padding: 0.5rem;
+    /* The switch - the box around the slider */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--textmain);
+        -webkit-transition: .15s;
+        transition: .15s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .15s;
+        transition: .15s;
+    }
+
+    input:checked+.slider {
+        background-color: var(--maincol);
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px var(--textmain);
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    .arrow {
+        margin: 50px 20px;
+        width: 75px;
+        height: 75px;
+        float: left;
+        background-color: var(--textmain);
+    }
+
+    .prev {
+        -webkit-transform: rotate(315deg);
+    }
+
+    .next {
+        -webkit-transform: rotate(135deg);
+    }
+
+    .arrow:hover {
+        background-color: #f4690d;
+    }
+
+    .arrow:after {
+        content: '';
+        width: 75px;
+        height: 75px;
+        background: white;
+        position: absolute;
+        left: 3px;
+        top: 3px;
+    }
+
+
+    button {
+        background-color: white;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        /* cursor: pointer; */
+        /* outline: inherit; */
+    }
+</style>
+
+<script>
+
+    let condensed = false;
+    let overlayIsOn = false;
+    var overlay;
+    var entries;
+    let selectedEntry = 0;
+
+    window.onload = () => {
+        // REFORMAT DATES (its weird before)
+        var dateElements = document.getElementsByClassName("date");
+        Array.from(dateElements).forEach(element => {
+            const date = new Date(element.textContent)
+            const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+            element.textContent = formattedDate;
+        });
+
+        let check = document.getElementById("checkbox");
+        let overlay_prev = document.getElementById("overlay-prev");
+        let overlay_next = document.getElementById("overlay-next");
+        document.addEventListener("keydown", (e) => {
+            if (event.defaultPrevented) {
+                return; // Should do nothing if the default action has been cancelled
             }
-        }
-
-        @media screen and (min-width: 1500px) {
-
-            #overlaytitle {
-                font-size: xx-large;
-            }
-            #inneroverlay {
-                width: 80%;
-                height: 70%;
-            }
-            #overlaybody {
-                display: flex;
-                flex-direction: row;
-            }
-            #overlaysummary {
-                font-size: x-large;
-                max-width: 35rem;
-                padding: 1rem;
-                padding-left: 1.5rem;
-            }
-        }
-
-
-        /* The switch - the box around the slider */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-
-        /* Hide default HTML checkbox */
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        /* The slider */
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--textmain);
-            -webkit-transition: .15s;
-            transition: .15s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .15s;
-            transition: .15s;
-        }
-
-        input:checked + .slider {
-            background-color: var(--maincol);
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 1px var(--textmain);
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-       
-        .arrow { 
-            margin: 50px 20px;
-            width: 75px;
-            height: 75px; 
-            float: left;
-            background-color: var(--textmain);
-        }
-        .prev { 
-            -webkit-transform: rotate(315deg); 
-        }
-        .next {
-            -webkit-transform: rotate(135deg);
-        }
-        .arrow:hover {
-            background-color: #f4690d;
-        }
-
-        .arrow:after {
-            content: '';
-            width: 75px;
-            height: 75px;
-            background: white;
-            position: absolute; 
-            left: 3px;
-            top: 3px;
-        }
-
-
-        button {
-            background-color: white;
-            color: inherit;
-            border: none;
-            padding: 0;
-            font: inherit;
-            /* cursor: pointer; */
-            /* outline: inherit; */
-        }
-
-
-        
-
-
-    </style>
-
-    <script>
-
-        let condensed = false; 
-        let overlayIsOn = false; 
-        var overlay; 
-        var entries; 
-        let selectedEntry = 0; 
-
-        window.onload = () => {
-            // REFORMAT DATES (its weird before)
-            var dateElements = document.getElementsByClassName("date");
-            Array.from(dateElements).forEach(element => {
-                const date = new Date(element.textContent)
-                const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-                element.textContent = formattedDate;
-            });
-
-            let check = document.getElementById("checkbox");
-            let overlay_prev = document.getElementById("overlay-prev");
-            let overlay_next = document.getElementById("overlay-next");
-            document.addEventListener("keydown", (e) => {
-                if (event.defaultPrevented) {
-                    return; // Should do nothing if the default action has been cancelled
-                }
-                if (e.key !== undefined) {
-                    if (overlayIsOn) {
-                        // console.log("OVERLAY ON " + e.key)
-                        if ([ "d", "ArrowRight", "l" ].includes(e.key)) {
-                            overlay_next.click();
-                        } else if ([ "a", "ArrowLeft", "h" ].includes(e.key)) {
-                            overlay_prev.click();
-                        } else if (["Alt", "j", "s"].includes(e.key)) {
-                            overlayOff();
-                        }
-                    } else {
-                        // console.log("OVERLAY OFF " + e.key)
-                        if (["w", "k", "Alt"].includes(e.key)) {
-                            overlayOn(selectedEntry);
-                        } else if (e.key === "s") {
-                            check.click();
-                        }
+            if (e.key !== undefined) {
+                if (overlayIsOn) {
+                    // console.log("OVERLAY ON " + e.key)
+                    if (["d", "ArrowRight", "l"].includes(e.key)) {
+                        overlay_next.click();
+                    } else if (["a", "ArrowLeft", "h"].includes(e.key)) {
+                        overlay_prev.click();
+                    } else if (["Alt", "j", "s"].includes(e.key)) {
+                        overlayOff();
                     }
-
-                    return
-                }                 
-            });
-
-            overlay = document.getElementById("overlay");
-            entries = document.getElementById("main-list").childElementCount;
-            console.log("entries " + entries);
-
-            overlay.addEventListener("click", (e) => {
-                if (e.defaultPrevented) {
-                    return; // Should do nothing if the default action has been cancelled
+                } else {
+                    // console.log("OVERLAY OFF " + e.key)
+                    if (["w", "k", "Alt"].includes(e.key)) {
+                        overlayOn(selectedEntry);
+                    } else if (e.key === "s") {
+                        check.click();
+                    }
                 }
-                overlayOff();
+
+                return
+            }
+        });
+
+        overlay = document.getElementById("overlay");
+        entries = document.getElementById("main-list").childElementCount;
+        console.log("entries " + entries);
+
+        overlay.addEventListener("click", (e) => {
+            if (e.defaultPrevented) {
+                return; // Should do nothing if the default action has been cancelled
+            }
+            overlayOff();
+        })
+
+        arrows = document.getElementsByClassName("arrow");
+
+
+        Array.from(document.getElementsByClassName("eventBlocker")).forEach(element => {
+            element.addEventListener("click", (event) => {
+                event.stopPropagation();
+                // event.preventDefault();
             })
+        });
 
-            arrows = document.getElementsByClassName("arrow");
-
-
-            Array.from(document.getElementsByClassName("eventBlocker")).forEach(element => {
-                element.addEventListener("click", (event) => {
-                    event.stopPropagation();
-                    // event.preventDefault();
-                })
-            });
-            
-        };
+    };
 
 
-        function arrowClick(event, num) {
-            event.preventDefault();
-            let newNum = Math.max(Math.min(entries - 1, num + selectedEntry), 0); 
-            if (newNum === selectedEntry) {
-                return; 
-            }
-            overlayOn(newNum);
+    function arrowClick(event, num) {
+        event.preventDefault();
+        let newNum = Math.max(Math.min(entries - 1, num + selectedEntry), 0);
+        if (newNum === selectedEntry) {
+            return;
         }
+        overlayOn(newNum);
+    }
 
-        function testPrint(inDat) {
-            console.log(inDat)
+    function testPrint(inDat) {
+        console.log(inDat)
+    }
+
+    function overlayOn(inNum) {
+        overlay.style.display = "flex";
+
+        var ele = document.getElementById("entry_" + inNum);
+        // console.log("ELEMENT " + ele)
+        var dat = {
+            summary: ele.querySelector(".summary").textContent,
+            title: ele.querySelector(".articleTitle").textContent,
+            photo: ele.querySelector(".entryPhoto").src,
+            published: ele.querySelector(".date").textContent,
+            url: ele.querySelector("a").href,
+            urlTxt: ele.querySelector("a").textContent,
         }
+        overlay.querySelector("#overlaysummary").textContent = dat.summary;
+        overlay.querySelector("#overlaytitle").textContent = dat.title;
+        overlay.querySelector(".entryPhoto").src = dat.photo;
+        overlay.querySelector(".date").textContent = dat.published;
+        overlay.querySelector("a").href = dat.url;
+        overlay.querySelector("a").textContent = dat.urlTxt;
 
-        function overlayOn(inNum) {
-            overlay.style.display = "flex";
+        selectedEntry = inNum;
+        overlayIsOn = true;
+    }
 
-            var ele = document.getElementById("entry_" + inNum);
-            // console.log("ELEMENT " + ele)
-            var dat = {
-                summary: ele.querySelector(".summary").textContent,
-                title: ele.querySelector(".articleTitle").textContent,
-                photo: ele.querySelector(".entryPhoto").src,
-                published: ele.querySelector(".date").textContent,
-                url: ele.querySelector("a").href,
-                urlTxt: ele.querySelector("a").textContent,
-            }
-            overlay.querySelector("#overlaysummary").textContent = dat.summary;
-            overlay.querySelector("#overlaytitle").textContent = dat.title;
-            overlay.querySelector(".entryPhoto").src = dat.photo;
-            overlay.querySelector(".date").textContent = dat.published;
-            overlay.querySelector("a").href = dat.url;
-            overlay.querySelector("a").textContent = dat.urlTxt;
+    function overlayOff() {
+        ele = document.getElementById("overlay");
+        ele.style.display = "none";
+        overlayIsOn = false;
+    }
 
-            selectedEntry = inNum;
-            overlayIsOn = true; 
-        }
+    function toggleCondensed() {
+        hideables = document.getElementsByClassName("hideable");
 
-        function overlayOff() {
-            ele = document.getElementById("overlay");
-            ele.style.display = "none";
-            overlayIsOn = false; 
-        }
-        
-        function toggleCondensed() {
-            hideables = document.getElementsByClassName("hideable");
+        condensed = !condensed;
+        Array.from(hideables).forEach(h => {
+            h.classList.toggle("hidden");
+        });
 
-            condensed = !condensed;
-            Array.from(hideables).forEach(h => {
-                h.classList.toggle("hidden");
-            });
+    }
 
-        }
+</script>
 
-    </script>
-    <body>
-        <div id="header" class="header-footer bordered">
-            <h1 id="title">The HeadLiner</h1>
-            <h2>Line your head with news summaries. Its like skimming the headlines, but better!</h2>
-            <br>
+<body>
+    <div id="header" class="header-footer bordered">
+        <h1 id="title">The HeadLiner</h1>
+        <h2>Line your head with news summaries. Its like skimming the headlines, but better!</h2>
+        <br>
 
-            <p>Click button at <b>left corner</b> for summaries (or 's')</p>
-            <br>
-            <p>Click on photo to <b>focus</b> (or 'Alt'), while focused, click arrow keys to <b>change summaries</b></p>
-            
-            <!-- <p>Click on the button in the <b>lower left corner</b> to show all summaries (or click 's')</p>
+        <p>Click button at <b>left corner</b> for summaries (or 's')</p>
+        <br>
+        <p>Click on photo to <b>focus</b> (or 'Alt'), while focused, click arrow keys to <b>change summaries</b></p>
+
+        <!-- <p>Click on the button in the <b>lower left corner</b> to show all summaries (or click 's')</p>
             <p>Click on a photo to <b>focus</b> (or click Alt, W, or K, unfocus with Alt, S, or J)</p>
             <p>While in focus, click the arrow keys, A and D, or H and L to <b>move between summaries</b></p> -->
-            <br>
-            <p><b>Disclaimer:</b> AI can be so silly! Please use the original sources for references, as <i> sometimes </i> the summarizer hallucinates, bless 🙏.</p>
-            
-            <!-- <button onclick="toggleCondensed()">Toggle Condensed</button> -->
-        </div>
-        <section id="main-list">
-			{{range $index, $dat := .Entries}}
-			<div id="entry_{{$index}}" class="entry bordered" ontouchend="overlayOn({{$index}})" onclick="overlayOn({{$index}})">
-                <div class="entry-top">
-                    <h2 class="articleTitle eventBlocker">{{$dat.Title}}</h2>
-                    <img rel="preload" class="entryPhoto photoBordered" src="{{$dat.PhotoUrl}}">
-                </div>
-                <div class="centered eventBlocker">
-                    <h3 class="published"><time class="date" datetime="{{$dat.TimePublished}}">{{$dat.TimePublished}}</time></h3>
-                    <a href="{{ $dat.Url }}" target='_blank' rel="noopener noreferrer">Link ({{$dat.FromWeb}})</a>
-                </div>
-                <div class="entrybody eventBlocker hideable hidden">
-                    <p class="summary">{{$dat.Summary}}</p>
-                </div>
+        <br>
+        <p><b>Disclaimer:</b> AI can be so silly! Please use the original sources for references, as <i> sometimes </i>
+            the summarizer hallucinates, bless 🙏.</p>
+
+        <!-- <button onclick="toggleCondensed()">Toggle Condensed</button> -->
+    </div>
+    <section id="main-list">
+        {{range $index, $dat := .Entries}}
+        <div id="entry_{{$index}}" class="entry bordered" ontouchend="overlayOn({{$index}})"
+            onclick="overlayOn({{$index}})">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">{{$dat.Title}}</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="{{$dat.PhotoUrl}}">
             </div>
-			{{end}}
-		</section>
-        
-        <section id="comic-sec">
-            <div class="comic-in bordered">
-                <!--  Now don't YOU feel informed? 🤭 -->
-                <p>Well aren't you a _ravenous_ news consumer! Treat yourself to a Boomer comic.</p>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="{{$dat.TimePublished}}">{{$dat.TimePublished}}</time>
+                </h3>
+                <a href="{{ $dat.Url }}" target='_blank' rel="noopener noreferrer">Link ({{$dat.FromWeb}})</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">{{$dat.Summary}}</p>
+            </div>
+        </div>
+        {{end}}
+    </section>
+
+    <!--        <section id="comic-sec">
+<div class="comic-in bordered"> -->
+    <!--  Now don't YOU feel informed? 🤭 -->
+    <!-- <p>Well aren't you a _ravenous_ news consumer! Treat yourself to a Boomer comic.</p>
                 <img id="comic" decoding="async" src="https://filesrv.cagle.com/283181/750/283181.png">
                 <p>What delicious nuanced political commentary! Come back in a few hours for another batch of summaries 💯</p>
             </div>
-        </section>
-        <section id="padding" style="padding: 2rem;"></section>
+</section> -->
+    <section id="padding" style="padding: 2rem;"></section>
 
-        <div id="overlay" style="justify-content: center; align-items: center;">
-            <button id="overlay-prev" onclick="arrowClick(event, -1)">
-                <i class="arrow prev"></i>
-            </button>
-            <div id="inneroverlay" class="bordered">
-                <h2 id="overlaytitle" class="eventBlocker bordered"></h2>
-                <div id="overlaybody">
-                    <div style=" display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div id="overlay" style="justify-content: center; align-items: center;">
+        <button id="overlay-prev" onclick="arrowClick(event, -1)">
+            <i class="arrow prev"></i>
+        </button>
+        <div id="inneroverlay" class="bordered">
+            <h2 id="overlaytitle" class="eventBlocker bordered"></h2>
+            <div id="overlaybody">
+                <div style=" display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
-                        <img class="entryPhoto photoBordered" src="">
-                        <h3 class="published eventBlocker" style="text-align: center;"><time class="date" datetime=""></time></h3>
-                        <a class="eventBlocker" style="justify-content: center; text-align: center;" target='_blank' rel="noopener noreferrer"></a>
-                    </div>
-                    <p id="overlaysummary" class="eventBlocker"></p>
-                    <!-- <div class="entrybody">
+                    <img class="entryPhoto photoBordered" src="">
+                    <h3 class="published eventBlocker" style="text-align: center;"><time class="date"
+                            datetime=""></time></h3>
+                    <a class="eventBlocker" style="justify-content: center; text-align: center;" target='_blank'
+                        rel="noopener noreferrer"></a>
+                </div>
+                <p id="overlaysummary" class="eventBlocker"></p>
+                <!-- <div class="entrybody">
                         <div>
                            
                         </div>
                     </div> -->
-                </div>
             </div>
+        </div>
 
-            <button id="overlay-next" onclick="arrowClick(event, 1)">
-                <i class="arrow next"></i>
-            </button>
-        </div>
-        
-        <div id="summarytoggle" class="bordered" style="padding: 0.25rem; text-align: center; width: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--secondback); position: fixed; bottom: 0.5rem; left: 0.5rem;">
-            <p>Summaries ('s')</p>
-            <label class="switch">
-                <input id="checkbox" type="checkbox" onclick="toggleCondensed()">
-                <span class="slider"></span>
-            </label>
-        </div>
-        <div class=".header-footer">
-            <!-- <p> Come back in a few hours </p> -->
-        </div>
-    </body>
+        <button id="overlay-next" onclick="arrowClick(event, 1)">
+            <i class="arrow next"></i>
+        </button>
+    </div>
+
+    <div id="summarytoggle" class="bordered"
+        style="padding: 0.25rem; text-align: center; width: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--secondback); position: fixed; bottom: 0.5rem; left: 0.5rem;">
+        <p>Summaries ('s')</p>
+        <label class="switch">
+            <input id="checkbox" type="checkbox" onclick="toggleCondensed()">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class=".header-footer">
+        <!-- <p> Come back in a few hours </p> -->
+    </div>
+</body>
+
 </html>
