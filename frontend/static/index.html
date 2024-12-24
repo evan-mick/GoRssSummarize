@@ -1,714 +1,849 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Website</title>
-    </head>
-    <style>
-        :root {
-            --mainback: #ffffff;
-            --secondback: #ffffff;
-            --textmain:  #434343;
-             
-             
-             
-            --maincol: #8d3900; 
-            --outlinesize: 0.15rem; 
-        }
 
-        * {
-            padding: 0;
-            margin: 0; 
-        }
-            
-        #comic {
-            max-width: 25rem;
-            width: 100%;
-             
-        }
-
-        #comic-sec {
-            background-color: var(--mainback);
-            justify-content: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 4rem;
-            margin-bottom: 2rem;
-        }
-
-        .comic-in {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 40rem;
-            background-color: var(--secondback);
-            padding: 1rem;
-            color: var(--textmain);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        }
-
-        body {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            color: var(--textmain);
-            background-color: var(--mainback);
-        }
-
-        .header-footer {
-            background-color: var(--secondback);
-            padding-top: 1rem;
-            min-width: 100%;
-            box-sizing:border-box;
-            padding-right: 2rem;
-            padding-left: 2rem;
-            padding-bottom: 2rem;
-
-        }
-
-
+<head>
+    <title>Website</title>
+</head>
+<style>
+    :root {
+        --mainback: #ffffff;
+        --secondback: #ffffff;
+        --textmain: #434343;
          
-        #main-list {
-            background-color: var(--mainback);
-             
-            margin: 1rem;
-            display: flex;
-             
-            justify-content: center;
-            
-            flex-wrap: wrap;
-             
-        }
+         
+         
+        --maincol: #8d3900;
+        --outlinesize: 0.15rem;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #comic {
+        max-width: 25rem;
+        width: 100%;
+         
+    }
+
+    #comic-sec {
+        background-color: var(--mainback);
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    .comic-in {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 40rem;
+        background-color: var(--secondback);
+        padding: 1rem;
+        color: var(--textmain);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    body {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: var(--textmain);
+        background-color: var(--mainback);
+    }
+
+    .header-footer {
+        background-color: var(--secondback);
+        padding-top: 1rem;
+        min-width: 100%;
+        box-sizing: border-box;
+        padding-right: 2rem;
+        padding-left: 2rem;
+        padding-bottom: 2rem;
+
+    }
 
 
+     
+    #main-list {
+        background-color: var(--mainback);
+         
+        margin: 1rem;
+        display: flex;
+         
+        justify-content: center;
+
+        flex-wrap: wrap;
+         
+    }
+
+
+     
+
+    .bordered {
+         
+        border-bottom: var(--outlinesize) solid var(--maincol);
+    }
+
+    .photoBordered {
+         
+        border-bottom: var(--outlinesize) solid var(--textmain);
+    }
+
+    .entry {
+        background-color: var(--secondback);
+
+        border-bottom: var(--outlinesize) solid var(--maincol);
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: first baseline;
+        padding: 2rem;
+        max-width: 22rem;
+         
          
 
-        .bordered {
-             
-            border-bottom: var(--outlinesize) solid var(--maincol);
-        }
+        transition: transform 0.05s;
+        color: var(--textmain);
+        text-align: left;
+        font-size: large;
 
-        .photoBordered {
-             
-            border-bottom: var(--outlinesize) solid var(--textmain);
-        }
-
-        .entry {
-            background-color: var(--secondback);
-
-            border-bottom: var(--outlinesize) solid var(--maincol);
-            align-items: flex-start;
-            display: flex;
-            flex-direction: column;
-            justify-content: first baseline;
-            padding: 2rem;
-            max-width: 22rem; 
-             
-             
-
-            transition: transform 0.05s;
-            color: var(--textmain);
-            text-align: left;
-            font-size: large;
-
-            cursor: pointer;
-             
-             
-        }
-
+        cursor: pointer;
          
-             
          
-        .articleTitle {
-            font-weight: bolder;
-            font-size: large;
-            color: var(--textmain);
-            cursor: default;
-        }
+    }
 
-        :hover.entry .articleTitle {
-            color: var(--maincol)
-        }
+     
+     
+     
+    .articleTitle {
+        font-weight: bolder;
+        font-size: large;
+        color: var(--textmain);
+        cursor: default;
+    }
+
+    :hover.entry .articleTitle {
+        color: var(--maincol)
+    }
 
 
-        .entrybody {
+    .entrybody {
 
-            margin-top: 2rem;
-            border-top: var(--outlinesize) solid var(--textmain);
-            align-items: flex-start;
-            display: flex;
-            flex-direction: column;
-             
-            width: 100%;
-            height: 100%;
-            font-size: small;
-            cursor: default;
-        }
+        margin-top: 2rem;
+        border-top: var(--outlinesize) solid var(--textmain);
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+         
+        width: 100%;
+        height: 100%;
+        font-size: small;
+        cursor: default;
+    }
 
-        .entryPhoto {
-            min-width: 2rem;
-            width: 40rem;
-            max-width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            margin: 0.5rem;
-            object-position: 50% 0;
-            cursor: pointer;
-             
-        }
+    .entryPhoto {
+        min-width: 2rem;
+        width: 40rem;
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+        margin: 0.5rem;
+        object-position: 50% 0;
+        cursor: pointer;
+         
+    }
 
-        
 
-        .eventBlocker {
-            cursor: default;
-        }
 
-        .summary {
-            color: var(--textmain);
-            padding-top: 1rem;
-            font-size: small;
-            overflow-y: scroll;
-            cursor: default;
-        }
+    .eventBlocker {
+        cursor: default;
+    }
 
+    .summary {
+        color: var(--textmain);
+        padding-top: 1rem;
+        font-size: small;
+        overflow-y: scroll;
+        cursor: default;
+    }
+
+    #title {
+        color: var(--maincol);
+        font-size: 3rem;
+    }
+
+    h2 {
+         
+        color: var(--textmain);
+        font-size: large;
+    }
+
+    h3 {
+        font-size: medium;
+    }
+
+    .entry-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+    }
+
+    @media screen and (min-width: 600px) {
         #title {
-            color: var(--maincol);
-            font-size: 3rem;
+            font-size: 4rem;
         }
 
         h2 {
-             
-            color: var(--textmain);
+            font-size: larger;
+        }
+
+        h3 {
             font-size: large;
         }
-        h3 {
-            font-size: medium;
+
+        .header-footer {
+            padding-left: 4rem;
+            padding-right: 4rem;
+        }
+
+        .entry {
+            max-width: 12rem;
         }
 
         .entry-top {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: start;
-        }
-
-        @media screen and (min-width: 600px) {
-            #title {
-                font-size: 4rem;
-            }
-            h2 {
-                font-size: larger;
-            }
-            h3 {
-                font-size: large;
-            }
-            .header-footer {
-                padding-left: 4rem;
-                padding-right: 4rem;
-            }
-            .entry {
-                max-width: 12rem;
-            }
-            .entry-top {
-                flex-direction: column;
-            }
-        }
-
-        
-
-        @media screen and (min-width: 900px) {
-            .entry {
-                max-width: 20rem;
-            }
-            .entrybody {
-                font-size: large;
-            }
-
-            .articleTitle {
-                font-size: larger;
-            }
-            .summary {
-                font-size: large;
-            }
-            #title {
-                font-size: 5rem;
-            }
-        }
-
-        @media screen and (min-width: 1100px) {
-            .entry {
-                max-width: 25rem;
-            }
-            #title {
-                font-size: 6rem;
-            }
-
-            h2 {
-                font-size: x-large;
-            }
-            h3 {
-                font-size: larger;
-            }
-        }
-
-        .hidden {
-            display: none;
-        }
-
-       
-
-        .published {
-            color: var(--textmain); 
-            padding-top: 1rem;
-        }
-        
-        .centered {
-            margin: auto;
-            display: flex;
             flex-direction: column;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
-        } 
-        
+        }
+    }
 
-        #overlay {
-            position: fixed;  
-            display: none;  
-            width: 100%;  
-            height: 100%;  
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0,0,0,0.7);  
-            z-index: 2;  
-            cursor: pointer;  
-            gap: 1rem;
+
+
+    @media screen and (min-width: 900px) {
+        .entry {
+            max-width: 20rem;
+        }
+
+        .entrybody {
+            font-size: large;
+        }
+
+        .articleTitle {
+            font-size: larger;
+        }
+
+        .summary {
+            font-size: large;
+        }
+
+        #title {
+            font-size: 5rem;
+        }
+    }
+
+    @media screen and (min-width: 1100px) {
+        .entry {
+            max-width: 25rem;
+        }
+
+        #title {
+            font-size: 6rem;
+        }
+
+        h2 {
+            font-size: x-large;
+        }
+
+        h3 {
+            font-size: larger;
+        }
+    }
+
+    .hidden {
+        display: none;
+    }
+
+
+
+    .published {
+        color: var(--textmain);
+        padding-top: 1rem;
+    }
+
+    .centered {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+
+
+    #overlay {
+        position: fixed;
+         
+        display: none;
+         
+        width: 100%;
+         
+        height: 100%;
+         
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+         
+        z-index: 2;
+         
+        cursor: pointer;
+         
+        gap: 1rem;
+    }
+
+    #inneroverlay {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        justify-content: center;
+        align-items: center;
+        max-width: 60%;
+         
+        min-width: 20rem;
+    }
+
+    #overlaysummary {
+        color: var(--textmain);
+        padding: 0.2rem;
+        font-size: medium;
+        overflow: scroll;
+        text-overflow: ellipsis;
+        display: block;
+        line-height: 1.2em;
+         
+        max-height: 18em;
+         
+    }
+
+    #overlaybody {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #overlaytitle {
+        font-weight: bolder;
+        font-size: x-large;
+        padding: 1rem;
+        color: var(--textmain);
+        align-self: center;
+    }
+
+
+    @media screen and (min-width: 1000px) {
+        #overlaysummary {
+            font-size: large;
+            padding: 0.5rem;
+        }
+    }
+
+    @media screen and (min-width: 1500px) {
+
+        #overlaytitle {
+            font-size: xx-large;
         }
 
         #inneroverlay {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            background-color: white; 
-            justify-content: center;
-            align-items: center;
-            max-width: 60%;
-             
-            min-width: 20rem;
-        }
-
-        #overlaysummary {
-            color: var(--textmain);
-            padding: 0.2rem;
-            font-size: medium;
-            overflow: scroll;
-            text-overflow: ellipsis;
-            display: block;
-            line-height: 1.2em;  
-            max-height: 18em;  
+            width: 80%;
+            height: 70%;
         }
 
         #overlaybody {
-            width: 100%;
-            height: 100%;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
         }
 
-        #overlaytitle {
-            font-weight: bolder;
+        #overlaysummary {
             font-size: x-large;
+            max-width: 35rem;
             padding: 1rem;
-            color: var(--textmain);
-            align-self: center;
+            padding-left: 1.5rem;
         }
+    }
 
 
-        @media screen and (min-width: 1000px) {
-            #overlaysummary {
-                font-size: large;
-                padding: 0.5rem;
-            }
-        }
+     
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
 
-        @media screen and (min-width: 1500px) {
+     
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 
-            #overlaytitle {
-                font-size: xx-large;
-            }
-            #inneroverlay {
-                width: 80%;
-                height: 70%;
-            }
-            #overlaybody {
-                display: flex;
-                flex-direction: row;
-            }
-            #overlaysummary {
-                font-size: x-large;
-                max-width: 35rem;
-                padding: 1rem;
-                padding-left: 1.5rem;
-            }
-        }
+     
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--textmain);
+        -webkit-transition: .15s;
+        transition: .15s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .15s;
+        transition: .15s;
+    }
+
+    input:checked+.slider {
+        background-color: var(--maincol);
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px var(--textmain);
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    .arrow {
+        margin: 50px 20px;
+        width: 75px;
+        height: 75px;
+        float: left;
+        background-color: var(--textmain);
+    }
+
+    .prev {
+        -webkit-transform: rotate(315deg);
+    }
+
+    .next {
+        -webkit-transform: rotate(135deg);
+    }
+
+    .arrow:hover {
+        background-color: #f4690d;
+    }
+
+    .arrow:after {
+        content: '';
+        width: 75px;
+        height: 75px;
+        background: white;
+        position: absolute;
+        left: 3px;
+        top: 3px;
+    }
 
 
+    button {
+        background-color: white;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
          
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-
          
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+    }
+</style>
 
-         
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--textmain);
-            -webkit-transition: .15s;
-            transition: .15s;
-        }
+<script>
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .15s;
-            transition: .15s;
-        }
+    let condensed = false;
+    let overlayIsOn = false;
+    var overlay;
+    var entries;
+    let selectedEntry = 0;
 
-        input:checked + .slider {
-            background-color: var(--maincol);
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 1px var(--textmain);
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-       
-        .arrow { 
-            margin: 50px 20px;
-            width: 75px;
-            height: 75px; 
-            float: left;
-            background-color: var(--textmain);
-        }
-        .prev { 
-            -webkit-transform: rotate(315deg); 
-        }
-        .next {
-            -webkit-transform: rotate(135deg);
-        }
-        .arrow:hover {
-            background-color: #f4690d;
-        }
-
-        .arrow:after {
-            content: '';
-            width: 75px;
-            height: 75px;
-            background: white;
-            position: absolute; 
-            left: 3px;
-            top: 3px;
-        }
-
-
-        button {
-            background-color: white;
-            color: inherit;
-            border: none;
-            padding: 0;
-            font: inherit;
-             
-             
-        }
-
-
+    window.onload = () => {
         
+        var dateElements = document.getElementsByClassName("date");
+        Array.from(dateElements).forEach(element => {
+            const date = new Date(element.textContent)
+            const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+            element.textContent = formattedDate;
+        });
 
-
-    </style>
-
-    <script>
-
-        let condensed = false; 
-        let overlayIsOn = false; 
-        var overlay; 
-        var entries; 
-        let selectedEntry = 0; 
-
-        window.onload = () => {
-            
-            var dateElements = document.getElementsByClassName("date");
-            Array.from(dateElements).forEach(element => {
-                const date = new Date(element.textContent)
-                const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-                element.textContent = formattedDate;
-            });
-
-            let check = document.getElementById("checkbox");
-            let overlay_prev = document.getElementById("overlay-prev");
-            let overlay_next = document.getElementById("overlay-next");
-            document.addEventListener("keydown", (e) => {
-                if (event.defaultPrevented) {
-                    return; 
-                }
-                if (e.key !== undefined) {
-                    if (overlayIsOn) {
-                        
-                        if ([ "d", "ArrowRight", "l" ].includes(e.key)) {
-                            overlay_next.click();
-                        } else if ([ "a", "ArrowLeft", "h" ].includes(e.key)) {
-                            overlay_prev.click();
-                        } else if (["Alt", "j", "s"].includes(e.key)) {
-                            overlayOff();
-                        }
-                    } else {
-                        
-                        if (["w", "k", "Alt"].includes(e.key)) {
-                            overlayOn(selectedEntry);
-                        } else if (e.key === "s") {
-                            check.click();
-                        }
-                    }
-
-                    return
-                }                 
-            });
-
-            overlay = document.getElementById("overlay");
-            entries = document.getElementById("main-list").childElementCount;
-            console.log("entries " + entries);
-
-            overlay.addEventListener("click", (e) => {
-                if (e.defaultPrevented) {
-                    return; 
-                }
-                overlayOff();
-            })
-
-            arrows = document.getElementsByClassName("arrow");
-
-
-            Array.from(document.getElementsByClassName("eventBlocker")).forEach(element => {
-                element.addEventListener("click", (event) => {
-                    event.stopPropagation();
-                    
-                })
-            });
-            
-        };
-
-
-        function arrowClick(event, num) {
-            event.preventDefault();
-            let newNum = Math.max(Math.min(entries - 1, num + selectedEntry), 0); 
-            if (newNum === selectedEntry) {
+        let check = document.getElementById("checkbox");
+        let overlay_prev = document.getElementById("overlay-prev");
+        let overlay_next = document.getElementById("overlay-next");
+        document.addEventListener("keydown", (e) => {
+            if (event.defaultPrevented) {
                 return; 
             }
-            overlayOn(newNum);
-        }
-
-        function testPrint(inDat) {
-            console.log(inDat)
-        }
-
-        function overlayOn(inNum) {
-            overlay.style.display = "flex";
-
-            var ele = document.getElementById("entry_" + inNum);
-            
-            var dat = {
-                summary: ele.querySelector(".summary").textContent,
-                title: ele.querySelector(".articleTitle").textContent,
-                photo: ele.querySelector(".entryPhoto").src,
-                published: ele.querySelector(".date").textContent,
-                url: ele.querySelector("a").href,
-                urlTxt: ele.querySelector("a").textContent,
-            }
-            overlay.querySelector("#overlaysummary").textContent = dat.summary;
-            overlay.querySelector("#overlaytitle").textContent = dat.title;
-            overlay.querySelector(".entryPhoto").src = dat.photo;
-            overlay.querySelector(".date").textContent = dat.published;
-            overlay.querySelector("a").href = dat.url;
-            overlay.querySelector("a").textContent = dat.urlTxt;
-
-            selectedEntry = inNum;
-            overlayIsOn = true; 
-        }
-
-        function overlayOff() {
-            ele = document.getElementById("overlay");
-            ele.style.display = "none";
-            overlayIsOn = false; 
-        }
-        
-        function toggleCondensed() {
-            hideables = document.getElementsByClassName("hideable");
-
-            condensed = !condensed;
-            Array.from(hideables).forEach(h => {
-                h.classList.toggle("hidden");
-            });
-
-        }
-
-    </script>
-    <body>
-        <div id="header" class="header-footer bordered">
-            <h1 id="title">The HeadLiner</h1>
-            <h2>Line your head with news summaries. Its like skimming the headlines, but better!</h2>
-            <br>
-
-            <p>Click button at <b>left corner</b> for summaries (or 's')</p>
-            <br>
-            <p>Click on photo to <b>focus</b> (or 'Alt'), while focused, click arrow keys to <b>change summaries</b></p>
-            
-            
-            <br>
-            <p><b>Disclaimer:</b> AI can be so silly! Please use the original sources for references, as <i> sometimes </i> the summarizer hallucinates, bless 🙏.</p>
-            
-            
-        </div>
-        <section id="main-list">
-			
-			<div id="entry_0" class="entry bordered" ontouchend="overlayOn( 0 )" onclick="overlayOn( 0 )">
-                <div class="entry-top">
-                    <h2 class="articleTitle eventBlocker">A new rule in Georgia could allow some election boards to refuse to certify results</h2>
-                    <img rel="preload" class="entryPhoto photoBordered" src="">
-                </div>
-                <div class="centered eventBlocker">
-                    <h3 class="published"><time class="date" datetime="2024-08-08 17:18:29 -0400 -0400">2024-08-08 17:18:29 -0400 -0400</time></h3>
-                    <a href="https://www.npr.org/2024/08/08/nx-s1-5065909/a-new-rule-in-georgia-could-allow-some-election-boards-to-refuse-to-certify-results" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
-                </div>
-                <div class="entrybody eventBlocker hideable hidden">
-                    <p class="summary">Georgias new election law grants local election boards the authority to reject election results, escalating concerns for the upcoming November election. The laws passage has sparked criticism, with opponents fearing it could lead to partisan interference in the certification process. The rule allows boards to refuse to certify results based on &#34;a lack of confidence&#34; in the outcome or &#34;substantial doubt&#34; about the accuracy of the vote. This move has raised concerns that local boards could leverage their new power to overturn results they deem unfavorable.</p>
-                </div>
-            </div>
-			
-			<div id="entry_1" class="entry bordered" ontouchend="overlayOn( 1 )" onclick="overlayOn( 1 )">
-                <div class="entry-top">
-                    <h2 class="articleTitle eventBlocker">After two months, astronauts stranded at the ISS may have a way back home</h2>
-                    <img rel="preload" class="entryPhoto photoBordered" src="">
-                </div>
-                <div class="centered eventBlocker">
-                    <h3 class="published"><time class="date" datetime="2024-08-08 17:58:35 -0400 -0400">2024-08-08 17:58:35 -0400 -0400</time></h3>
-                    <a href="https://www.npr.org/2024/08/08/nx-s1-5066993/after-two-months-astronauts-stranded-at-the-iss-may-have-a-way-back-home" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
-                </div>
-                <div class="entrybody eventBlocker hideable hidden">
-                    <p class="summary">Astronauts Wilmore and Williams planned 8-day mission to the International Space Station has extended to two months due to ongoing issues with their Boeing Starliner vehicle. NASA is considering a contingency plan to return them in a SpaceX capsule. The Starliner has faced thruster and other problems that remain unresolved. NASAs decision will depend on the resolution of these issues and the availability of the SpaceX capsule.</p>
-                </div>
-            </div>
-			
-			<div id="entry_2" class="entry bordered" ontouchend="overlayOn( 2 )" onclick="overlayOn( 2 )">
-                <div class="entry-top">
-                    <h2 class="articleTitle eventBlocker">New CDC guidance recommends doctors address IUD insertion pain for patients</h2>
-                    <img rel="preload" class="entryPhoto photoBordered" src="">
-                </div>
-                <div class="centered eventBlocker">
-                    <h3 class="published"><time class="date" datetime="2024-08-08 17:32:41 -0400 -0400">2024-08-08 17:32:41 -0400 -0400</time></h3>
-                    <a href="https://www.npr.org/2024/08/08/nx-s1-5068298/new-cdc-guidance-recommends-doctors-address-iud-insertion-pain-for-patients" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
-                </div>
-                <div class="entrybody eventBlocker hideable hidden">
-                    <p class="summary">The American College of Obstetricians and Gynecologists (ACOG) and the Society for Maternal-Fetal Medicine (SMFM) have collaborated to issue new federal guidance addressing IUD insertion pain management. Historically, IUD insertion has been associated with significant pain for some individuals. The guidelines emphasize the importance of thorough patient counseling before insertion, including discussions about potential discomfort and pain management options. The guidance advises doctors to consider local anesthesia, oral pain relievers, and procedural techniques to minimize pain during IUD insertion.</p>
-                </div>
-            </div>
-			
-			<div id="entry_3" class="entry bordered" ontouchend="overlayOn( 3 )" onclick="overlayOn( 3 )">
-                <div class="entry-top">
-                    <h2 class="articleTitle eventBlocker">The significance of Trump&#39;s repeated mispronunciation of &#39;Kamala&#39;</h2>
-                    <img rel="preload" class="entryPhoto photoBordered" src="">
-                </div>
-                <div class="centered eventBlocker">
-                    <h3 class="published"><time class="date" datetime="2024-08-08 17:30:00 -0400 -0400">2024-08-08 17:30:00 -0400 -0400</time></h3>
-                    <a href="https://www.npr.org/2024/08/08/nx-s1-5050768/the-significance-of-trumps-repeated-mispronunciation-of-kamala" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
-                </div>
-                <div class="entrybody eventBlocker hideable hidden">
-                    <p class="summary">As Kamala Harris gains prominence in politics, the pronunciation of her name has become a topic of discussion. Her opponents have intentionally mispronounced her name on the campaign trail, sparking debate about cultural insensitivity and the importance of respect for different names and backgrounds. The correct pronunciation of her name is &#34;KAH-mah-lah,&#34; a testament to her Indian heritage and identity. This issue has highlighted the need for greater sensitivity and understanding in political discourse, where the respect for diverse cultures and backgrounds is paramount.</p>
-                </div>
-            </div>
-			
-			<div id="entry_4" class="entry bordered" ontouchend="overlayOn( 4 )" onclick="overlayOn( 4 )">
-                <div class="entry-top">
-                    <h2 class="articleTitle eventBlocker">Here&#39;s what happened at the Olympic track and field events tonight</h2>
-                    <img rel="preload" class="entryPhoto photoBordered" src="">
-                </div>
-                <div class="centered eventBlocker">
-                    <h3 class="published"><time class="date" datetime="2024-08-08 17:55:15 -0400 -0400">2024-08-08 17:55:15 -0400 -0400</time></h3>
-                    <a href="https://www.npr.org/2024/08/08/nx-s1-5068065/heres-what-happened-at-the-olympic-track-and-field-events-tonight" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
-                </div>
-                <div class="entrybody eventBlocker hideable hidden">
-                    <p class="summary">At the Paris Olympics, the United States track and field team is poised to potentially secure multiple gold medals. The teams strength lies in events such as the 100-meter dash, where Trayvon Bromell and Fred Kerley are contenders. The 400-meter hurdles will feature Rai Benjamin, while Sydney McLaughlin and Dalilah Muhammad will battle in the 400-meter hurdles. Additionally, the United States is considered a strong contender in the 4x100-meter and 4x400-meter relays.</p>
-                </div>
-            </div>
-			
-		</section>
-        
-        <section id="comic-sec">
-            <div class="comic-in bordered">
-                
-                <p>Well aren't you a _ravenous_ news consumer! Treat yourself to a Boomer comic.</p>
-                <img id="comic" decoding="async" src="https://filesrv.cagle.com/283181/750/283181.png">
-                <p>What delicious nuanced political commentary! Come back in a few hours for another batch of summaries 💯</p>
-            </div>
-        </section>
-        <section id="padding" style="padding: 2rem;"></section>
-
-        <div id="overlay" style="justify-content: center; align-items: center;">
-            <button id="overlay-prev" onclick="arrowClick(event, -1)">
-                <i class="arrow prev"></i>
-            </button>
-            <div id="inneroverlay" class="bordered">
-                <h2 id="overlaytitle" class="eventBlocker bordered"></h2>
-                <div id="overlaybody">
-                    <div style=" display: flex; flex-direction: column; justify-content: center; align-items: center;">
-
-                        <img class="entryPhoto photoBordered" src="">
-                        <h3 class="published eventBlocker" style="text-align: center;"><time class="date" datetime=""></time></h3>
-                        <a class="eventBlocker" style="justify-content: center; text-align: center;" target='_blank' rel="noopener noreferrer"></a>
-                    </div>
-                    <p id="overlaysummary" class="eventBlocker"></p>
+            if (e.key !== undefined) {
+                if (overlayIsOn) {
                     
-                </div>
-            </div>
+                    if (["d", "ArrowRight", "l"].includes(e.key)) {
+                        overlay_next.click();
+                    } else if (["a", "ArrowLeft", "h"].includes(e.key)) {
+                        overlay_prev.click();
+                    } else if (["Alt", "j", "s"].includes(e.key)) {
+                        overlayOff();
+                    }
+                } else {
+                    
+                    if (["w", "k", "Alt"].includes(e.key)) {
+                        overlayOn(selectedEntry);
+                    } else if (e.key === "s") {
+                        check.click();
+                    }
+                }
 
-            <button id="overlay-next" onclick="arrowClick(event, 1)">
-                <i class="arrow next"></i>
-            </button>
+                return
+            }
+        });
+
+        overlay = document.getElementById("overlay");
+        entries = document.getElementById("main-list").childElementCount;
+        console.log("entries " + entries);
+
+        overlay.addEventListener("click", (e) => {
+            if (e.defaultPrevented) {
+                return; 
+            }
+            overlayOff();
+        })
+
+        arrows = document.getElementsByClassName("arrow");
+
+
+        Array.from(document.getElementsByClassName("eventBlocker")).forEach(element => {
+            element.addEventListener("click", (event) => {
+                event.stopPropagation();
+                
+            })
+        });
+
+    };
+
+
+    function arrowClick(event, num) {
+        event.preventDefault();
+        let newNum = Math.max(Math.min(entries - 1, num + selectedEntry), 0);
+        if (newNum === selectedEntry) {
+            return;
+        }
+        overlayOn(newNum);
+    }
+
+    function testPrint(inDat) {
+        console.log(inDat)
+    }
+
+    function overlayOn(inNum) {
+        overlay.style.display = "flex";
+
+        var ele = document.getElementById("entry_" + inNum);
+        
+        var dat = {
+            summary: ele.querySelector(".summary").textContent,
+            title: ele.querySelector(".articleTitle").textContent,
+            photo: ele.querySelector(".entryPhoto").src,
+            published: ele.querySelector(".date").textContent,
+            url: ele.querySelector("a").href,
+            urlTxt: ele.querySelector("a").textContent,
+        }
+        overlay.querySelector("#overlaysummary").textContent = dat.summary;
+        overlay.querySelector("#overlaytitle").textContent = dat.title;
+        overlay.querySelector(".entryPhoto").src = dat.photo;
+        overlay.querySelector(".date").textContent = dat.published;
+        overlay.querySelector("a").href = dat.url;
+        overlay.querySelector("a").textContent = dat.urlTxt;
+
+        selectedEntry = inNum;
+        overlayIsOn = true;
+    }
+
+    function overlayOff() {
+        ele = document.getElementById("overlay");
+        ele.style.display = "none";
+        overlayIsOn = false;
+    }
+
+    function toggleCondensed() {
+        hideables = document.getElementsByClassName("hideable");
+
+        condensed = !condensed;
+        Array.from(hideables).forEach(h => {
+            h.classList.toggle("hidden");
+        });
+
+    }
+
+</script>
+
+<body>
+    <div id="header" class="header-footer bordered">
+        <h1 id="title">The HeadLiner</h1>
+        <h2>Line your head with news summaries. Its like skimming the headlines, but better!</h2>
+        <br>
+
+        <p>Click button at <b>left corner</b> for summaries (or 's')</p>
+        <br>
+        <p>Click on photo to <b>focus</b> (or 'Alt'), while focused, click arrow keys to <b>change summaries</b></p>
+
+        
+        <br>
+        <p><b>Disclaimer:</b> AI can be so silly! Please use the original sources for references, as <i> sometimes </i>
+            the summarizer hallucinates, bless 🙏.</p>
+
+        
+    </div>
+    <section id="main-list">
+        
+        <div id="entry_0" class="entry bordered" ontouchend="overlayOn( 0 )"
+            onclick="overlayOn( 0 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">This year&#39;s &#39;October surprise&#39; may be no surprise at all</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://npr.brightspotcdn.com/dims3/default/strip/false/crop/7740x5205&#43;0&#43;0/resize/1100/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Ffc%2F98%2Fe5d8f46447738cd8dada07e40905%2Fgettyimages-2172455800.jpg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-13 06:00:00 -0400 -0400">2024-10-13 06:00:00 -0400 -0400</time>
+                </h3>
+                <a href="https://www.npr.org/2024/10/11/nx-s1-5150560/october-surprise-election-kamala-harris-donald-trump" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">The article explores the concept of the &#34;October surprise,&#34; a dramatic event that can potentially alter the outcome of a presidential campaign in the final weeks before Election Day. Despite the anticipation and media attention surrounding the phrase, few events have truly met its criteria in the past. Recent examples include the Democrat nomination shift to Vice President Harris and Hurricane Helenes devastation in the Southeast. However, the article notes that the proliferation of early voting and the increasing media fragmentation may make it more challenging for any single event to have a significant impact.</p>
+            </div>
         </div>
         
-        <div id="summarytoggle" class="bordered" style="padding: 0.25rem; text-align: center; width: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--secondback); position: fixed; bottom: 0.5rem; left: 0.5rem;">
-            <p>Summaries ('s')</p>
-            <label class="switch">
-                <input id="checkbox" type="checkbox" onclick="toggleCondensed()">
-                <span class="slider"></span>
-            </label>
+        <div id="entry_1" class="entry bordered" ontouchend="overlayOn( 1 )"
+            onclick="overlayOn( 1 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">Ukraine denounces Russia&#39;s reported execution of captured troops</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-13 12:24:48 &#43;0000 UTC">2024-10-13 12:24:48 &#43;0000 UTC</time>
+                </h3>
+                <a href="https://www.bbc.com/news/articles/c4g5y80dr5vo" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">Ukraines Human Rights Ombudsman Dmytro Lubinets has denounced the alleged execution of nine Ukrainian troops by Russian forces in the Kursk border region. Lubinets has appealed to the United Nations and the Red Cross to investigate, accusing Moscow of violating international war laws. The allegations stem from drone footage released by DeepState, which reportedly shows the dead soldiers stripped to their underwear and lying face down in Kursk. Kyiv has previously accused Russia of executing captured troops, which constitutes a war crime under the Geneva Convention.</p>
+            </div>
         </div>
-        <div class=".header-footer">
-            
+        
+        <div id="entry_2" class="entry bordered" ontouchend="overlayOn( 2 )"
+            onclick="overlayOn( 2 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">Ukrainian journalist, 27, who chronicled Russian occupation dies in prison</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-12 23:00:47 &#43;0000 UTC">2024-10-12 23:00:47 &#43;0000 UTC</time>
+                </h3>
+                <a href="https://www.bbc.com/news/articles/cy0g29w45p1o" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">Viktoriia Roshchyna, a 27-year-old Ukrainian journalist who went missing in August 2023, has been confirmed dead by Russian authorities after nine months. She was reportedly detained in an occupied area of Ukraine, but no reason was given for her arrest. Her body is set to be returned in a prisoner swap, with her death date recorded as September 19. Despite being threatened with detention, Roshchyna continued to report on life in occupied Ukraine, using her platform to expose collaborators and document life under siege.</p>
+            </div>
         </div>
-    </body>
+        
+        <div id="entry_3" class="entry bordered" ontouchend="overlayOn( 3 )"
+            onclick="overlayOn( 3 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">The stark divide between Harris and Trump on voting rights</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://npr.brightspotcdn.com/dims3/default/strip/false/crop/4969x3313&#43;0&#43;0/resize/1100/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F6b%2Ffe%2F941f8e8a403cac64f3b256666865%2Fgettyimages-2170596408.jpg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-13 05:00:00 -0400 -0400">2024-10-13 05:00:00 -0400 -0400</time>
+                </h3>
+                <a href="https://www.npr.org/2024/10/13/nx-s1-5150093/kamala-harris-voting-rights-trump" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">The upcoming presidential election in the U.S. features drastically contrasting stances on voting rights between Vice President Harris and former President Trump. Harris advocates for strengthening protections against racial discrimination and expanding voter access through legislation like the John Lewis Voting Rights Advancement Act and the Freedom to Vote Act. Conversely, Trump promotes restrictions such as requiring proof of citizenship and limiting voting to one day, measures that would disproportionately impact voters of color. The outcome of the election and the balance of power in Congress and the courts will determine the realization of these candidates voting rights policies.</p>
+            </div>
+        </div>
+        
+        <div id="entry_4" class="entry bordered" ontouchend="overlayOn( 4 )"
+            onclick="overlayOn( 4 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">Deep inside a Norwegian fjord, a dream of farming salmon sustainably</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://npr.brightspotcdn.com/dims3/default/strip/false/crop/4032x3024&#43;0&#43;0/resize/1100/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F7f%2F98%2Fdf497bf34381992a9e8401b6b701%2F178.jpeg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-13 10:51:50 -0400 -0400">2024-10-13 10:51:50 -0400 -0400</time>
+                </h3>
+                <a href="https://www.npr.org/2024/10/13/nx-s1-5090753/fishing-sustainability-environment-norway-salmon" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">The &#34;Salmon Eye,&#34; the worlds largest floating art installation, serves as an education center about environmental threats posed by salmon farming in Norways Hardangersfjord. Despite being the worlds largest exporter of farmed salmon, Norways industry faces criticism for its impact on wild salmon populations, particularly due to escaped farmed salmon interbreeding with wild stocks and the proliferation of sea lice. However, Sondre Eide, CEO of the salmon farming company Eide Fjordbruck, has developed a closed pen salmon farming system that eliminates escapes, sea lice infestation, and nitrogen pollution, representing a potential solution to the industrys sustainability challenges.</p>
+            </div>
+        </div>
+        
+        <div id="entry_5" class="entry bordered" ontouchend="overlayOn( 5 )"
+            onclick="overlayOn( 5 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">&#39;I&#39;m too tired to chew food but still can&#39;t get care for my ME&#39;</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-13 01:45:19 &#43;0000 UTC">2024-10-13 01:45:19 &#43;0000 UTC</time>
+                </h3>
+                <a href="https://www.bbc.com/news/articles/cn03pxk1g4xo" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">The death of Maeve Boothby-ONeill, a 27-year-old severely ill with myalgic encephalomyelitis (ME), has exposed the lack of specialized care for people with severe ME in England. The coroner in her inquest concluded that care for such individuals is &#34;non-existent.&#34; Like Maeve, Nicole, who has had severe ME for six years, faces limited options and inadequate support due to misconceptions about the condition. Charities estimate that 240,000 people in the UK have ME, and those with severe cases often experience debilitating symptoms such as pain, hypersensitivity, weakness, and difficulty speaking and swallowing. Despite the urgent need for research and improved treatment, funding and training for ME remain limited, leaving many patients feeling forgotten and neglected.</p>
+            </div>
+        </div>
+        
+        <div id="entry_6" class="entry bordered" ontouchend="overlayOn( 6 )"
+            onclick="overlayOn( 6 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">Budget rule change could mean fewer tax rises</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-13 10:59:19 &#43;0000 UTC">2024-10-13 10:59:19 &#43;0000 UTC</time>
+                </h3>
+                <a href="https://www.bbc.com/news/articles/c981me1qn43o" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">Chancellor Rachel Reeves announced plans to address a £22 billion budget deficit while avoiding significant tax hikes. To achieve this, Reeves is considering adjusting the governments debt definition by potentially altering the treatment of Bank of England operations or adopting broader financial measures. However, these changes may face scrutiny from the Conservative party. Despite the use of &#34;Budget rules hacks,&#34; The Institute for Fiscal Studies estimates that tax increases of up to £25 billion are still likely. The government aims to limit the scale of investment spending and fulfill manifesto priorities, but the exact distribution of gains and losses remains uncertain until the October 30th Budget announcement.</p>
+            </div>
+        </div>
+        
+        <div id="entry_7" class="entry bordered" ontouchend="overlayOn( 7 )"
+            onclick="overlayOn( 7 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">Walt Whitman, gay love and a posthumous novel</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://npr.brightspotcdn.com/dims3/default/strip/false/crop/938x1500&#43;0&#43;0/resize/800/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F3f%2F27%2F7a973446403da42240f78f49acb8%2F81vuxb6lg7l-sl1500.jpg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-13 08:00:00 -0400 -0400">2024-10-13 08:00:00 -0400 -0400</time>
+                </h3>
+                <a href="https://www.npr.org/2024/10/12/nx-s1-4916639/walt-whitman-gay-love-and-a-posthumous-novel" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">&#34;Song of Myself: A Novel&#34; by Arnie Kantrowitz, posthumously published three years after his death, features Daniel Dell Blake, a character whose journey mirrors the history of gay life in the 20th century. The novel is a product of its time but conveys Kantrowitzs empathy, humor, and fierce defense of marginalized people. Kantrowitzs partner, Dr. Larry Mass, believes that despite its initial rejection, the novels timeless words will resonate with readers who find themselves in Kantrowitzs message. The books publication is a testament to Kantrowitzs legacy as a scholar of Walt Whitman and a gay rights pioneer.</p>
+            </div>
+        </div>
+        
+        <div id="entry_8" class="entry bordered" ontouchend="overlayOn( 8 )"
+            onclick="overlayOn( 8 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">BBC&#39;s James Cook on Alex Salmond&#39;s fight for independence</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-13 11:33:01 &#43;0000 UTC">2024-10-13 11:33:01 &#43;0000 UTC</time>
+                </h3>
+                <a href="https://www.bbc.com/news/articles/c33vyzezz4ro" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">Following the decisive &#34;No&#34; vote in the 2014 Scottish independence referendum, Alex Salmond, the charismatic leader of the Scottish National Party (SNP), announced his resignation as First Minister and party leader. Salmond, known for his pugnacious confidence, expressed disappointment but emphasized that the campaign for independence would continue.
+
+Despite setbacks, such as the limited success of the pro-independence Alba Party and questionable judgment on international affairs, Salmonds modernization and professionalization of the SNP played a pivotal role in advancing the cause of independence. His ability to connect with voters through his skillful use of language and historical references helped make independence a mainstream aspiration for a significant portion of the Scottish electorate.
+
+However, Salmonds legacy is also marked by controversy, including allegations of inappropriate behavior towards women and his later affiliation with the Kremlin-backed RT broadcaster. The SNP, once a united front, is now fractured, with ongoing fallout from the internal battles surrounding Salmonds conduct and judgment.
+
+Despite these challenges, Salmonds impact on Scottish politics is undeniable. His dedication to the independence movement and his ability to inspire a grassroots movement have left a lasting imprint on the Scottish political landscape, with the future of independence remaining an ongoing debate.</p>
+            </div>
+        </div>
+        
+        <div id="entry_9" class="entry bordered" ontouchend="overlayOn( 9 )"
+            onclick="overlayOn( 9 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">&#39;There is no home:&#39; Floridians find helping hands after floods</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://npr.brightspotcdn.com/dims3/default/strip/false/crop/3000x2001&#43;0&#43;0/resize/1100/quality/50/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F75%2F4e%2F3613c4734cb4bfc614d2726268e8%2Fdsc5484.jpg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-13 05:00:00 -0400 -0400">2024-10-13 05:00:00 -0400 -0400</time>
+                </h3>
+                <a href="https://www.npr.org/2024/10/13/nx-s1-5150542/hillsborough-county-floods-florida-aid" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">Hurricane Milton caused severe flooding in Valrico, Florida, displacing dozens of residents who sought refuge in the parking lot of Creekside Church of Christ. The church provided food and drinks to the displaced individuals, as their homes remained inundated with water from the nearby Alafia River, which reached a major flood stage. Emergency crews rescued over 500 people and 100 pets in the flooding aftermath. Despite the damage and uncertainty, residents are relying on community support and prayer as they navigate the challenges ahead.</p>
+            </div>
+        </div>
+        
+        <div id="entry_10" class="entry bordered" ontouchend="overlayOn( 10 )"
+            onclick="overlayOn( 10 )">
+            <div class="entry-top">
+                <h2 class="articleTitle eventBlocker">Harris puts pressure on Trump over medical records</h2>
+                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
+            </div>
+            <div class="centered eventBlocker">
+                <h3 class="published"><time class="date" datetime="2024-10-13 00:32:46 &#43;0000 UTC">2024-10-13 00:32:46 &#43;0000 UTC</time>
+                </h3>
+                <a href="https://www.bbc.com/news/articles/cm28r8md15do" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
+            </div>
+            <div class="entrybody eventBlocker hideable hidden">
+                <p class="summary">Kamala Harris has released medical records stating she is in &#34;excellent health&#34; and fit for the presidency, prompting her to criticize Donald Trumps lack of transparency for not releasing his own records. Trumps team responded by citing his doctors statement that he is in &#34;perfect and excellent health&#34; but did not provide any medical records. Harriss records indicate she has a healthy lifestyle but a family history of colon cancer and allergies. The release of Harriss records has sparked a back-and-forth between the candidates, with Harris questioning Trumps mental acuity and Trumps team defending his health and fitness for office.</p>
+            </div>
+        </div>
+        
+    </section>
+
+    
+    
+    
+    <section id="padding" style="padding: 2rem;"></section>
+
+    <div id="overlay" style="justify-content: center; align-items: center;">
+        <button id="overlay-prev" onclick="arrowClick(event, -1)">
+            <i class="arrow prev"></i>
+        </button>
+        <div id="inneroverlay" class="bordered">
+            <h2 id="overlaytitle" class="eventBlocker bordered"></h2>
+            <div id="overlaybody">
+                <div style=" display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+                    <img class="entryPhoto photoBordered" src="">
+                    <h3 class="published eventBlocker" style="text-align: center;"><time class="date"
+                            datetime=""></time></h3>
+                    <a class="eventBlocker" style="justify-content: center; text-align: center;" target='_blank'
+                        rel="noopener noreferrer"></a>
+                </div>
+                <p id="overlaysummary" class="eventBlocker"></p>
+                
+            </div>
+        </div>
+
+        <button id="overlay-next" onclick="arrowClick(event, 1)">
+            <i class="arrow next"></i>
+        </button>
+    </div>
+
+    <div id="summarytoggle" class="bordered"
+        style="padding: 0.25rem; text-align: center; width: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--secondback); position: fixed; bottom: 0.5rem; left: 0.5rem;">
+        <p>Summaries ('s')</p>
+        <label class="switch">
+            <input id="checkbox" type="checkbox" onclick="toggleCondensed()">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class=".header-footer">
+        
+    </div>
+</body>
+
 </html>
