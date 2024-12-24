@@ -1,1 +1,1 @@
-docker build --tag rsssummarize .
+docker build --tag evanmick/headliner:latest .
