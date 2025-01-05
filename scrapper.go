@@ -128,7 +128,7 @@ var Reuters = Website{RSSLink: "https://www.reutersagency.com/feed/?best-sectors
 	c := getDefaultCollector()
 
 	var ret ScrapeReturn
-	ret.photoURL = "https://commons.wikimedia.org/w/index.php?curid=149082496"
+	ret.photoUrl = "https://commons.wikimedia.org/w/index.php?curid=149082496"
 
 	c.OnHTML(".article-body__content__17Yit", func(e *colly.HTMLElement) {
 		ret.allText = e.ChildText("div")
