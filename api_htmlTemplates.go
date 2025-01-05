@@ -13,8 +13,9 @@ const templateOutput = `./frontend/static/`
 //../frontend/static/`
 
 type htmlDat struct {
-	Title   string
-	Entries []SummaryEntry
+	Title           string
+	Entries         []SummaryEntry
+	MainListDefined bool
 }
 
 func OutputMainPage() {
@@ -40,17 +41,20 @@ func OutputMainPage() {
 		return
 	}
 
-	entries, err := LoadLocalCache() //SelectAllRows() // SelectNRows(5, 0)
+	var entries []SummaryEntry = []SummaryEntry{}
+	var entriesLoaded bool = true
+	entries, err = LoadLocalCache() //SelectAllRows() // SelectNRows(5, 0)
+	// If we can't find cache, we're loading
 	if err != nil {
+		entriesLoaded = false
 		// log.Printf("Error with getting files: " + err.Error())
-		return
-
 	}
 	// log.Print(entries)
 
 	toDisplay := htmlDat{
-		Title:   "Website",
-		Entries: entries,
+		Title:           "The Headliner",
+		Entries:         entries,
+		MainListDefined: entriesLoaded,
 	}
 
 	temp.Execute(file, toDisplay)

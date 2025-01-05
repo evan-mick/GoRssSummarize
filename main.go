@@ -42,6 +42,7 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
+	OutputMainPage()
 	defer CloseDB()
 	go InitAPIServer()
 
@@ -115,6 +116,15 @@ func main() {
 			fmt.Println("CACHE CREATED")
 		}*/
 	}
+
+	err = os.Remove("./frontend_data/data.json")
+	if err != nil {
+		fmt.Printf("Data removal error %s", err.Error())
+	}
+	err = os.Remove("./frontend/static/index.html")
+	if err != nil {
+		fmt.Printf("Index removal error %s", err.Error())
+	}
 }
 
 func MainLoop() {
@@ -138,6 +148,7 @@ func MainLoop() {
 			toLoopTime = time.Now().Add(loopTime)
 		}
 	}
+
 }
 
 func RunOneFullRefresh() {

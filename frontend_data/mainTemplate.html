@@ -482,6 +482,8 @@
     var entries;
     let selectedEntry = 0;
 
+
+    // {{if .MainListDefined}}
     window.onload = () => {
         // REFORMAT DATES (its weird before)
         var dateElements = document.getElementsByClassName("date");
@@ -543,7 +545,7 @@
         });
 
     };
-
+    // {{end}}
 
     function arrowClick(event, num) {
         event.preventDefault();
@@ -620,6 +622,8 @@
         <!-- <button onclick="toggleCondensed()">Toggle Condensed</button> -->
     </div>
     <section id="main-list">
+
+        {{if .MainListDefined}}
         {{range $index, $dat := .Entries}}
         <div id="entry_{{$index}}" class="entry bordered" ontouchend="overlayOn({{$index}})"
             onclick="overlayOn({{$index}})">
@@ -636,6 +640,9 @@
                 <p class="summary">{{$dat.Summary}}</p>
             </div>
         </div>
+        {{end}}
+        {{else}}
+        <p>The website has not loaded the entries, or there is a caching issue, check back in 2 minutes!</p>
         {{end}}
     </section>
 
