@@ -57,15 +57,12 @@ var NPR = Website{RSSLink: "https://feeds.npr.org/1002/rss.xml", Name: "NPR", sc
 	})
 
 	var def bool = false
-	// THIS NOT WORKING
 	c.OnHTML(".storytext picture img.img", func(e *colly.HTMLElement) {
 		first := e.DOM.First()
 		var exists bool
-		// Extract the `src` attribute value
 
 		if !def {
 			ret.photoUrl, exists = first.Attr("src")
-			//fmt.Print(ret.photoUrl)
 
 			if !exists {
 				ret.photoUrl = "https://media.npr.org/chrome_svg/npr-logo.svg"
@@ -125,13 +122,15 @@ var AP = Website{RSSLink: "https://apnews.com/index.rss", Name: "AP", scrapeFunc
 
 // MUST ADD PHOTO
 // RSS DOESN'T WORK, NEED ALT SCRIPT
+
+// By Reuters - <a rel="nofollow" class="external text" href="http://www.reuters.com">www.reuters.com</a>, Public Domain, <a href="https://commons.wikimedia.org/w/index.php?curid=149082496">Link</a>
 var Reuters = Website{RSSLink: "https://www.reutersagency.com/feed/?best-sectors=economy&post_type=best", scrapeFunc: func(htmlstring string) (ScrapeReturn, error) {
 	c := getDefaultCollector()
 
 	var ret ScrapeReturn
+	ret.photoURL = "https://commons.wikimedia.org/w/index.php?curid=149082496"
 
 	c.OnHTML(".article-body__content__17Yit", func(e *colly.HTMLElement) {
-		fmt.Println("ON HTML")
 		ret.allText = e.ChildText("div")
 	})
 
@@ -160,7 +159,7 @@ var BBC = Website{RSSLink: "https://feeds.bbci.co.uk/news/rss.xml", Name: "BBC",
 	})
 
 	var exists bool = false
-	c.OnHTML(".sc-814e9212-1 img", func(e *colly.HTMLElement) {
+	c.OnHTML(".sc-a34861b-1 img", func(e *colly.HTMLElement) {
 		ele := e.DOM.First()
 
 		ret.photoUrl, exists = ele.Attr("src")

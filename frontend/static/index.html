@@ -9,9 +9,9 @@
         --mainback: #ffffff;
         --secondback: #ffffff;
         --textmain: #434343;
-         
-         
-         
+
+
+
         --maincol: #8d3900;
         --outlinesize: 0.15rem;
     }
@@ -24,7 +24,7 @@
     #comic {
         max-width: 25rem;
         width: 100%;
-         
+
     }
 
     #comic-sec {
@@ -66,29 +66,29 @@
     }
 
 
-     
+
     #main-list {
         background-color: var(--mainback);
-         
+
         margin: 1rem;
         display: flex;
-         
+
         justify-content: center;
 
         flex-wrap: wrap;
-         
+
     }
 
 
-     
+
 
     .bordered {
-         
+
         border-bottom: var(--outlinesize) solid var(--maincol);
     }
 
     .photoBordered {
-         
+
         border-bottom: var(--outlinesize) solid var(--textmain);
     }
 
@@ -102,8 +102,8 @@
         justify-content: first baseline;
         padding: 2rem;
         max-width: 22rem;
-         
-         
+
+
 
         transition: transform 0.05s;
         color: var(--textmain);
@@ -111,13 +111,13 @@
         font-size: large;
 
         cursor: pointer;
-         
-         
+
+
     }
 
-     
-     
-     
+
+
+
     .articleTitle {
         font-weight: bolder;
         font-size: large;
@@ -137,7 +137,7 @@
         align-items: flex-start;
         display: flex;
         flex-direction: column;
-         
+
         width: 100%;
         height: 100%;
         font-size: small;
@@ -153,7 +153,7 @@
         margin: 0.5rem;
         object-position: 50% 0;
         cursor: pointer;
-         
+
     }
 
 
@@ -176,7 +176,7 @@
     }
 
     h2 {
-         
+
         color: var(--textmain);
         font-size: large;
     }
@@ -284,23 +284,23 @@
 
     #overlay {
         position: fixed;
-         
+
         display: none;
-         
+
         width: 100%;
-         
+
         height: 100%;
-         
+
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.7);
-         
+
         z-index: 2;
-         
+
         cursor: pointer;
-         
+
         gap: 1rem;
     }
 
@@ -312,7 +312,7 @@
         justify-content: center;
         align-items: center;
         max-width: 60%;
-         
+
         min-width: 20rem;
     }
 
@@ -324,9 +324,9 @@
         text-overflow: ellipsis;
         display: block;
         line-height: 1.2em;
-         
+
         max-height: 18em;
-         
+
     }
 
     #overlaybody {
@@ -378,7 +378,7 @@
     }
 
 
-     
+
     .switch {
         position: relative;
         display: inline-block;
@@ -386,14 +386,14 @@
         height: 34px;
     }
 
-     
+
     .switch input {
         opacity: 0;
         width: 0;
         height: 0;
     }
 
-     
+
     .slider {
         position: absolute;
         cursor: pointer;
@@ -469,8 +469,8 @@
         border: none;
         padding: 0;
         font: inherit;
-         
-         
+
+
     }
 </style>
 
@@ -483,7 +483,7 @@
     let selectedEntry = 0;
 
     window.onload = () => {
-        
+
         var dateElements = document.getElementsByClassName("date");
         Array.from(dateElements).forEach(element => {
             const date = new Date(element.textContent)
@@ -496,11 +496,11 @@
         let overlay_next = document.getElementById("overlay-next");
         document.addEventListener("keydown", (e) => {
             if (event.defaultPrevented) {
-                return; 
+                return;
             }
             if (e.key !== undefined) {
                 if (overlayIsOn) {
-                    
+
                     if (["d", "ArrowRight", "l"].includes(e.key)) {
                         overlay_next.click();
                     } else if (["a", "ArrowLeft", "h"].includes(e.key)) {
@@ -509,7 +509,7 @@
                         overlayOff();
                     }
                 } else {
-                    
+
                     if (["w", "k", "Alt"].includes(e.key)) {
                         overlayOn(selectedEntry);
                     } else if (e.key === "s") {
@@ -527,7 +527,7 @@
 
         overlay.addEventListener("click", (e) => {
             if (e.defaultPrevented) {
-                return; 
+                return;
             }
             overlayOff();
         })
@@ -538,7 +538,7 @@
         Array.from(document.getElementsByClassName("eventBlocker")).forEach(element => {
             element.addEventListener("click", (event) => {
                 event.stopPropagation();
-                
+
             })
         });
 
@@ -562,7 +562,7 @@
         overlay.style.display = "flex";
 
         var ele = document.getElementById("entry_" + inNum);
-        
+
         var dat = {
             summary: ele.querySelector(".summary").textContent,
             title: ele.querySelector(".articleTitle").textContent,
@@ -610,202 +610,22 @@
         <br>
         <p>Click on photo to <b>focus</b> (or 'Alt'), while focused, click arrow keys to <b>change summaries</b></p>
 
-        
+
         <br>
         <p><b>Disclaimer:</b> AI can be so silly! Please use the original sources for references, as <i> sometimes </i>
             the summarizer hallucinates, bless 🙏.</p>
 
-        
+
     </div>
     <section id="main-list">
-        
-        <div id="entry_0" class="entry bordered" ontouchend="overlayOn( 0 )"
-            onclick="overlayOn( 0 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">This year&#39;s &#39;October surprise&#39; may be no surprise at all</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://npr.brightspotcdn.com/dims3/default/strip/false/crop/7740x5205&#43;0&#43;0/resize/1100/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Ffc%2F98%2Fe5d8f46447738cd8dada07e40905%2Fgettyimages-2172455800.jpg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-13 06:00:00 -0400 -0400">2024-10-13 06:00:00 -0400 -0400</time>
-                </h3>
-                <a href="https://www.npr.org/2024/10/11/nx-s1-5150560/october-surprise-election-kamala-harris-donald-trump" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">The article explores the concept of the &#34;October surprise,&#34; a dramatic event that can potentially alter the outcome of a presidential campaign in the final weeks before Election Day. Despite the anticipation and media attention surrounding the phrase, few events have truly met its criteria in the past. Recent examples include the Democrat nomination shift to Vice President Harris and Hurricane Helenes devastation in the Southeast. However, the article notes that the proliferation of early voting and the increasing media fragmentation may make it more challenging for any single event to have a significant impact.</p>
-            </div>
-        </div>
-        
-        <div id="entry_1" class="entry bordered" ontouchend="overlayOn( 1 )"
-            onclick="overlayOn( 1 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">Ukraine denounces Russia&#39;s reported execution of captured troops</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-13 12:24:48 &#43;0000 UTC">2024-10-13 12:24:48 &#43;0000 UTC</time>
-                </h3>
-                <a href="https://www.bbc.com/news/articles/c4g5y80dr5vo" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">Ukraines Human Rights Ombudsman Dmytro Lubinets has denounced the alleged execution of nine Ukrainian troops by Russian forces in the Kursk border region. Lubinets has appealed to the United Nations and the Red Cross to investigate, accusing Moscow of violating international war laws. The allegations stem from drone footage released by DeepState, which reportedly shows the dead soldiers stripped to their underwear and lying face down in Kursk. Kyiv has previously accused Russia of executing captured troops, which constitutes a war crime under the Geneva Convention.</p>
-            </div>
-        </div>
-        
-        <div id="entry_2" class="entry bordered" ontouchend="overlayOn( 2 )"
-            onclick="overlayOn( 2 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">Ukrainian journalist, 27, who chronicled Russian occupation dies in prison</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-12 23:00:47 &#43;0000 UTC">2024-10-12 23:00:47 &#43;0000 UTC</time>
-                </h3>
-                <a href="https://www.bbc.com/news/articles/cy0g29w45p1o" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">Viktoriia Roshchyna, a 27-year-old Ukrainian journalist who went missing in August 2023, has been confirmed dead by Russian authorities after nine months. She was reportedly detained in an occupied area of Ukraine, but no reason was given for her arrest. Her body is set to be returned in a prisoner swap, with her death date recorded as September 19. Despite being threatened with detention, Roshchyna continued to report on life in occupied Ukraine, using her platform to expose collaborators and document life under siege.</p>
-            </div>
-        </div>
-        
-        <div id="entry_3" class="entry bordered" ontouchend="overlayOn( 3 )"
-            onclick="overlayOn( 3 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">The stark divide between Harris and Trump on voting rights</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://npr.brightspotcdn.com/dims3/default/strip/false/crop/4969x3313&#43;0&#43;0/resize/1100/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F6b%2Ffe%2F941f8e8a403cac64f3b256666865%2Fgettyimages-2170596408.jpg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-13 05:00:00 -0400 -0400">2024-10-13 05:00:00 -0400 -0400</time>
-                </h3>
-                <a href="https://www.npr.org/2024/10/13/nx-s1-5150093/kamala-harris-voting-rights-trump" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">The upcoming presidential election in the U.S. features drastically contrasting stances on voting rights between Vice President Harris and former President Trump. Harris advocates for strengthening protections against racial discrimination and expanding voter access through legislation like the John Lewis Voting Rights Advancement Act and the Freedom to Vote Act. Conversely, Trump promotes restrictions such as requiring proof of citizenship and limiting voting to one day, measures that would disproportionately impact voters of color. The outcome of the election and the balance of power in Congress and the courts will determine the realization of these candidates voting rights policies.</p>
-            </div>
-        </div>
-        
-        <div id="entry_4" class="entry bordered" ontouchend="overlayOn( 4 )"
-            onclick="overlayOn( 4 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">Deep inside a Norwegian fjord, a dream of farming salmon sustainably</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://npr.brightspotcdn.com/dims3/default/strip/false/crop/4032x3024&#43;0&#43;0/resize/1100/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F7f%2F98%2Fdf497bf34381992a9e8401b6b701%2F178.jpeg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-13 10:51:50 -0400 -0400">2024-10-13 10:51:50 -0400 -0400</time>
-                </h3>
-                <a href="https://www.npr.org/2024/10/13/nx-s1-5090753/fishing-sustainability-environment-norway-salmon" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">The &#34;Salmon Eye,&#34; the worlds largest floating art installation, serves as an education center about environmental threats posed by salmon farming in Norways Hardangersfjord. Despite being the worlds largest exporter of farmed salmon, Norways industry faces criticism for its impact on wild salmon populations, particularly due to escaped farmed salmon interbreeding with wild stocks and the proliferation of sea lice. However, Sondre Eide, CEO of the salmon farming company Eide Fjordbruck, has developed a closed pen salmon farming system that eliminates escapes, sea lice infestation, and nitrogen pollution, representing a potential solution to the industrys sustainability challenges.</p>
-            </div>
-        </div>
-        
-        <div id="entry_5" class="entry bordered" ontouchend="overlayOn( 5 )"
-            onclick="overlayOn( 5 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">&#39;I&#39;m too tired to chew food but still can&#39;t get care for my ME&#39;</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-13 01:45:19 &#43;0000 UTC">2024-10-13 01:45:19 &#43;0000 UTC</time>
-                </h3>
-                <a href="https://www.bbc.com/news/articles/cn03pxk1g4xo" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">The death of Maeve Boothby-ONeill, a 27-year-old severely ill with myalgic encephalomyelitis (ME), has exposed the lack of specialized care for people with severe ME in England. The coroner in her inquest concluded that care for such individuals is &#34;non-existent.&#34; Like Maeve, Nicole, who has had severe ME for six years, faces limited options and inadequate support due to misconceptions about the condition. Charities estimate that 240,000 people in the UK have ME, and those with severe cases often experience debilitating symptoms such as pain, hypersensitivity, weakness, and difficulty speaking and swallowing. Despite the urgent need for research and improved treatment, funding and training for ME remain limited, leaving many patients feeling forgotten and neglected.</p>
-            </div>
-        </div>
-        
-        <div id="entry_6" class="entry bordered" ontouchend="overlayOn( 6 )"
-            onclick="overlayOn( 6 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">Budget rule change could mean fewer tax rises</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-13 10:59:19 &#43;0000 UTC">2024-10-13 10:59:19 &#43;0000 UTC</time>
-                </h3>
-                <a href="https://www.bbc.com/news/articles/c981me1qn43o" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">Chancellor Rachel Reeves announced plans to address a £22 billion budget deficit while avoiding significant tax hikes. To achieve this, Reeves is considering adjusting the governments debt definition by potentially altering the treatment of Bank of England operations or adopting broader financial measures. However, these changes may face scrutiny from the Conservative party. Despite the use of &#34;Budget rules hacks,&#34; The Institute for Fiscal Studies estimates that tax increases of up to £25 billion are still likely. The government aims to limit the scale of investment spending and fulfill manifesto priorities, but the exact distribution of gains and losses remains uncertain until the October 30th Budget announcement.</p>
-            </div>
-        </div>
-        
-        <div id="entry_7" class="entry bordered" ontouchend="overlayOn( 7 )"
-            onclick="overlayOn( 7 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">Walt Whitman, gay love and a posthumous novel</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://npr.brightspotcdn.com/dims3/default/strip/false/crop/938x1500&#43;0&#43;0/resize/800/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F3f%2F27%2F7a973446403da42240f78f49acb8%2F81vuxb6lg7l-sl1500.jpg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-13 08:00:00 -0400 -0400">2024-10-13 08:00:00 -0400 -0400</time>
-                </h3>
-                <a href="https://www.npr.org/2024/10/12/nx-s1-4916639/walt-whitman-gay-love-and-a-posthumous-novel" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">&#34;Song of Myself: A Novel&#34; by Arnie Kantrowitz, posthumously published three years after his death, features Daniel Dell Blake, a character whose journey mirrors the history of gay life in the 20th century. The novel is a product of its time but conveys Kantrowitzs empathy, humor, and fierce defense of marginalized people. Kantrowitzs partner, Dr. Larry Mass, believes that despite its initial rejection, the novels timeless words will resonate with readers who find themselves in Kantrowitzs message. The books publication is a testament to Kantrowitzs legacy as a scholar of Walt Whitman and a gay rights pioneer.</p>
-            </div>
-        </div>
-        
-        <div id="entry_8" class="entry bordered" ontouchend="overlayOn( 8 )"
-            onclick="overlayOn( 8 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">BBC&#39;s James Cook on Alex Salmond&#39;s fight for independence</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-13 11:33:01 &#43;0000 UTC">2024-10-13 11:33:01 &#43;0000 UTC</time>
-                </h3>
-                <a href="https://www.bbc.com/news/articles/c33vyzezz4ro" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">Following the decisive &#34;No&#34; vote in the 2014 Scottish independence referendum, Alex Salmond, the charismatic leader of the Scottish National Party (SNP), announced his resignation as First Minister and party leader. Salmond, known for his pugnacious confidence, expressed disappointment but emphasized that the campaign for independence would continue.
+        The website is loading or there is a caching issue! Check back in a few minutes.
 
-Despite setbacks, such as the limited success of the pro-independence Alba Party and questionable judgment on international affairs, Salmonds modernization and professionalization of the SNP played a pivotal role in advancing the cause of independence. His ability to connect with voters through his skillful use of language and historical references helped make independence a mainstream aspiration for a significant portion of the Scottish electorate.
 
-However, Salmonds legacy is also marked by controversy, including allegations of inappropriate behavior towards women and his later affiliation with the Kremlin-backed RT broadcaster. The SNP, once a united front, is now fractured, with ongoing fallout from the internal battles surrounding Salmonds conduct and judgment.
-
-Despite these challenges, Salmonds impact on Scottish politics is undeniable. His dedication to the independence movement and his ability to inspire a grassroots movement have left a lasting imprint on the Scottish political landscape, with the future of independence remaining an ongoing debate.</p>
-            </div>
-        </div>
-        
-        <div id="entry_9" class="entry bordered" ontouchend="overlayOn( 9 )"
-            onclick="overlayOn( 9 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">&#39;There is no home:&#39; Floridians find helping hands after floods</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://npr.brightspotcdn.com/dims3/default/strip/false/crop/3000x2001&#43;0&#43;0/resize/1100/quality/50/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F75%2F4e%2F3613c4734cb4bfc614d2726268e8%2Fdsc5484.jpg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-13 05:00:00 -0400 -0400">2024-10-13 05:00:00 -0400 -0400</time>
-                </h3>
-                <a href="https://www.npr.org/2024/10/13/nx-s1-5150542/hillsborough-county-floods-florida-aid" target='_blank' rel="noopener noreferrer">Link (NPR)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">Hurricane Milton caused severe flooding in Valrico, Florida, displacing dozens of residents who sought refuge in the parking lot of Creekside Church of Christ. The church provided food and drinks to the displaced individuals, as their homes remained inundated with water from the nearby Alafia River, which reached a major flood stage. Emergency crews rescued over 500 people and 100 pets in the flooding aftermath. Despite the damage and uncertainty, residents are relying on community support and prayer as they navigate the challenges ahead.</p>
-            </div>
-        </div>
-        
-        <div id="entry_10" class="entry bordered" ontouchend="overlayOn( 10 )"
-            onclick="overlayOn( 10 )">
-            <div class="entry-top">
-                <h2 class="articleTitle eventBlocker">Harris puts pressure on Trump over medical records</h2>
-                <img rel="preload" class="entryPhoto photoBordered" src="https://1000logos.net/wp-content/uploads/2016/10/BBC-Logo.jpg">
-            </div>
-            <div class="centered eventBlocker">
-                <h3 class="published"><time class="date" datetime="2024-10-13 00:32:46 &#43;0000 UTC">2024-10-13 00:32:46 &#43;0000 UTC</time>
-                </h3>
-                <a href="https://www.bbc.com/news/articles/cm28r8md15do" target='_blank' rel="noopener noreferrer">Link (BBC)</a>
-            </div>
-            <div class="entrybody eventBlocker hideable hidden">
-                <p class="summary">Kamala Harris has released medical records stating she is in &#34;excellent health&#34; and fit for the presidency, prompting her to criticize Donald Trumps lack of transparency for not releasing his own records. Trumps team responded by citing his doctors statement that he is in &#34;perfect and excellent health&#34; but did not provide any medical records. Harriss records indicate she has a healthy lifestyle but a family history of colon cancer and allergies. The release of Harriss records has sparked a back-and-forth between the candidates, with Harris questioning Trumps mental acuity and Trumps team defending his health and fitness for office.</p>
-            </div>
-        </div>
-        
     </section>
 
-    
-    
-    
+
+
+
     <section id="padding" style="padding: 2rem;"></section>
 
     <div id="overlay" style="justify-content: center; align-items: center;">
@@ -824,7 +644,7 @@ Despite these challenges, Salmonds impact on Scottish politics is undeniable. Hi
                         rel="noopener noreferrer"></a>
                 </div>
                 <p id="overlaysummary" class="eventBlocker"></p>
-                
+
             </div>
         </div>
 
@@ -842,7 +662,7 @@ Despite these challenges, Salmonds impact on Scottish politics is undeniable. Hi
         </label>
     </div>
     <div class=".header-footer">
-        
+
     </div>
 </body>
 
