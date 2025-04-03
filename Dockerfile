@@ -1,6 +1,6 @@
 # https://docs.docker.com/language/golang/build-images/
 
-FROM golang:1.22-alpine3.18
+FROM golang:1.24
 WORKDIR /container
 COPY go.mod go.sum ./
 COPY points.json ./
