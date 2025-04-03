@@ -81,7 +81,7 @@ func googleRequest(toSummarize string) (string, error) {
 	}
 
 	// Define cURL equivalent URL
-	url := "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + google_key
+	url := "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + google_key
 
 	// Create HTTP request
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(requestBody))

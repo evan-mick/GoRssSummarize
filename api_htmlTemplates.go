@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-const templateOutput = `./frontend/static/`
+const templateOutput = `./frontend/`
 
 //../frontend/static/`
 
