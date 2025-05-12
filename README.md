@@ -1,5 +1,5 @@
 
-This is the source code for The Headliner!
+This is the source code for [The Headliner](https://theheadliner.news)!
 
 Notably, a .env file is needed with a Google Gemini API key. It needs the input
 
